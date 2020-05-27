@@ -62,7 +62,8 @@
         //wp_register_script('unslider'     , get_template_directory_uri().'/js/unslider-min.js', array('jquery'), null, true);
         //wp_register_script('slider'       , get_template_directory_uri().'/js/slider.js', array('jquery','unslider'), null, true);
 
-        wp_register_script('siema'         , get_template_directory_uri().'/js/siema/dist/siema.min.js', array(), null, true);
+        //wp_register_script('siema'         , get_template_directory_uri().'/js/siema/dist/siema.min.js', array(), null, true);
+        wp_register_script('siema'         , get_template_directory_uri().'/js/siema.min.js', array(), null, true);
         wp_register_script('siema-slider'  , get_template_directory_uri().'/js/siema-slider.js', array('siema'), null, true);
 
         wp_register_script('scripts'      , get_template_directory_uri().'/js/scripts.js', array('jquery'), null, true);
