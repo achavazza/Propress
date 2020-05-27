@@ -1,2 +1,2 @@
-# TheNewBlank
-A blank template for wordpress
+# LoungePress
+A WP Theme
