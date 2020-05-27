@@ -1,0 +1,49 @@
+// main: ../qs.less
+
+// Table of Contents
+// ======================================================================================================
+// #Box - Box element
+
+@box   : 10px;
+@boxSm : 5px;
+@boxMd : 20px;
+
+.box{
+	.box(@box);
+
+	& &-head{
+		.boxHead(@box);
+	}
+	& &-content{
+		.boxContent(@box);
+	}
+	& &-foot{
+		.boxFoot(@box);
+	}
+
+	&-sm{
+		.box(@boxSm);
+		& &-head{
+			.boxHead(@boxSm);
+		}
+		& &-content{
+			.boxContent(@boxSm);
+		}
+		& &-foot{
+			.boxFoot(@boxSm);
+		}
+	}
+
+	&-md{
+		.box(@boxMd);
+		& &-head{
+			.boxHead(@boxMd);
+		}
+		& &-content{
+			.boxContent(@boxMd);
+		}
+		& &-foot{
+			.boxFoot(@boxMd);
+		}
+	}
+}

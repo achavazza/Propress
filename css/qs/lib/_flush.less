@@ -1,0 +1,58 @@
+// main: ../qs.less
+
+.flush(){
+    > *{
+        display: inline-block !important;
+        width: auto !important;
+        vertical-align: middle !important;
+        *display: inline !important; //ie7
+    }
+}
+.flush{
+    .flush();
+}
+@media (min-width: @screenSmallDevice){
+    .flush-sm{
+        .flush();
+    }
+}
+@media (min-width: @screenMediumDevice){
+    .flush-md{
+        .flush();
+    }
+}
+@media (min-width: @screenLargeDevice){
+    .flush-lg{
+        .flush();
+    }
+}
+
+.flush-fit{
+  display: table;
+  width: 100%;
+  & > *{
+    display: table-cell;
+    vertical-align: middle;
+  }
+}
+.flush-fit > .flush-row{
+  display: table-row;
+  & > *{
+  display: table-cell;
+  vertical-align: middle;
+  }
+}
+
+.flush-flex{
+    display: flex;
+    flex-flow: row wrap;
+    & > *{
+        flex: 1 0 200px; // arbitrary
+    }
+}
+
+
+.stack > *{
+  display: block !important;
+  width: 100% !important;
+}

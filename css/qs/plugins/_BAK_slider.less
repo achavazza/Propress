@@ -1,0 +1,77 @@
+// main: ../qs.less
+
+#slider{
+    background: @colorWhite;
+    margin-bottom: 1em;
+    
+    > div,
+    > div > div{
+        display: flex !important;
+    }
+
+    .slide{
+        flex: 1 1 auto;
+    }
+
+    .slide-item{
+        border-radius: 2px;
+        background-position: center center;
+        background-size: cover;
+        background-repeat: no-repeat;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        display: flex;
+        flex: 1 1 100%;
+        height: 100%;
+        width: 100%;
+
+        .content{
+            padding: 5%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 1 1 100%;
+
+            &.center-top{
+                align-items: start;
+                justify-content: center;
+            }
+            &.left-top{
+                align-items: start;
+                justify-content: left;
+            }
+            &.right-top{
+                align-items: start;
+                justify-content: right;
+            }
+            &.center-center{
+                align-items: center;
+                justify-content: center;
+            }
+            &.left-center{
+                align-items: center;
+                justify-content: left;
+            }
+            &.right-center{
+                align-items: center;
+                justify-content: right;
+            }
+            &.center-bottom{
+                align-items: end;
+                justify-content: center;
+            }
+            &.left-bottom{
+                align-items: end;
+                justify-content: left;
+            }
+            &.right-bottom{
+                align-items: end;
+                justify-content: right;
+            }
+        }
+    }
+}

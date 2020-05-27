@@ -1,0 +1,15 @@
+.gallery{
+    display: block;
+    /*margin: -10px -10px 0 !important;*/
+    margin-top: 10px !important;
+    padding: 5px;
+    background: #eeeeee none repeat scroll 0 0;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1) inset, 0 0 0 1px rgba(0, 0, 0, 0.05) inset;
+    max-height: 300px;
+    overflow: auto;
+}
+.gallery li{
+    display: inline-block;
+    padding: 10px;
+    margin-bottom: 0;
+}

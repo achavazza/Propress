@@ -1,0 +1,92 @@
+// main: ../qs.less
+
+#slider{
+    background: @colorWhite;
+    margin-bottom: 1em;
+
+    /* absolute - relative fix */
+    position: relative;
+    /*padding-bottom: 40%;
+    @media (min-width: @screenSmallDevice){
+        padding-bottom: 30%;
+    }
+    @media (min-width: @screenMediumDevice){
+        padding-bottom: 25%;
+    }
+    @media (min-width: @screenLargeDevice){
+        padding-bottom: 20%;
+    }*/
+    > div{
+        position: absolute;
+    }
+    div{
+        height: 100% !important;
+    }
+    /* absolute - relative fix */
+
+    .slide-item{
+        border-radius: 2px;
+        background-position: center center;
+        background-size: cover;
+        background-repeat: no-repeat;
+
+        display: flex;
+
+
+        .content{
+            display: flex;
+            box-sizing: border-box;
+            padding: 5%;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+        }
+
+        .center-top{
+            align-items: start;
+            justify-content: center;
+        }
+        .left-top{
+            align-items: start;
+            justify-content: left;
+        }
+        .right-top{
+            align-items: start;
+            justify-content: right;
+        }
+        .center-center{
+            align-items: center;
+            justify-content: center;
+        }
+        .left-center{
+            align-items: center;
+            justify-content: left;
+        }
+        .right-center{
+            align-items: center;
+            justify-content: right;
+        }
+        .center-bottom{
+            align-items: end;
+            justify-content: center;
+        }
+        .left-bottom{
+            align-items: end;
+            justify-content: left;
+        }
+        .right-bottom{
+            align-items: end;
+            justify-content: right;
+        }
+    }
+}
+
+#post-thumbnail{
+    text-align: center;
+    img{
+        border-radius: 2px;
+        max-width: 100%;
+        height: auto;
+    }
+}

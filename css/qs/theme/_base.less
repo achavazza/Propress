@@ -1,0 +1,165 @@
+// main: ../qs.less
+
+// Table of Contents
+// ======================================================================================================
+// #Basic
+// #Lists
+// #Definition lists
+// #Tables
+
+// #Basic styles - For good typographic support
+// ======================================================================================================
+
+body{
+    // thanks to http://cssfontstack.com/
+    font-family: @baseFontFamily;
+    line-height: @lineHeight;
+    font-size: @baseFontSize;
+    color: @baseFontColor;
+    background: @bgBody;
+}
+
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6{
+    //font-family: @altFontFamily;
+    display: block;
+    font-weight: bold;
+
+    /*.sub-title{
+        font-size: .75em;
+    }*/
+}
+.h1 { font-size:@h1FontSize }
+.h2 { font-size:@h2FontSize }
+.h3 { font-size:@h3FontSize }
+.h4 { font-size:@h4FontSize }
+.h5 { font-size:@h5FontSize }
+.h6 { font-size:@h6FontSize }
+/*
+.h1 { .fontProps(@h1FontSize) }
+.h2 { .fontProps(@h2FontSize) }
+.h3 { .fontProps(@h3FontSize) }
+.h4 { .fontProps(@h4FontSize) }
+.h5 { .fontProps(@h5FontSize) }
+.h6 { .fontProps(@h6FontSize) }
+*/
+/*.subheader { font-size: @subFontSize; font-weight: normal;}
+
+.subheader {
+    color: @subFontColor;
+    margin-bottom: @hSpacing;
+}*/
+
+/* select fix */
+.form select{
+    //padding: .45em;
+    padding: @elemPadding - .1em;
+}
+
+.underline{
+    text-decoration: underline;
+}
+
+hr{
+    border: 0 none;
+    //border-bottom: 1px solid @baseFontColor;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+    margin: 1em 0;
+}
+
+a { text-decoration: none; }
+
+p { margin-bottom: @pSpacing; }
+
+
+// #Lists
+// ======================================================================================================
+
+ol.list li,
+ul.list li{
+    margin-left: @listIndent;
+    margin-bottom: @listSpacing;
+}
+ul.list li       { list-style: disc        outside none; }
+ul.list li li    { list-style: square      outside none; }
+ul.list li li li { list-style: circle      outside none; }
+ol.list li       { list-style: decimal     outside none; }
+ol.list li li    { list-style: lower-alpha outside none; }
+ol.list li li li { list-style: lower-roman outside none; }
+
+// #Definition Lists
+// ======================================================================================================
+
+dl {}
+dt {}
+dd {}
+
+.dl{
+    &-list,
+    &-vertical,
+    &-horizontal{
+        margin: 0;
+        margin-bottom: @pSpacing;
+
+        dt{
+            font-weight: bold;
+            margin-bottom: @defSpacing;
+            padding-top: @defSpacing;
+        }
+        dd{
+            margin-bottom: @defSpacing;
+            //padding-top: @defSpacing;
+            margin-left: 0;
+        }
+    }
+    &-vertical{
+    }
+    &-horizontal{
+        /*display: table;
+        dt, dd{
+            display: table-cell;
+        }*/
+        dt{
+            width: @defWidth;
+            max-width: @defWidth;
+            padding-right: @defSpan;
+            text-align: right;
+            float: left;
+            clear: right;
+        }
+        dd{
+            margin-bottom: @defSpacing;
+            padding-top: @defSpacing;
+            margin-left: @defWidth + @defSpan;
+        }
+    }
+}
+
+// #Tables
+// ======================================================================================================
+.table{
+    width: 100%;
+    th,
+    td{
+        padding: @tablePadding;
+        border-bottom: @tableBorder;
+    }
+    th{
+        background: @tableBgHead;
+    }
+    &-bordered{
+        th,
+        td{
+            border: @tableBorder;
+        }
+    }
+    &-stripped{
+        tr:nth-child(odd) td{
+            background: @tableBgOdd;
+        }
+    }
+}

@@ -1,0 +1,135 @@
+// main: ../qs.less
+
+// Clearfix
+// ==========================================================================
+.row,
+.row-fix,
+.input,
+.field,
+.clearfix{
+    .clearfix();
+}
+
+// Toolbox
+// ==========================================================================
+
+.relative      {position: relative !important;} //1
+.overflow      {overflow:hidden !important;}    //1
+.clear         {clear:none !important;}         //1
+.hide          {display: none !important;}      //1
+.show          {display: block !important;}     //1
+.block         {display: block !important;}     //1
+//1 - Deprecated
+
+.bold          {font-weight:bold !important;}
+
+.float-left    {float: left !important;}
+.float-right   {float: right !important;}
+.float-none    {float:none !important;}
+.no-top        {margin-top: 0 !important}
+.no-bottom     {margin-bottom: 0 !important}
+.align-left    {text-align: left !important;}
+.align-center  {text-align: center !important;}
+.align-right   {text-align: right !important;}
+.align-top     {vertical-align: top !important;}
+.align-middle  {vertical-align: middle !important;}
+.align-bottom  {vertical-align: bottom !important;}
+.uppercase     {text-transform: uppercase !important;}
+.normalcase    {text-transform: none !important;}
+.lowercase     {text-transform: lowercase !important;}
+.single-line   {white-space:nowrap !important;}
+.text-overflow {overflow: hidden !important;
+                text-overflow: ellipsis !important;}
+
+
+
+//  Img or video fit
+.fit-width {width: 100%}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    border: 0;
+
+    &-focusable {
+        &:active,
+        &:focus {
+          position: static;
+          width: auto;
+          height: auto;
+          margin: 0;
+          overflow: visible;
+          clip: auto;
+        }
+    }
+}
+@media screen and (min-width: @screenSmallDevice){
+.float-left-sm    {float: left !important;}
+.float-right-sm   {float: right !important;}
+.float-none-sm    {float:none !important;}
+.no-top-sm        {margin-top: 0 !important}
+.no-bottom-sm     {margin-bottom: 0 !important}
+.align-left-sm    {text-align: left !important;}
+.align-center-sm  {text-align: center !important;}
+.align-right-sm   {text-align: right !important;}
+.align-top-sm     {vertical-align: top !important;}
+.align-middle-sm  {vertical-align: middle !important;}
+.align-bottom-sm  {vertical-align: bottom !important;}
+.uppercase-sm     {text-transform: uppercase !important;}
+.normalcase-sm    {text-transform: none !important;}
+.lowercase-sm     {text-transform: lowercase !important;}
+.fit-width-sm     {width: 100%}
+}
+@media screen and (min-width: @screenMediumDevice){
+.float-left-md    {float: left !important;}
+.float-right-md   {float: right !important;}
+.float-none-md    {float:none !important;}
+.no-top-md        {margin-top: 0 !important}
+.no-bottom-md     {margin-bottom: 0 !important}
+.align-left-md    {text-align: left !important;}
+.align-center-md  {text-align: center !important;}
+.align-right-md   {text-align: right !important;}
+.align-top-md     {vertical-align: top !important;}
+.align-middle-md  {vertical-align: middle !important;}
+.align-bottom-md  {vertical-align: bottom !important;}
+.uppercase-md     {text-transform: uppercase !important;}
+.normalcase-md    {text-transform: none !important;}
+.lowercase-md     {text-transform: lowercase !important;}
+.fit-width-md     {width: 100%}
+}
+@media screen and (min-width: @screenLargeDevice){
+.float-left-lg    {float: left !important;}
+.float-right-lg   {float: right !important;}
+.float-none-lg    {float:none !important;}
+.no-top-lg        {margin-top: 0 !important}
+.no-bottom-lg     {margin-bottom: 0 !important}
+.align-left-lg    {text-align: left !important;}
+.align-center-lg  {text-align: center !important;}
+.align-right-lg   {text-align: right !important;}
+.align-top-lg     {vertical-align: top !important;}
+.align-middle-lg  {vertical-align: middle !important;}
+.align-bottom-lg  {vertical-align: bottom !important;}
+.uppercase-lg     {text-transform: uppercase !important;}
+.normalcase-lg    {text-transform: none !important;}
+.lowercase-lg     {text-transform: lowercase !important;}
+.fit-width-lg     {width: 100%}
+}
+
+
+@x: .5em;
+.mb-1 { margin-bottom: @x * 1 }
+.mb-2 { margin-bottom: @x * 2 }
+.mb-3 { margin-bottom: @x * 3 }
+.mb-4 { margin-bottom: @x * 4 }
+.mb-5 { margin-bottom: @x * 5 }
+
+.mt-1 { margin-top: @x * 1 }
+.mt-2 { margin-top: @x * 2 }
+.mt-3 { margin-top: @x * 3 }
+.mt-4 { margin-top: @x * 4 }
+.mt-5 { margin-top: @x * 5 }

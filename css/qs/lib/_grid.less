@@ -1,0 +1,242 @@
+// main: ../qs.less
+
+// Table of Contents
+// ======================================================================================================
+//     #Init
+//     #Desktop (1240px)
+//         #Desktop Visible / Invisible
+//
+//     #Landscape (1000px > < 1240px)
+//         #Landscape Mutate
+//         #Landscape Visible / Invisible
+//         #Debug
+//
+//     #Portrait  (768px > < 1000px)
+//         #Portrait Mutate
+//         #Portrait Visible / Invisible
+//         #Debug
+//
+//     #Mobile  (> 768px)
+//         #Mobile Reset
+//         #Mobile Mutate
+//         #Mobile Visible / Invisible
+//         #Debug
+
+// #Mobile
+
+.grid {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+
+// #Mobile Mutate - change and adapt cols
+// ======================================================================================================
+// since every col / triad mutates to 100% we dont have mutations
+
+.visible-only-sm    ,
+.visible-only-md    ,
+.visible-only-lg    ,
+.invisible-only     { display: none !important;  }
+
+.invisible-only-sm  ,
+.invisible-only-md  ,
+.invisible-only-lg  ,
+.visible-only       { display: block !important;  }
+
+.visible-sm     ,
+.visible-md     ,
+.visible-lg     ,
+.invisible      { display: none !important;  }
+
+.visible        { display: block !important; }
+
+// #Debug
+// ======================================================================================================
+.debug{
+
+    .grid{box-shadow: 0 0 0 10px rgba(255,0,0,0.2);}
+
+    .row {
+        background: rgba(0, 0, 255, 0.1) !important;
+    }
+
+    .__generateSetup(triad, debug);
+    .__generateSetup(quad, debug);
+}
+
+
+// #Init
+@media screen and (min-width: @screenSmallDevice){
+    // #Grid - Container
+    // ======================================================================================================
+
+    .grid {
+        margin-left: auto;
+        margin-right: auto;
+
+        // if doesn't have @media support
+        //width: @layoutMediumDevice;
+    }
+    .grid-fluid{
+        margin-left: @gutter  !important;
+        margin-right: @gutter !important;
+        width: auto           !important;
+    }
+    .grid-left  { margin-left:  @gutter !important; }
+    .grid-right { margin-right: @gutter !important; }
+
+    .grid-snap .row ,
+    .grid .row-snap {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .__generateSetup(triad, gridsnap);
+    .__generateSetup(quad, gridsnap);
+
+    // #Row - no more .alpha or .omega, instead we have .row
+    // ======================================================================================================
+    .row {
+      margin-left:  -@gutter;
+      margin-right: -@gutter;
+      clear: both;
+    }
+
+    .__generateSetup(triad, colcentered);
+    .__generateSetup(quad, colcentered);
+
+    // #Quads & Triads - Init
+    // ======================================================================================================
+    .__generateSetup(triad, setup);
+    .__generateSetup(quad, setup);
+
+    .__generateSetup(triad, pushpull);
+    .__generateSetup(quad, pushpull);
+
+    .__generateGrid(triad, 3);
+    .__generateGrid(quad, 4);
+
+    .debug{
+        .row {
+            background: rgba(0, 0, 255, 0.1) !important;
+        }
+        .__generateSetup(triad, debugsm);
+        .__generateSetup(quad, debugsm);
+    }
+}
+
+.responsive-sm() when (isnumber(@screenSmallDevice)){
+    @media screen and (min-width: @screenSmallDevice){
+
+        .grid { width: @layoutSmallDevice; }
+
+        .__generateGridResponsive(triad, 3, sm);
+        .__generateGridResponsive(quad, 4, sm);
+
+        // #Portrait Visible / Invisible - switch on off elements
+        // ======================================================================================================
+        .visible-only       ,
+        .visible-only-md    ,
+        .visible-only-lg    ,
+        .invisible-only-sm  { display: none !important;  }
+
+        .invisible-only      ,
+        .invisible-only-md   ,
+        .invisible-only-lg   ,
+        .visible-only-sm    { display: block !important; }
+
+        .visible-md     ,
+        .visible-lg     ,
+        .invisible      ,
+        .invisible-sm   { display: none !important;  }
+
+        .visible        ,
+        .visible-sm     { display: block !important; }
+
+        // #Debug
+        // ======================================================================================================
+        .debug{
+            .grid{box-shadow: 0 0 0 10px rgba(255,0,0,0.2);}
+        }
+    }
+}
+
+.responsive-sm();
+.responsive-md() when (isnumber(@screenMediumDevice)){
+@media screen and (min-width: @screenMediumDevice){
+
+    .grid { width: @layoutMediumDevice; }
+
+    // #Landscape Mutate - change and adapt cols
+    // ======================================================================================================
+
+    .__generateGridResponsive(triad, 3, md);
+    .__generateGridResponsive(quad, 4, md);
+
+    // #Landscape Visible / Invisible - switch on off elements
+    // ======================================================================================================
+
+    .visible-only        ,
+    .visible-only-sm     ,
+    .visible-only-lg     ,
+    .invisible-only-md   { display: none !important;  }
+
+    .invisible-only      ,
+    .invisible-only-sm   ,
+    .invisible-only-lg   ,
+    .visible-only-md     { display: block !important; }
+
+    .visible-lg     ,
+    .invisible      ,
+    .invisible-sm   ,
+    .invisible-md   { display: none !important;  }
+
+    .visible        ,
+    .visible-sm     ,
+    .visible-md     { display: block !important; }
+
+    // #Debug
+    // ======================================================================================================
+    .debug{
+        .grid{box-shadow: 0 0 0 10px rgba(255,255,0,0.2);}
+    }
+
+}
+}
+.responsive-md();
+.responsive-lg() when (isnumber(@screenLargeDevice)){
+@media screen and (min-width: @screenLargeDevice) {
+
+    .grid{ width: @layoutLargeDevice; }
+
+    .__generateGridResponsive(triad, 3, lg);
+    .__generateGridResponsive(quad, 4, lg);
+
+    // #Desktop Visible / Invisible - switch on off elements
+    // ======================================================================================================
+    .visible-only        ,
+    .visible-only-sm     ,
+    .visible-only-md     ,
+    .invisible-only-lg   { display: none !important;  }
+
+    .invisible-only      ,
+    .invisible-only-sm   ,
+    .invisible-only-md   ,
+    .visible-only-lg     { display: block !important; }
+
+    .invisible      ,
+    .invisible-sm   ,
+    .invisible-md   ,
+    .invisible-lg   { display: none !important;  }
+
+    .visible        ,
+    .visible-sm     ,
+    .visible-md     ,
+    .visible-lg     { display: block !important; }
+
+    .debug{
+        .grid{box-shadow: 0 0 0 10px rgba(0,255,0,0.2);}
+    }
+}
+}
+.responsive-lg();

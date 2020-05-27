@@ -1,0 +1,17 @@
+{
+  "name": "loungepress",
+  "version": "1.0.0",
+  "description": "A blank template for wordpress",
+  "main": "index.php",
+  "author": "Alejandro Chavazza",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^4.5.0",
+    "jquery": "^3.5.1",
+    "popper.js": "^1.16.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

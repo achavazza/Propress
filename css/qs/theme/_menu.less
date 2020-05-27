@@ -1,0 +1,197 @@
+// main: ../qs.less
+/*.menu{
+    a{
+        text-transform: uppercase;
+        @media (min-width: @screenMediumDevice){
+            line-height: 80px;
+        }
+    }
+    li{
+        padding: 0 10px;
+    }
+    .current-menu-item{
+        a{
+            font-weight: bold;
+        }
+    }
+    &-mobile{
+        text-align: right;
+    }
+}*/
+
+
+#header{
+    .menu{
+        //text-transform: uppercase;
+        &-mobile{
+            position: relative;
+            text-align: right;
+        }
+        a{
+            padding: .5em 1em;
+            @media (min-width: @screenMediumDevice){
+                line-height: 80px;
+                padding: 0 1em;
+                //padding:1em 1.5em;
+            }
+
+            display:block;
+            //.contrast(@brandPrimary, false);
+
+            /*&:hover{
+                background-color: lighten(@brandPrimary, 10%);
+                //.contrast(@brandPrimary, false);
+            }*/
+            &:hover{
+                //background-color: darken(@colorWhite, 5%);
+                //.contrast(@brandPrimary, false);
+                background-color: lighten(@brandPrimary, 10%);
+            }
+        }
+        .trigger-open{
+            background: @brandPrimary;
+            .contrast(@brandPrimary, false);
+            &:hover{
+                background-color: lighten(@brandPrimary, 10%) !important;
+            }
+        }
+    }
+
+    .sub-menu{
+        display: none;
+        background-color: darken(@colorWhite, 5%);
+        //background-color: lighten(@brandPrimary, 5%);
+        text-align: left;
+
+        min-width: 200px;
+        //border: 4px solid @brandAccent;
+        //margin: 0 -4px -4px;
+        //background: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 1px 1px rgba(0,0,0,.1);
+        @media (min-width: @screenMediumDevice){
+            box-shadow: 0 5px 10px rgba(0,0,0,.5);
+        }
+
+        a{
+            padding: 0.5em 2em;
+            line-height: 2em;
+            display: block;
+            white-space: nowrap;
+        }
+
+
+        @media (min-width: @screenMediumDevice){
+            position: absolute;
+            z-index: 1;
+        }
+    }
+
+    .menu-item:hover{
+        .sub-menu{
+            display:block;
+        }
+    }
+    .sub-menu{
+        @media (min-width: @screenMediumDevice){
+            //margin-top: -20px;
+            margin-top: -5px;
+        }
+        .menu-item{
+            .sub-menu{
+                display: none;
+            }
+            &:hover{
+                .sub-menu {
+                    display: block;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: @screenMediumDevice){
+    .menu{
+        #menu-principal{
+            position: absolute;
+            top: 80px;
+            //top: 20px;
+            right: 0;
+            z-index: 1000;
+            min-width: 200px;
+            text-align: left;
+            //border: 4px solid @brandAccent;
+            //background-color: @brandPrimary;
+            background-color: @colorWhite;
+            .contrast( @brandPrimary);
+
+            a{
+                padding: 1em;
+                &:hover{
+                    background-color: lighten(@brandPrimary, 10%);
+                }
+            }
+        }
+    }
+    .menu-trigger{
+        .icon{
+            line-height: 66px;
+        }
+    }
+    /*.menu-trigger{
+        margin-top: .8em;
+    }*/
+}
+#header{
+    .current-menu-item{
+        > a{
+            //background-color: @brandAccent;
+            //.contrast(@brandAccent, false);
+            font-weight: bold;
+
+            /*&:hover{
+                //background-color: lighten(@brandAccent, 10%);
+            }*/
+        }
+    }
+}
+
+/*#footer{
+    .menu{
+        a{
+            .contrast(@brandAccent, false);
+            &:hover{
+                background-color: lighten(@brandAccent, 10%);
+            }
+        }
+    }
+    .current-menu-item{
+        a{
+            background-color: lighten(@brandAccent, 5%);
+            .contrast(@brandAccent, false);
+        }
+    }
+}*/
+
+
+/* fix para los videos de youtube */
+figure{
+    margin: 0;
+}
+.wp-block-embed-youtube {
+    padding-bottom: 56.25%;
+    position: relative;
+
+    .wp-block-embed__wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+
+        iframe{
+            width: 100%;
+            height: 100%;
+        }
+
+    }
+}

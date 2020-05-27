@@ -1,0 +1,75 @@
+// main: ../qs.less
+
+// Table of Contents
+// ======================================================================================================
+// #Labels       - basic styling
+// #Label-styles - style variations
+
+// #Labels
+// ======================================================================================================
+
+.label {
+
+    // Structure
+    display: inline-block;
+    zoom: 1;
+
+    font-family: inherit;
+    font-size: 100%;
+    line-height: normal;
+    white-space: nowrap;
+    vertical-align: baseline;
+    text-align: center;
+    text-decoration: none;
+
+    .user-select();
+
+    *display: inline;   // IE 6/7
+    *font-size: 90%;    // IE 6/7 - To reduce IE's oversized button text
+    *overflow: visible; // IE 6/7 - Because of IE's overly large left/right padding on buttons
+
+
+    // Style
+    padding: @btnPadding;
+    border: 1px solid #B7B7B7;
+    border-color: rgba(0, 0, 0, .1);
+
+    border-radius: 3px;
+    //text-shadow: 0 1px 0 rgba(255,255,255,.5);
+    background-color: @labelDefault;
+    .contrast(@labelDefault, false);
+
+
+    &-hidden {
+        display: none;
+    }
+
+    &-full { width: 100%; }
+}
+
+// #Label-styles
+// ======================================================================================================
+.label{
+    &-default { background-color: @labelDefault  ; .contrast(@labelDefault  , false)}
+
+    &-primary  {background-color: @labelPrimary  ; .contrast(@brandPrimary  , false)}
+    &-secondary{background-color: @labelSecondary; .contrast(@brandSecondary, false)}
+    &-accent   {background-color: @labelAccent   ; .contrast(@brandAccent   , false)}
+
+    &-error,
+    &-danger  { background-color: @labelDanger   ; .contrast(@labelDanger   , false)}
+    &-warning { background-color: @labelWarning  ; .contrast(@labelWarning  , false)}
+    &-info    { background-color: @labelInfo     ; .contrast(@labelInfo     , false)}
+    &-success { background-color: @labelSuccess  ; .contrast(@labelSuccess  , false)}
+    &-action  { background-color: @labelAction   ; .contrast(@labelAction   , false)}
+    &-alt     { background-color: @labelAlt      ; .contrast(@labelAlt      , false)}
+    &-inverse { background-color: @labelInverse  ; .contrast(@labelInverse  , false)}
+    &-hollow{
+        color: inherit;
+        border-color: currentColor;
+        //border-color: inherit;
+        background-image: none;
+        background-color: transparent;
+        text-shadow: 0 0 transparent;
+    }
+}
