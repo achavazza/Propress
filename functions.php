@@ -47,24 +47,20 @@
         if ( !is_admin() ) {
            wp_deregister_script('jquery');
         }
-        wp_register_script('jquery'       , '//code.jquery.com/jquery-2.2.4.min.js', array(), '2.2.4', false);
-        //wp_register_script('jquery'       , '//code.jquery.com/jquery-1.x-git.min.js', array(), '1.12.5', false);
+        wp_register_script('jquery'       , get_template_directory_uri().'/js/jquery.min.js', array(), '3.5.1', false);
 
-        wp_register_script('photoswipe'   , get_template_directory_uri().'/js/photoswipe/photoswipe.min.js', array(), null, true);
-        wp_register_script('photoswipeUI' , get_template_directory_uri().'/js/photoswipe/photoswipe-ui-default.min.js', array('photoswipe'), null, true);
-        wp_register_script('photo-init'   , get_template_directory_uri().'/js/photoswipe/photoswipe.init.js', array('photoswipe','photoswipeUI','jquery'), null, true);
+        wp_register_script('photoswipe'   , get_template_directory_uri().'/js/plugins/photoswipe.min.js', array(), '4.1.3', true);
+        wp_register_script('photoswipeUI' , get_template_directory_uri().'/js/plugins/photoswipe-ui-default.min.js', array('photoswipe'), '4.1.3', true);
+        wp_register_script('photo-init'   , get_template_directory_uri().'/js/photoswipe.init.js', array('photoswipe','photoswipeUI','jquery'), '1.0.0', true);
 
-        wp_register_script('lity'         , get_template_directory_uri().'/js/lity/lity.min.js', array('jquery'), '1.0.0', true);
+        wp_register_script('lity'         , get_template_directory_uri().'/js/plugins/lity.js', array('jquery'), '2.4.1', true);
 
         wp_register_script('validate'     , get_template_directory_uri().'/js/jquery.validate.min.js', array('jquery'), '1.0.0', true);
         wp_register_script('form'         , get_template_directory_uri().'/js/form.js', array('jquery','validate'), '1.0.0', true);
 
-        //wp_register_script('unslider'     , get_template_directory_uri().'/js/unslider-min.js', array('jquery'), null, true);
-        //wp_register_script('slider'       , get_template_directory_uri().'/js/slider.js', array('jquery','unslider'), null, true);
-
         //wp_register_script('siema'         , get_template_directory_uri().'/js/siema/dist/siema.min.js', array(), null, true);
-        wp_register_script('siema'         , get_template_directory_uri().'/js/siema.min.js', array(), null, true);
-        wp_register_script('siema-slider'  , get_template_directory_uri().'/js/siema-slider.js', array('siema'), null, true);
+        wp_register_script('siema'         , get_template_directory_uri().'/js/plugins/siema.min.js', array(), '1.5.1', true);
+        //wp_register_script('siema-slider'  , get_template_directory_uri().'/js/siema-slider.js', array('siema'), '1.0.0', true);
 
         wp_register_script('scripts'      , get_template_directory_uri().'/js/scripts.js', array('jquery'), null, true);
 
@@ -73,7 +69,7 @@
     add_action( 'wp_enqueue_scripts', 'theme_name_scripts' );
 
 
-    wp_register_script('infobubble'   , (get_template_directory_uri().'/js/info-bubble/src/infobubble.js'), array(), null, false);
+    wp_register_script('infobubble'   , (get_template_directory_uri().'/js/plugins/infobubble.js'), array(), null, false);
     wp_register_script('initmaps'     , (get_template_directory_uri().'/js/map-search/initmaps.js'), array('infobubble'), '1.0.0', false);
     wp_register_script('gmaps'        , ('http://maps.google.com/maps/api/js?&key='.GMAPS_KEY.'&callback=initMap'), array('initmaps'), null, false);
     wp_register_script('map'          , ('http://maps.google.com/maps/api/js?&key='.GMAPS_KEY), array(), null, false);
@@ -184,8 +180,7 @@
         return $status;
     }
 
-    $base_path    = str_replace('\\', '/', dirname( __FILE__ ) ."/inc/CMB2-develop");
-    //$base_path    = str_replace('\\', '/', dirname( __FILE__ ) ."/inc/cmb2");
+    $base_path    = str_replace('\\', '/', dirname( __FILE__ ) ."/inc/cmb2");
     $plugins_path = str_replace('\\', '/', dirname( __FILE__ ) ."/inc/cmb2-plugins");
     //$plugins_path = str_replace('\\', '/', dirname( __FILE__ ) ."/inc/CMB2-plugins");
 
