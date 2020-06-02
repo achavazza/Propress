@@ -346,4 +346,13 @@
     return $title;
     });
 
+
+    /**
+    * Test if a WordPress plugin is active
+    */
+    /*
+    if(in_array('elementor/elementor.php', apply_filters('active_plugins', get_option('active_plugins')))){
+        require_once('elementor-widgets/my-widgets.php');
+    }
+    */
 ?>
