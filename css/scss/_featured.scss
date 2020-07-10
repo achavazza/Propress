@@ -1,0 +1,107 @@
+//main: theme.scss
+
+#gallery{
+    padding: 2em 0;
+    figure{
+        margin: 0;
+        img{
+            max-width: 100%;
+            height: auto;
+        }
+    }
+    .img-list{
+        display: flex;
+        flex-flow: row;
+        justify-content: center;
+
+        &-left{
+            justify-content: left;
+        }
+
+        figure{
+            display: flex;
+            margin: 5px 5px 0 0;
+            border: 1px solid rgba(0,0,0,.05);
+            border-radius: 1px;
+
+            &:last-child{
+                margin-right: 0;
+            }
+        }
+        img {
+            width: 80px;
+        }
+        &-big{
+            img {
+                width: 150px;
+            }
+        }
+
+    }
+    .big-thumb{
+        width: 100%;
+        height: 300px;
+        @include media-breakpoint-up(md){
+            height: 500px;
+        }
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        a{
+            display: block;
+            text-align: center;
+
+            height: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        img{
+            flex: 0;
+            object-fit: scale-down;
+        }
+
+        position: relative;
+
+        .thumb-btns{
+            list-style: none;
+            position: absolute;
+            bottom: 0;
+            display: flex;
+
+            .btn{
+                line-height:1 !important;
+                height: auto !important;
+            }
+            li{
+                padding: 1em .5em;;
+            }
+        }
+    }
+    .img-limit{
+        a{
+            position: relative;
+            display:flex;
+            text-align: center;
+            font-weight: bold;
+            font-style: italic;
+
+            img{
+                opacity: .2;
+            }
+            span{
+                position: absolute;
+                width: auto;
+                max-width: 100%;
+                top: 50%;
+                left: 50%;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                transform: translate(-50%, -50%);
+
+            }
+        }
+    }
+}

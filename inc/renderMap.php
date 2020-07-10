@@ -55,10 +55,10 @@ function renderMap($lat, $lon){
     </script>
     <div id="gmap_canvas" style="width:100%;height:300px;"></div>
 
-    <div id="map_lightbox" class="modal fade">
+    <div id="map_lightbox" class="modal">
         <div id="gmap_lightbox" style="width:100%;height:500px;"></div>
     </div>
-    <div id="street_lightbox" class="modal fade">
+    <div id="street_lightbox" class="modal">
         <div id="gstreet_lightbox" style="width:100%;height:500px;"></div>
     </div>
 

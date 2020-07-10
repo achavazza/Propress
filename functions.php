@@ -97,13 +97,6 @@ require_once 'inc/custom-functions.php';
         return false;
     }
 
-    //define('GMAPS_KEY', '&key=AIzaSyCisG_Fxqpeogfc6ku4HFPoqy3-VAUjKDo'); //key de los cofasa
-    //define('GMAPS_KEY', '&key=AIzaSyCjbvXytu9D1g1qk9dmXVmCuqjYy14tD50'); //javier@loungemedia.com.ar
-    //define('GMAPS_KEY', 'AIzaSyBBAErDMyxu0tsfWjPcK554l1_tsU6cbUo'); //alejandrochavazza@gmail.com
-    //define('GMAPS_KEY', 'AIzaSyDbJuQBpGJ_DOEzNMhkPX10jcrl_dn3tpw'); //alejandrochavazza@gmail.com
-    //define('GMAPS_KEY', '&key=AIzaSyBBJ4IWepUAgKbISKb9y0vvJ8_INiCgMB4'); //alejandrochavazza@gmail.com
-    //define('GMAPS_KEY', '&key=AIzaSyDRAdGWITvn-2SG5U8sZ_RwQ9Oe5Bdur5g'); //alejandrochavazza@gmail.com
-
     define('GMAPS_KEY', get_option('tnb_setup_options')['tnb_setup_API']);
 
     /*

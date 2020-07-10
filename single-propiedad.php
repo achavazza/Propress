@@ -207,9 +207,6 @@ $operation         = get_the_terms($post, 'operacion')[0];
 						endif;
 					?>
 
-
-
-
 					<?php
 					$tax_title       = get_post_meta($post->ID, '_prop_tax_title', true);
 					$tax_desc        = get_post_meta($post->ID, '_prop_tax_desc', true);
@@ -423,7 +420,7 @@ $operation         = get_the_terms($post, 'operacion')[0];
 	</div>
 </div>
 <?php
-	wp_enqueue_script('lity');
+	//wp_enqueue_script('lity');
 	include('inc/photoswipe-gallery.php');
 	get_footer();
 ?>

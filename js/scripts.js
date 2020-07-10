@@ -31,13 +31,14 @@ $(function(){
 		*/
 
 		$('#map_lightbox').on('shown.bs.modal', function () {
-  			init_map('gmap_lightbox');
-			alert('map');
+  			//init_map('gmap_lightbox');
+			console.log('map');
 		});
 		$('#street_lightbox').on('shown.bs.modal', function () {
-  			init_street_view('gstreet_lightbox');
-			alert('street');
+  			//init_street_view('gstreet_lightbox');
+			console.log('street');
 		});
+		
 
 
 });
