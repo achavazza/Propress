@@ -20,7 +20,7 @@ $prop_bathrooms  = $data['_prop_bathrooms'][0];
 //$prop_time       = $data['_prop_time'][0];
 
 $prop_feat       = $data['_prop_featured'][0];
-$prop_phrase     = phrases()[$data['_prop_phrase'][0]];
+//$prop_phrase     = phrases()[$data['_prop_phrase'][0]];
 //$prop_loc        = wp_get_post_terms($post->ID, 'location');
 //pr($post);
 
@@ -38,68 +38,51 @@ $statuses        = get_the_terms($post->ID, 'status')[0];
 //var_dump($prop_sale);
 
 ?>
-<div <?php post_class('box') ?> id="post-<?php the_ID(); ?>">
-    <div class="box-head">
-        <div class="thumb-head">
-            <ul class="thumb-badges flush">
-                <?php /*
-                <?php if($prop_phrase): ?>
-                    <li>
-                        <span class="badge badge-danger">
-                            <?php echo $prop_phrase; ?>
-                        </span>
-                    </li>
-                <?php endif; ?>
-                */ ?>
-                <?php
-                if($statuses){  ?>
-                    <li>
-                        <a class="badge badge-info" href="<?php echo get_term_link($statuses); ?>">
-                            <?php echo $statuses->name; ?>
-                        </a>
-                    </li>
-                <?php } ?>
-                <?php if($ops):
-                    foreach($ops as $op): ?>
-                        <li>
-                            <a href="<?php echo get_term_link($op); ?>" class="badge badge-primary">
-                                <?php echo $op->name; ?>
-                            </a>
-                        </li>
-                    <?php endforeach;
-                    endif; ?>
-                <?php if($prop_feat): ?>
-                    <li>
-                        <span class="badge badge-warning">
-                            <?php echo 'Destacado'; ?>
-                        </span>
-                    </li>
-                <?php endif; ?>
-            </ul>
-            <a href="<?php the_permalink() ?>">
-                <?php if($thumb): ?>
-                    <?php echo $thumb ?>
-                <?php else: ?>
-                    <img src="<?php echo get_attachment_url_by_slug('default', 'medium') ?>" />
-                <?php endif; ?>
-            </a>
+<div <?php post_class('card') ?> id="post-<?php the_ID(); ?>">
+    <div class="card-img">
+        <div class="card-img-top thumb-head">
+            <?php
+            echo '<ul class="list-unstyled list-inline list-badges">';
+                if($statuses):
+                    $out  = '';
+                    $out .= '<li class="list-inline-item">';
+                    $out .= sprintf('<a class="badge bg-info" href="%s">%s</a>', get_term_link($statuses), $statuses->name);
+                    $out .= '</li>';
+                    echo $out;
+                endif;
+                if($ops):
+                    foreach($ops as $op):
+                        $out = '';
+                        $out .= '<li class="list-inline-item">';
+                        $out .= sprintf('<a class="badge bg-primary" href="%s">%s</a>', get_term_link($op), $op->name);
+                        $out .= '</li>';
+                        echo $out;
+                    endforeach;
+                endif;
+                if($prop_feat):
+                    $out = '';
+                    $out .= '<li class="list-inline-item">';
+                        $out .= sprintf('<span class="badge bg-warning">%s</span>', __('Destacado', 'propress'));
+                    $out .= '</li>';
+                    echo $out;
+                endif;
+            echo '</ul>';
+            echo '<a href="'.get_the_permalink().'">';
+                echo $thumb ? $thumb : sprintf('<img src="%s" />', get_attachment_url_by_slug('default', 'medium'));
+            echo '</a>';
+            ?>
         </div>
+    </div>
+    <div class="card-header">
         <a href="<?php the_permalink() ?>">
             <span class="h3 prop-title align-center">
-            <?php if($prop_address): ?>
-                <?php echo $prop_address; ?>
-                <?php /*
-                <span class="sub-title">
-                    <?php
-                    if ($prop_extra):
-                        echo ' - ' . $prop_extra;
+                <?php
+                    if($prop_address):
+                        echo $prop_address;
+                    else:
+                        the_title();
                     endif;
-                    ?>
-                </span>
-                */ ?>
-            <?php else: ?>
-                <?php the_title(); ?>
-            <?php endif; ?>
+                ?>
             </span>
             <span class="h4 sub-title align-center">
                 <?php
@@ -110,7 +93,7 @@ $statuses        = get_the_terms($post->ID, 'status')[0];
                 endif;
                 ?>
             </span>
-            <div class="price-block">
+            <span class="price-block">
                 <?php
                 if(!$prop_sale && !$prop_rent):
                     echo __('Consultar');
@@ -119,7 +102,6 @@ $statuses        = get_the_terms($post->ID, 'status')[0];
                         $val = '';
                         if(isset($_GET['operacion']) && $_GET['operacion'] == 'alquiler'){
                             $val = '<span>'.'$'.$prop_rent.'</span>';
-                            //$val = '<strong class="highlight">'.'$'.$prop_rent.'</strong>';
                         }else{
                             $val = '$'.$prop_rent;
                         }
@@ -131,23 +113,19 @@ $statuses        = get_the_terms($post->ID, 'status')[0];
                     if($prop_sale):
                         $val = '';
                         if(isset($_GET['operacion']) && $_GET['operacion'] != 'alquiler'){
-                            //echo '<strong class="highlight">'.'$'.$prop_sale.'</strong>';
                             $val = '<span>'.$cur_symbol.' '.$prop_sale.'</span>';
-                            //$val = '<span class="highlight">'.$cur_symbol.' '.$prop_sale.'</span>';
                         }else{
                             $val = $cur_symbol.' '.$prop_sale;
-                            //echo '$'.$prop_sale;
                         }
                         echo sprintf('<span class="price sale-price" title="Precio de venta">%s</span>', $val);
                     endif;
                 endif;
                 ?>
-            </div>
+            </span>
         </a>
     </div>
-
-    <div class="box-body">
-        <ul class="prop-list">
+    <div class="card-body">
+        <ul class="list-unstyled prop-list">
             <li>
                 <?php if(!$type):?>
                 <a href="<?php echo get_bloginfo('home').'/?s=' ?>" title="<?php echo __('Tipo de propiedad') ?>">
@@ -172,12 +150,8 @@ $statuses        = get_the_terms($post->ID, 'status')[0];
                         <i class="icon cofasa-img-icons icon-l icon-bed"></i>
                     </span>
                     <?php
-                        //if(!$prop_dormrooms):
-                        //    $prop_dormrooms = 0;
-                        //endif;
                         $dorms = intval($prop_dormrooms);
                         echo sprintf(ngettext("%d Dormitorio", "%d Dormitorios", $dorms), $dorms);
-                        //echo $prop_rooms . 'Dormitorios';
                     ?>
                 </span>
             </li>
@@ -189,71 +163,17 @@ $statuses        = get_the_terms($post->ID, 'status')[0];
                         <i class="icon cofasa-img-icons icon-l icon-bath"></i>
                     </span>
                     <?php
-                        //if(!$prop_bathrooms):
-                        //    $prop_bathrooms = 0;
-                        //endif;
                         $baths = intval($prop_bathrooms);
                         echo sprintf(ngettext("%d Baño", "%d Baños", $baths), $baths);
-                        //echo $prop_rooms . 'Dormitorios';
                     ?>
                 </span>
             </li>
             <?php endif; ?>
-            <?php /*
-            <?php if($prop_rooms): ?>
-            <li>
-                <span title="<?php echo __('Ambientes') ?>">
-                    <span class="block">
-                        <i class="icons-big icon-rooms"></i>
-                    </span>
-                    &nbsp;
-                    <?php
-                        $rooms = intval($prop_rooms);
-                        echo sprintf(ngettext("%d Ambiente", "%d Ambientes", $rooms), $rooms);
-                        //echo $prop_rooms . 'Dormitorios';
-                    ?>
-
-                </span>
-            </li>
-            <?php endif; ?>
-            <?php if($prop_sup): ?>
-            <li>
-                <span title="<?php echo __('Superficie') ?>">
-                    <i class="icons-big icon-sup"></i>
-                    &nbsp;
-                    <?php echo $prop_sup; ?>
-                    m<sup>2</sup>
-                </span>
-            </li>
-            <?php endif; ?>
-            <?php if($prop_dormrooms): ?>
-
-            <?php if($prop_garage): ?>
-            <li>
-                <span title="<?php echo __('Cochera') ?>">
-                    <i class="icons-big icon-garage"></i>
-                    &nbsp;
-                    <?php echo $prop_garage; ?>
-                </span>
-            </li>
-            <?php endif; ?>
-            <?php if($prop_time): ?>
-            <li>
-                <span title="<?php echo __('Antigüedad') ?>">
-                    <i class="icons-big icon-time"></i>
-                    &nbsp;
-                    <?php echo $prop_time; ?>
-                </span>
-            </li>
-            <?php endif; ?>
-            */ ?>
         </ul>
     </div>
-    <div class="box-foot">
-        <div class="align-center">
-            <a class="btn btn-primary" href="<?php the_permalink() ?>">
-                <?php echo __('Mas Información') ?>
-            </a>
-        </div>
+     <div class="card-body text-right">
+        <a class="btn btn-primary" href="<?php the_permalink() ?>">
+            <?php echo __('Mas Información') ?>
+        </a>
     </div>
 </div>

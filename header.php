@@ -54,14 +54,35 @@
 
 	<div id="page-wrap">
 		<div id="header">
-		<div class="grid">
-			<div class="head">
-			<a id="logo" href="<?php echo get_option('home').'/'; ?>">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<div class="container">
+			<a id="logo" class="navbar-brand" href="<?php echo get_option('home').'/'; ?>">
 				<img class="visible-md"   src="<?php echo get_template_directory_uri().'/img/logo.png' ?>" title="<?php bloginfo('name'); ?>"     alt="<?php bloginfo('name'); ?>" />
-				<img class="invisible-md" src="<?php echo get_template_directory_uri().'/img/logo-min.png' ?>" title="<?php bloginfo('name'); ?>" alt="<?php bloginfo('name'); ?>" />
 			</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs4navbar" aria-controls="bs4navbar" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<?php
+			wp_nav_menu([
+				'menu'            => 'top',
+				'theme_location'  => 'header-menu',
+				'container'       => 'div',
+				'container_id'    => 'bs4navbar',
+				'container_class' => 'collapse navbar-collapse ml-auto',
+				'menu_id'         => false,
+				'menu_class'      => 'navbar-nav ml-auto text-right',
+				'depth'           => 2,
+				'fallback_cb'     => 'bs4navwalker::fallback',
+				'walker'          => new bs4navwalker()
+			]);
+			?>
+			</div>
+		</nav>
+
 			<?php
 			/*
+			<div class="head">
 			<h1><a href="<?php echo get_option('home'); ?>/"><?php bloginfo('name'); ?></a></h1>
 			<div class="description"><?php bloginfo('description'); ?></div>
 
@@ -72,7 +93,6 @@
 			if(isset($twitter) && !empty($twitter)):
 				$social .= '<li><a class="social-icon" href="'.$twitter.'"><i class="icon-twitter"></i></a></li>';
 			endif;
-			*/
 			$mobile = '<li class="invisible-md"><a href="#" class="menu-trigger"><i class="icon cofasa-linear icon-l icon-hamburger"></i></a></li>';
 			wp_nav_menu( array(
 						'theme_location'  => 'header-menu',
@@ -82,7 +102,7 @@
 						'items_wrap'      => '<div class="menu-mobile"><ul class="flush %2$s"><li><ul id="%1$s" class="flush-md visible-md">%3$s</ul>'.$mobile.'</ul></div>'
 						//'items_wrap'      => '<div class="menu-mobile float-right-md"><ul class="flush %2$s"><li><ul id="%1$s" class="flush-md visible-md">%3$s</ul>'.$social.$mobile.'</ul></div>'
 			));
-			?>
 			</div>
-		</div>
+			*/
+			?>
 		</div>

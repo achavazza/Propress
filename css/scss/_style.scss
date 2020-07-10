@@ -1,1 +1,74 @@
 //main: theme.scss
+html{font-size: 14px;}
+a{
+    text-decoration: none;
+}
+/*
+.search-fields-list{
+    display: flex;
+    flex-flow: row wrap;
+    > li{
+        flex: 1;
+        padding: 0 0.31em;
+
+        #map-container &{
+            flex: 1 1 50%;
+            padding: 0 15px;
+        }
+    }
+}
+*/
+
+#map-container{
+    display:flex;
+    > div{
+        flex: 1 1 50%;
+    }
+}
+
+.card{
+    box-shadow: 0 15px 40px rgba(0,0,0,.15);
+}
+.card-img,
+.card-img-top{
+    overflow: hidden;
+
+    img{
+        object-fit:cover;
+        width: 100%;
+        height: 250px;
+    }
+}
+.card-img-top{
+    position: relative;
+    .list-badges{
+        padding: .5em;
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+}
+.card-img,
+.card-img-bottom {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.panel{
+    @extend .card;
+}
+.panel-body{
+    @extend .card-body;
+}
+.panel-title{
+    @extend .card-title;
+}
+.panel-subtitle{
+    @extend .card-subtitle;
+}
+.panel-text{
+    @extend .card-text;
+}
+.panel-link{
+    @extend .card-link;
+}

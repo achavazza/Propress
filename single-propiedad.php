@@ -1,6 +1,5 @@
 <?php
 get_header();
-wp_enqueue_script('lity');
 
 //pr(get_post_meta ($post->ID));
 //$mapGPS  = get_post_meta ($post->ID, '_prop_map', true );
@@ -11,56 +10,57 @@ wp_enqueue_script('lity');
 //var_dump(get_post_meta($post->ID, '_prop_features'));
 //pr(get_service_list());
 
-$data            = get_post_meta($post->ID);
+$data              = get_post_meta($post->ID);
 
 $notification_form = get_option('tnb_extra_options')['tnb_options_notification_form'];
 $contact_form      = get_option('tnb_extra_options')['tnb_options_contact_form'];
 
-$prop_title      = get_the_title();
-$prop_img        = get_the_post_thumbnail_url(null, 'thumbnail');
-$prop_address    = $data['_prop_address'][0];
-$prop_sale       = ($data['_prop_price_sale'][0]!= 0) ? number_format($data['_prop_price_sale'][0], 0, ',', '.') : '';
-$prop_rent       = ($data['_prop_price_rent'][0]!= 0) ? number_format($data['_prop_price_rent'][0], 0, ',', '.') : '';
-$prop_link       = get_the_permalink();
-$prop_extra      = $data['_prop_extra'][0];
+$prop_title        = get_the_title();
+$prop_img          = get_the_post_thumbnail_url(null, 'thumbnail');
+$prop_address      = $data['_prop_address'][0];
+$prop_sale         = ($data['_prop_price_sale'][0]!= 0) ? number_format($data['_prop_price_sale'][0], 0, ',', '.') : '';
+$prop_rent         = ($data['_prop_price_rent'][0]!= 0) ? number_format($data['_prop_price_rent'][0], 0, ',', '.') : '';
+$prop_link         = get_the_permalink();
+$prop_extra        = $data['_prop_extra'][0];
 
-$mapGPS          = get_post_meta($post->ID, '_prop_map', true);
+$mapGPS            = get_post_meta($post->ID, '_prop_map', true);
 
-$prop_rooms      = $data['_prop_rooms'][0];
-$prop_sup        = $data['_prop_sup'][0];
-$prop_dormrooms  = $data['_prop_dormrooms'][0];
-$prop_bathrooms  = $data['_prop_bathrooms'][0];
+$prop_rooms        = $data['_prop_rooms'][0];
+$prop_sup          = $data['_prop_sup'][0];
+$prop_dormrooms    = $data['_prop_dormrooms'][0];
+$prop_bathrooms    = $data['_prop_bathrooms'][0];
 //$prop_garage     = $data['_prop_garage'][0];
 //$prop_time       = $data['_prop_time'][0];
 
-$prop_feat       = $data['_prop_featured'][0];
-$prop_phrase     = phrases()[$data['_prop_phrase'][0]];
-$prop_currency   = currency()[$data['_prop_currency'][0]];
+$prop_feat         = $data['_prop_featured'][0];
+$prop_phrase       = phrases()[$data['_prop_phrase'][0]];
+$prop_currency     = currency()[$data['_prop_currency'][0]];
 //$cur_symbol      = $prop_currency ? '$' : 'U$S';
 
-$prop_loc        = get_location($post);
-$type            = get_the_terms($post, 'tipo')[0];
-$operation       = get_the_terms($post, 'operacion')[0];
+$prop_loc          = get_location($post);
+$type              = get_the_terms($post, 'tipo')[0];
+$operation         = get_the_terms($post, 'operacion')[0];
 
 
 ?>
 <div class="section section-primary">
-	<div class="grid">
+	<div class="container">
 		<?php echo get_search_form(); ?>
 	</div>
 </div>
+
 <div class="section">
-	<div class="grid">
-		<?php include ('inc/featured-image.php') ?>
+	<div class="container">
+		<?php include('inc/featured-image.php'); ?>
 	</div>
 </div>
-<div class="grid">
+<div class="container">
 	<div class="row">
 		<?php //the_breadcrumb(); ?>
 		<?php if (have_posts()) :?>
-			<?php
-			while (have_posts()) : the_post(); ?>
-			<div class="quad-3">
+
+			<div class="col-md-8">
+			<?php while (have_posts()) : the_post(); ?>
 				<div <?php post_class(); ?> id="post-<?php the_ID(); ?>">
 					<div class="clearfix mb-1">
 						<h2 class="h2 prop-title float-left">
@@ -130,7 +130,6 @@ $operation       = get_the_terms($post, 'operacion')[0];
 			                <a href="<?php echo get_term_link($type); ?>" title="<?php echo __('Tipo de propiedad') ?>">
 			                    <span class="block align-center">
 									<i class="icon cofasa-img-icons icon-l icon-property"></i>
-			                        <!-- <i class="icon cofasa-linear icon-l icon-property"></i> -->
 			                    </span>
 			                    &nbsp;
 			                    <?php echo $type->name; ?>
@@ -141,7 +140,6 @@ $operation       = get_the_terms($post, 'operacion')[0];
 			            <li>
 			                <span title="<?php echo __('Dormitorios') ?>">
 			                    <span class="block align-center">
-									<!-- <i class="icon cofasa-linear icon-l icon-bed"></i> -->
 									<i class="icon cofasa-img-icons icon-l icon-bed"></i>
 			                    </span>
 			                    &nbsp;
@@ -183,17 +181,13 @@ $operation       = get_the_terms($post, 'operacion')[0];
 					$content_desktop = apply_filters("the_content", $content);
 					?>
 					<?php if($content): ?>
-						<div class="panel">
-							<div class="panel-head">
-								<h3 class="h5"><?php echo __('Descripción de la propiedad') ?></h3>
+						<div class="card">
+							<div class="card-title">
+								<h3 class="h5 my-3"><?php echo __('Descripción de la propiedad') ?></h3>
 							</div>
-							<div class="panel-content">
+							<div class="card-body">
 								<div class="entry">
-									<?php
-									//echo wpautop($content);
-									//echo $content_desktop;
-									echo wpautop($content_desktop);
-									?>
+									<?php echo wpautop($content_desktop); ?>
 								</div>
 							</div>
 						</div>
@@ -223,9 +217,9 @@ $operation       = get_the_terms($post, 'operacion')[0];
 					<div class="panel">
 						<div class="panel-head panel-primary">
 							<?php if($tax_title && $tax_title != '0,00'): ?>
-								<h3 class="h5"><?php echo sprintf(__('$ %s Gastos iniciales'), $tax_title); ?></h3>
+								<h3 class="h5 my-3"><?php echo sprintf(__('$ %s Gastos iniciales'), $tax_title); ?></h3>
 							<?php else: ?>
-								<h3 class="h5"><?php echo __('Gastos iniciales') ?></h3>
+								<h3 class="h5 my-3"><?php echo __('Gastos iniciales') ?></h3>
 							<?php endif; ?>
 						</div>
 						<div class="panel-content">
@@ -241,9 +235,9 @@ $operation       = get_the_terms($post, 'operacion')[0];
 					<div class="panel">
 						<div class="panel-head panel-primary">
 							<?php if($tax_month_title && $tax_month_title != '0,00'): ?>
-								<h3 class="h5"><?php echo sprintf(__('$ %s Gastos mensuales'), $tax_month_title); ?></h3>
+								<h3 class="h5 my-3"><?php echo sprintf(__('$ %s Gastos mensuales'), $tax_month_title); ?></h3>
 							<?php else: ?>
-								<h3 class="h5"><?php echo __('Gastos mensuales') ?></h3>
+								<h3 class="h5 my-3"><?php echo __('Gastos mensuales') ?></h3>
 							<?php endif; ?>
 						</div>
 						<div class="panel-content">
@@ -268,7 +262,7 @@ $operation       = get_the_terms($post, 'operacion')[0];
 					?>
 					<div class="panel">
 						<div class="panel-head">
-							<h3 class="h5"><?php echo __('Importe') ?></h3>
+							<h3 class="h5 my-3"><?php echo __('Importe') ?></h3>
 						</div>
 						<div class="panel-content">
 							<?php /*
@@ -287,11 +281,11 @@ $operation       = get_the_terms($post, 'operacion')[0];
 					</div>
 					<?php endif; ?>
 
-					<div class="panel">
-						<div class="panel-head">
-							<h3 class="h5"><?php echo __('Detalles') ?></h3>
+					<div class="card mb-3">
+						<div class="card-header">
+							<h3 class="h5 my-3"><?php echo __('Detalles', 'tnb'); ?></h3>
 						</div>
-						<div class="panel-content">
+						<div class="card-body">
 							<?php
 								$stat             = status();
 								$prop_statuses    = get_post_meta($post->ID, '_prop_status', true);
@@ -307,13 +301,8 @@ $operation       = get_the_terms($post, 'operacion')[0];
 
 								//$prop_features    = get_service_list();
 								$features = get_the_terms($post, 'features');
-
-
-
-
-								//pr($prop_features);
 							?>
-							<ul class="feature-list">
+							<ul class="list-unstyled feature-list">
 								<?php /*
 								AMBIENTES
 								<?php if($prop_rooms): ?>
@@ -359,21 +348,6 @@ $operation       = get_the_terms($post, 'operacion')[0];
 											}
 										}
 									}
-								/*
-									if($prop_features){
-										$i = 0;
-										foreach($prop_features as $feature){
-											pr($feature);
-											if($feature){
-												echo '<li>';
-												echo '<i class="cofasa-img-icons icon-star"></i>';
-												echo $feature.': ' . __('Si');
-												echo '</li>';
-												$i++;
-											}
-										}
-									}
-									*/
 								?>
 								<?php if($prop_front): ?>
 									<li>
@@ -412,36 +386,13 @@ $operation       = get_the_terms($post, 'operacion')[0];
 							</ul>
 						</div>
 					</div>
-					<?php /*
-					<div>
-						<h4 class="h4 title-uppercase"><?php echo __('Servicios') ?></h4>
-						<dl class="service-list dl-horizontal">
-
-						</dl>
-						<hr />
-						<?php
-						if($prop_statuses){
-							echo '<hr />';
-							echo '<dl class="service-list dl-horizontal">';
-							foreach($prop_statuses as $status){
-								echo '<dt>'.$stat[$status].'</dt>';
-								echo '<dd>&nbsp;</dd>';
-							}
-							echo '</dl>';
-						}
-						?>
-					</div>
-					*/ ?>
 					<?php if(isset($mapGPS['latitude']) && isset($mapGPS['longitude']) && !empty($mapGPS['latitude']) && !empty($mapGPS['longitude'])): ?>
-					<div class="panel">
-						<div class="panel-head">
-							<h3 class="h5"><?php echo __('Ubicación') ?></h3>
+					<div class="card mb-3">
+						<div class="card-header">
+							<h3 class="h5 my-3"><?php echo __('Ubicación', 'tnb'); ?></h3>
 						</div>
-						<div class="panel-content panel-content-wrap">
-							<?php
-							//if(isset($mapGPS) && !empty($mapGPS)){
-								renderMap($mapGPS['latitude'],$mapGPS['longitude']);
-							?>
+						<div class="card-body">
+							<?php renderMap($mapGPS['latitude'],$mapGPS['longitude']); ?>
 						</div>
 					</div>
 					<?php endif; ?>
@@ -449,20 +400,7 @@ $operation       = get_the_terms($post, 'operacion')[0];
 				<?php include (TEMPLATEPATH . '/inc/agents.php' ); ?>
 				<?php include (TEMPLATEPATH . '/inc/related.php' ); ?>
 
-				<?php /*
-				<h4 class="h4 title-uppercase"><?php echo __('Consultar') ?></h4>
-				<?php include (TEMPLATEPATH . '/inc/admin/contact-form.php' ); ?>
-				*/ ?>
 			</div>
-
-			<?php // edit_post_link('Edit this entry','','.'); ?>
-			<?php /*
-			<div id="email-form" class="lity-hide email-form">
-			<h3 class="meta">Consultar por:</h4>
-			<h4 class="title-alt"><?php the_title(); ?></h4>
-			<?php include (TEMPLATEPATH . '/inc/admin/contact-form.php' ); ?>
-			</div>
-			*/ ?>
 			<?php if($notification_form): ?>
 				<div id="notificacion" class="lity-hide email-form">
 					<h3 class="meta">Consultar por:</h4>
@@ -479,12 +417,13 @@ $operation       = get_the_terms($post, 'operacion')[0];
 			<?php endif; ?>
 		<?php endwhile;?>
 	<?php endif; ?>
-	<div class="quad-1">
+	<div class="col-md-4">
 		<?php get_sidebar('propiedad'); ?>
 	</div>
-</div>
+	</div>
 </div>
 <?php
-include('inc/photoswipe-gallery.php');
+	wp_enqueue_script('lity');
+	include('inc/photoswipe-gallery.php');
+	get_footer();
 ?>
-<?php get_footer(); ?>

@@ -283,6 +283,14 @@ function wpa_filter_home_query( $query ){
     }
 
 
+function filter_search($query) {
+    if ($query->is_search) {
+         $query->set('post_type', array('propiedad'));
+    };
+    return $query;
+};
+add_filter('pre_get_posts', 'filter_search');
+
 /* COOKIES */
 
 function wpb_cookies_ID() {

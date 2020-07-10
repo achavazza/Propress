@@ -24,9 +24,7 @@ function initMap() {
       map: map,
       minWidth: 450,
       maxWidth: 450,
-      //maxWidth: 450,
       maxHeight: 234,
-      //maxHeight: 224,
       //content: '<div class="phoneytext">Some label</div>',
       position: new google.maps.LatLng(-35, 151),
       padding: 10,
@@ -73,6 +71,16 @@ function initMap() {
             google.maps.event.removeListener(zoomChangeBoundsListener);
         });
     });
+
+    /*
+    // Add a marker clusterer to manage the markers.
+    var mcOptions = {
+        //gridSize: 10,
+        minimumClusterSize: 20
+    };
+    var markerCluster = new MarkerClusterer(map, markers, mcOptions);
+    */
+
     map.initialZoom = true;
     map.fitBounds(bounds);
     //google.maps.event.addDomListener(window, 'load', init_map);

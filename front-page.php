@@ -18,7 +18,7 @@ if($img){
 ?>
 
 <div class="section section-primary">
-	<div class="grid">
+	<div class="container">
 		<?php echo get_search_form(); ?>
 	</div>
 </div>
@@ -26,7 +26,7 @@ if($img){
 
 <?php /*
 <div id="hero-featured">
-	<div class="grid">
+	<div class="container">
 		<?php
 		$args = array(
 	    'post_type'      => 'propiedad',
@@ -73,32 +73,29 @@ if($img){
 </div>
 */  ?>
 
-<div class="grid">
+<div class="container">
 	<?php
 	$args = array(
-		'post_type'      => 'propiedad',
-		'posts_per_page' => 12,
-		//'category_name'       => 'current',
 		//'ignore_sticky_posts' => 1,
 		//'paged'               => $paged
-		'post__not_in'        => $featPosts
+		'post_type'      => 'propiedad',
+		'posts_per_page' => 12,
+		'post__not_in'   => $featPosts
 	);
 	$loop = new WP_Query( $args );
 	if ( $loop->have_posts() ) :
 		$i = 0 ?>
-
-
-		<h2 class="h1 title">Últimas propiedades sumadas</h2>
+		<?php echo sprintf('<h2 class="h1 title">%s</h2>', __('Últimas propiedades sumadas', 'tnb')); ?>
 		<div class="row">
-
 		<?php while ( $loop->have_posts() ) : $loop->the_post(); ?>
-			<div class="triad-1-md triad-3-sm">
+			<div class="col col-md-4">
 				<?php get_template_part('parts/post','loop') ?>
 			</div>
-			<?php $i++; ?>
-			<?php echo ($i % 3 == 0) ? '</div><div class="row">':'' ?>
-		<?php endwhile; ?>
 
+			<?php
+			$i++;
+			echo ($i % 3 == 0) ? '</div><div class="row">' : ''; ?>
+		<?php endwhile; ?>
 		</div>
 	<?php endif; ?>
 	<?php /*
@@ -114,29 +111,4 @@ if($img){
 	<?php wp_reset_postdata(); ?>
 </div>
 
-<?php /*
-<div class="media-links">
-	<?php if (function_exists('dynamic_sidebar') && dynamic_sidebar('Home Widgets')) : else : endif; ?>
-</div>
-<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-	<div <?php post_class() ?> id="post-<?php the_ID(); ?>">
-		<h2><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></h2>
-		<?php include (TEMPLATEPATH . '/inc/meta.php' ); ?>
-		<div class="entry">
-			<?php the_content(); ?>
-		</div>
-		<div class="postmetadata">
-			<?php the_tags('Tags: ', ', ', '<br />'); ?>
-			Posted in <?php the_category(', ') ?> |
-			<?php comments_popup_link('No Comments &#187;', '1 Comment &#187;', '% Comments &#187;'); ?>
-		</div>
-	</div>
-<?php endwhile; ?>
-<?php include (TEMPLATEPATH . '/inc/nav.php' ); ?>
-<?php else : ?>
-	<h2>Not Found</h2>
-<?php endif; ?>
-<?php get_sidebar(); ?>
-
-*/ ?>
 <?php get_footer(); ?>

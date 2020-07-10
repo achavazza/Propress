@@ -131,12 +131,12 @@ function tnb_main_options_metabox() {
 	/**
 	 * Registers extra options page, and set main item as parent.
 	 */
-	$extra_options = new_cmb2_box( array(
-		'id'           => 'tnb_config_options_page',
+	$setup_options = new_cmb2_box( array(
+		'id'           => 'tnb_setup_options_page',
 		'title'        => esc_html__( 'Configuración', 'cmb2' ),
 		'object_types' => array( 'options-page' ),
 
-		'option_key'   => 'tnb_config_options',
+		'option_key'   => 'tnb_setup_options',
 		'parent_slug'  => 'tnb_main_options',
 
 		// 'icon_url'        => 'dashicons-palmtree', // Menu icon. Only applicable if 'parent_slug' is left empty.
@@ -150,9 +150,30 @@ function tnb_main_options_metabox() {
 		// 'message_cb'      => 'tnb_options_page_message_callback',
 	) );
 
-	$extra_options->add_field( array(
+	$setup_options->add_field( array(
+ 		'name'     => 'API Key',
+		'id'       => 'tnb_setup_API',
+		'desc'     => 'API de Google maps',
+ 		'type'     => 'text',
+ 	));
+
+	$setup_options->add_field( array(
+ 		'name'     => 'Latitud',
+		'id'       => 'tnb_setup_lat',
+		'desc'     => 'Latitud por defecto',
+ 		'type'     => 'text',
+ 	));
+
+	$setup_options->add_field( array(
+ 		'name'     => 'Longitud',
+		'id'       => 'tnb_setup_lon',
+		'desc'     => 'Longitud por defecto',
+ 		'type'     => 'text',
+ 	));
+
+	$setup_options->add_field( array(
  		'name'     => 'Miniaturas en galería',
-		'id'       => 'tnb_config_options_gallery',
+		'id'       => 'tnb_setup_options_gallery',
 		'desc'     => 'muestra hasta X imagenes, luego de este numero, listara "1 más"',
  		'type'     => 'text',
  		'default'     => '5',

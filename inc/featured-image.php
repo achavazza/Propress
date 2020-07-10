@@ -17,19 +17,30 @@
             if($btns): ?>
             <ul class="thumb-btns">
                 <?php if(in_array('map', $btns)): ?>
+                    <li><a class="btn" data-toggle="modal" data-target="#map_lightbox" href="#map_lightbox"><i class="icon cofasa-linear icon-map"></i></a></li>
+                <?php endif; ?>
+                <?php if(in_array('street', $btns)): ?>
+                    <li><a class="btn" data-toggle="modal" data-target="#street_lightbox" href="#street_lightbox"><i class="icon cofasa-linear icon-marker"></i></a></li>
+                <?php endif; ?>
+            </ul>
+            <?php /*
+            migrando de lity a bootstrap
+            <ul class="thumb-btns">
+                <?php if(in_array('map', $btns)): ?>
                     <li><a class="btn" href="#map_lightbox" id="map_lightbox_trigger"><i class="icon cofasa-linear icon-map"></i></a></li>
                 <?php endif; ?>
                 <?php if(in_array('street', $btns)): ?>
                     <li><a class="btn" href="#street_lightbox" id="street_lightbox_trigger"><i class="icon cofasa-linear icon-marker"></i></a></li>
                 <?php endif; ?>
             </ul>
+            */ ?>
         <?php endif; ?>
     </figure>
 
     <?php
     $block = '';
     $gallery_images = get_post_meta( get_the_ID(), '_prop_images', 1);
-    $thumb_limit = get_option('tnb_config_options')['tnb_config_options_gallery'];
+    $thumb_limit = get_option('tnb_setup_options')['tnb_setup_options_gallery'];
     $limit = 5; //5+1
     if($thumb_limit){
         $limit = intval($thumb_limit);
