@@ -97,6 +97,9 @@ require_once 'inc/custom-functions.php';
         return false;
     }
 
+    if(empty(get_option('tnb_setup_options')['tnb_setup_API'])){
+        echo('falta en configuraciones la clave de gmaps');
+    }
     define('GMAPS_KEY', get_option('tnb_setup_options')['tnb_setup_API']);
 
     /*

@@ -8,6 +8,7 @@
                 var items = [];
                 //$pic.find('a').each(function() {
                 $pic.find('.thumb').each(function() {
+                    if($(this).is('.limit')){console.log('.limit');return;}
                     var $href   = $(this).attr('href'),
                         $title  = $(this).attr('title'),
                         $size   = $(this).data('size').split('x'),

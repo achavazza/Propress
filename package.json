@@ -6,8 +6,8 @@
   "author": "Alejandro Chavazza",
   "license": "ISC",
   "dependencies": {
-    "bootstrap": "^5.0.0-alpha1",
-    "bootstrap-icons": "^1.0.0-alpha5",
+    "bootstrap": "^5.0.0-alpha3",
+    "bootstrap-icons": "^1.1.0",
     "info-bubble": "0.0.1",
     "jquery": "^3.5.1",
     "lity": "^2.4.1",

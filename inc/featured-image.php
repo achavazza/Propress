@@ -78,7 +78,7 @@
                 }
                 if($i > $limit){
                     $block  = '<figure class="img-limit">';
-                    $block .= '<a class="thumb" data-index="'.$i.'" href="'.$image[0].'" itemprop="contentUrl" data-size="'.$image[1].'x'.$image[2].'">';
+                    $block .= '<a class="thumb limit" data-index="'.$i.'" href="'.$image[0].'" itemprop="contentUrl" data-size="'.$image[1].'x'.$image[2].'">';
                     $block .= $thumb;
                     //$block .= wp_get_attachment_image( $gallery_image, 'thumbnail' );
                     $block .= '<span>'.($count - $limit).' más ...'.'</span>';
