@@ -1,8 +1,10 @@
 <form action="<?php bloginfo('siteurl'); ?>" id="searchform" method="get" class="form">
     <?php //if(!is_front_page()): ?>
+        <?php /*
         <div class="panel-head">
             <h3 class="h4">Buscador de propiedades</h3>
         </div>
+        */ ?>
         <?php //endif; ?>
         <div class="form search-form">
             <ul class="list-unstyled search-fields-list row g-3 align-items-end">
@@ -153,7 +155,7 @@
 
             <li class="col-auto flex-fill">
 
-                <button type="submit" id="searchsubmit" class="btn btn-outline-primary btn-block">
+                <button type="submit" id="searchsubmit" class="btn btn-secondary btn-block">
                     <i class="qs-icon icon-search"></i>
                     <?php echo __('Buscar') ?>
                 </button>

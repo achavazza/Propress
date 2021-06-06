@@ -1,9 +1,9 @@
 <?php
 function the_breadcrumb() {
-	echo '<div id="breadcrumb">';
-	echo '<ul id="crumbs" class="flush">';
+	echo '<nav aria-label="breadcrumb">';
+	echo '<ol class="breadcrumb my-2">';
 	if (!is_home()) {
-		echo '<li>';
+		echo '<li class="breadcrumb-item">';
             echo '<a href="'. get_option('home'). '">'. 'Inicio' . "</a>";
         echo "</li>";
 		//if (is_category() || is_single()) {
@@ -20,13 +20,13 @@ function the_breadcrumb() {
                     echo '<a href="'.$termlink.'" title="'.$term->name.'">'.$term->name.'</a>';
                 echo "</li>";
             }
-            echo "<li>";
+            echo '<li class="breadcrumb-item">';
             echo '<span>';
 			the_title();
             echo '</span>';
 			echo '</li>';
 		} elseif (is_page()) {
-			echo '<li>';
+			echo '<li class="breadcrumb-item">';
 			echo '<span>';
     			echo the_title();
 			echo '</span>';
@@ -63,8 +63,8 @@ function the_breadcrumb() {
         }
         echo'</li>';
     }
-	echo '</ul>';
-	echo '</div>';
+	echo '</ol>';
+	echo '</nav>';
 }
 /*
 function the_breadcrumb() {

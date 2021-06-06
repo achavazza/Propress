@@ -1,23 +1,60 @@
 //main: theme.scss
 html{font-size: 14px;}
+$h1-font-size: $font-size-base * 2 !default;
+$h2-font-size: $font-size-base * 1.8 !default;
+$h3-font-size: $font-size-base * 1.6 !default;
+$h4-font-size: $font-size-base * 1.4 !default;
+$h5-font-size: $font-size-base * 1.2 !default;
+$h6-font-size: $font-size-base !default;
+
+$btn-text-transform: uppercase;
+$btn-font-weight: bold;
+
 a{
     text-decoration: none;
 }
-/*
-.search-fields-list{
-    display: flex;
-    flex-flow: row wrap;
-    > li{
-        flex: 1;
-        padding: 0 0.31em;
-
-        #map-container &{
-            flex: 1 1 50%;
-            padding: 0 15px;
-        }
-    }
+.no-color{
+    color: inherit
 }
-*/
+.title{
+    font-weight: bold;
+}
+.title,
+.sub-title{
+    display:block;
+}
+.material-icons{
+    vertical-align: middle !important;
+    opacity: .4;
+}
+.icon-small{
+    font-size: $font-size-base * 1.4 !important;
+}
+.icon-big{
+    font-size: $font-size-base * 3 !important;
+}
+.block{
+    display:block;
+}
+
+//custom
+.btn{
+    text-transform: $btn-text-transform;
+    font-weight: $btn-font-weight;
+}
+.card-header,.card-body,.card-footer{
+    border-color: transparent
+}
+.card-header,.card-body{
+    padding: $spacer/2 $spacer;
+}
+.card-footer{
+    padding: $spacer/2 $spacer $spacer;
+}
+.badge{
+    text-transform: $btn-text-transform;
+}
+
 
 #map-container{
     display:flex;
@@ -42,10 +79,11 @@ a{
 .card-img-top{
     position: relative;
     .list-badges{
-        padding: .5em;
+        padding: $spacer/2;
         position: absolute;
         top: 0;
         right: 0;
+        line-height:1;
     }
 }
 .card-img,

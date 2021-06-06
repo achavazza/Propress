@@ -17,7 +17,7 @@ if($img){
 }*/
 ?>
 
-<div class="section section-primary">
+<div class="section section-primary bg-dark">
 	<div class="container">
 		<?php echo get_search_form(); ?>
 	</div>
@@ -74,6 +74,51 @@ if($img){
 */  ?>
 
 <div class="container">
+	<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+		<div class="post" id="post-<?php the_ID(); ?>">
+			<div class="entry">
+				<?php the_content(); ?>
+			</div>
+		</div>
+		<?php //comments_template(); ?>
+	<?php endwhile; endif; ?>
+	<?php
+	$args = array(
+		'post_type'      => 'post',
+		'posts_per_page' => 3,
+		//'category_name'       => 'current',
+		//'ignore_sticky_posts' => 1,
+		//'paged'               => $paged
+		'post__not_in'        => $featPosts
+	);
+	$loop = new WP_Query( $args );
+	if ( $loop->have_posts() ) :
+		$i = 0 ?>
+		<h2 class="h1 title">Noticias</h2>
+		<div class="row">
+		<?php while ( $loop->have_posts() ) : $loop->the_post(); ?>
+			<div class="col-sm-12 col-md-6 col-lg-4 mb-3">
+				<?php get_template_part('parts/blog','loop') ?>
+			</div>
+			<?php $i++; ?>
+			<?php echo ($i % 3 == 0) ? '</div><div class="row">':'' ?>
+		<?php endwhile; ?>
+		</div>
+	<?php endif; ?>
+	<?php wp_reset_postdata(); ?>
+	<?php if (get_option( 'page_for_posts' )): ?>
+	<div class="row justify-content-center">
+		<div class="col-sm-12 col-md-6 col-lg-4 mb-3">
+			<div class="d-grid">
+				<a href="<?php echo get_permalink( get_option( 'page_for_posts' ) )  ?>" class="btn btn-primary btn-lg btn-block">
+					<?php echo _e('Ver Todas las noticias') ?>
+				</a>
+			</div>
+		</div>
+	</div>
+	<?php endif; ?>
+</div>
+<div class="container">
 	<?php
 	$args = array(
 		//'ignore_sticky_posts' => 1,
@@ -88,7 +133,7 @@ if($img){
 		<?php echo sprintf('<h2 class="h1 title">%s</h2>', __('Últimas propiedades sumadas', 'tnb')); ?>
 		<div class="row">
 		<?php while ( $loop->have_posts() ) : $loop->the_post(); ?>
-			<div class="col col-md-4">
+			<div class="col-sm-12 col-md-6 col-lg-4 mb-3">
 				<?php get_template_part('parts/post','loop') ?>
 			</div>
 
@@ -98,16 +143,16 @@ if($img){
 		<?php endwhile; ?>
 		</div>
 	<?php endif; ?>
-	<?php /*
-	<div class="row">
-		<div class="triad-1 prefix-1 suffix-1">
-			<a href="<?php echo get_bloginfo('home').'/?s=' ?>" class="btn btn-primary btn-lg btn-block">
-				<?php echo _e('Ver Todas las propiedades') ?>
-			</a>
+	<div class="row justify-content-center">
+		<div class="col-sm-12 col-md-6 col-lg-4 mb-3">
+			<div class="d-grid">
+				<a href="<?php echo get_bloginfo('home').'/?s=' ?>" class="btn btn-primary btn-lg btn-block">
+					<?php echo _e('Ver Todas las propiedades') ?>
+				</a>
+			</div>
 		</div>
 	</div>
-	*/ ?>
-	<?php include (TEMPLATEPATH . '/inc/nav.php' ); ?>
+	<?php //include (TEMPLATEPATH . '/inc/nav.php' ); ?>
 	<?php wp_reset_postdata(); ?>
 </div>
 

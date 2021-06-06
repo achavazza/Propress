@@ -38,7 +38,7 @@ $statuses        = get_the_terms($post->ID, 'status')[0];
 //var_dump($prop_sale);
 
 ?>
-<div <?php post_class('card') ?> id="post-<?php the_ID(); ?>">
+<div <?php post_class('card h-100') ?> id="post-<?php the_ID(); ?>">
     <div class="card-img">
         <div class="card-img-top thumb-head">
             <?php
@@ -73,107 +73,96 @@ $statuses        = get_the_terms($post->ID, 'status')[0];
             ?>
         </div>
     </div>
-    <div class="card-header">
-        <a href="<?php the_permalink() ?>">
-            <span class="h3 prop-title align-center">
-                <?php
-                    if($prop_address):
-                        echo $prop_address;
-                    else:
-                        the_title();
-                    endif;
-                ?>
-            </span>
-            <span class="h4 sub-title align-center">
-                <?php
-                if ($prop_loc):
-                    echo $prop_loc;
-                else:
-                    echo '&nbsp;';
-                endif;
-                ?>
-            </span>
-            <span class="price-block">
-                <?php
-                if(!$prop_sale && !$prop_rent):
-                    echo __('Consultar');
-                else:
-                    if($prop_rent):
-                        $val = '';
-                        if(isset($_GET['operacion']) && $_GET['operacion'] == 'alquiler'){
-                            $val = '<span>'.'$'.$prop_rent.'</span>';
-                        }else{
-                            $val = '$'.$prop_rent;
-                        }
-                        echo sprintf('<span class="price rent-price" title="Precio de alquiler">%s</span>', $val);
-                    endif;
-                    if($prop_sale && $prop_rent):
-                        echo ' | ';
-                    endif;
-                    if($prop_sale):
-                        $val = '';
-                        if(isset($_GET['operacion']) && $_GET['operacion'] != 'alquiler'){
-                            $val = '<span>'.$cur_symbol.' '.$prop_sale.'</span>';
-                        }else{
-                            $val = $cur_symbol.' '.$prop_sale;
-                        }
-                        echo sprintf('<span class="price sale-price" title="Precio de venta">%s</span>', $val);
-                    endif;
-                endif;
-                ?>
-            </span>
-        </a>
-    </div>
     <div class="card-body">
-        <ul class="list-unstyled prop-list">
-            <li>
-                <?php if(!$type):?>
-                <a href="<?php echo get_bloginfo('home').'/?s=' ?>" title="<?php echo __('Tipo de propiedad') ?>">
-                    <span class="block align-center">
-                        <i class="icon cofasa-img-icons icon-l icon-property"></i>
+        <div class="d-flex w-100">
+            <div class="flex-grow-1">
+                <a href="<?php the_permalink() ?>" class="no-color">
+                    <span class="h4 title">
+                        <?php the_title(); ?>
                     </span>
-                    <?php echo 'Propiedad' ?>
+                    <span class="h6 sub-title">
+                        <?php
+                        if($prop_address):
+                            echo $prop_address;
+                        endif;
+                        if ($prop_loc):
+                            echo sprintf('- %s', $prop_loc);
+                        endif;
+                        ?>
+                    </span>
+                    <span class="price-block">
+                        <?php
+                        if(!$prop_sale && !$prop_rent):
+                            echo __('Consultar');
+                        else:
+                            if($prop_rent):
+                                $val = '';
+                                if(isset($_GET['operacion']) && $_GET['operacion'] == 'alquiler'){
+                                    $val = '<span>'.'$'.$prop_rent.'</span>';
+                                }else{
+                                    $val = '$'.$prop_rent;
+                                }
+                                echo sprintf('<span class="price rent-price" title="Precio de alquiler">%s</span>', $val);
+                            endif;
+                            if($prop_sale && $prop_rent):
+                                echo ' | ';
+                            endif;
+                            if($prop_sale):
+                                $val = '';
+                                if(isset($_GET['operacion']) && $_GET['operacion'] != 'alquiler'){
+                                    $val = '<span>'.$cur_symbol.' '.$prop_sale.'</span>';
+                                }else{
+                                    $val = $cur_symbol.' '.$prop_sale;
+                                }
+                                echo sprintf('<span class="price sale-price" title="Precio de venta">%s</span>', $val);
+                            endif;
+                        endif;
+                        ?>
+                    </span>
                 </a>
-                <?php else: ?>
-                <a href="<?php echo get_term_link($type); ?>" title="<?php echo __('Tipo de propiedad') ?>">
-                    <span class="block align-center">
-                        <i class="icon cofasa-img-icons icon-l icon-property"></i>
+            </div>
+            <div class="text-center">
+                <?php if(isset($type)): ?>
+                <a class="d-block no-color" href="<?= isset($type) ? get_term_link($type) : get_bloginfo('home').'/?s='; ?>" title="<?php echo __('Tipo de propiedad') ?>">
+                    <span class="material-icons icon-big d-block" <?= isset($type) ? $type->name : __('Propiedad', 'tnb'); ?>>business</span>
+                    <span class="d-block">
+                        <?= $type->name  ?>
                     </span>
-                    <?php echo $type->name; ?>
                 </a>
                 <?php endif; ?>
-            </li>
-            <?php if($prop_dormrooms): ?>
-            <li>
-                <span title="<?php echo __('Dormitorios') ?>">
-                    <span class="block align-center">
-                        <i class="icon cofasa-img-icons icon-l icon-bed"></i>
-                    </span>
-                    <?php
-                        $dorms = intval($prop_dormrooms);
-                        echo sprintf(ngettext("%d Dormitorio", "%d Dormitorios", $dorms), $dorms);
-                    ?>
-                </span>
-            </li>
-            <?php endif; ?>
-            <?php if($prop_bathrooms): ?>
-            <li>
-                <span title="<?php echo __('Baños') ?>">
-                    <span class="block align-center">
-                        <i class="icon cofasa-img-icons icon-l icon-bath"></i>
-                    </span>
-                    <?php
-                        $baths = intval($prop_bathrooms);
-                        echo sprintf(ngettext("%d Baño", "%d Baños", $baths), $baths);
-                    ?>
-                </span>
-            </li>
-            <?php endif; ?>
-        </ul>
+            </div>
+        </div>
     </div>
-     <div class="card-body text-right">
-        <a class="btn btn-primary" href="<?php the_permalink() ?>">
-            <?php echo __('Mas Información') ?>
-        </a>
+     <div class="card-footer d-flex flex-row justify-content-between align-items-center">
+         <div class="flex-grow-2">
+         <ul class="list-inline prop-list mb-0">
+             <?php if(isset($prop_dormrooms)):
+                $dorms = intval($prop_dormrooms);
+                ?>
+             <li class="list-inline-item">
+                <span class="material-icons icon-small" title="<?php echo sprintf(ngettext("%d Dormitorio", "%d Dormitorios", $dorms), $dorms); ?>">
+                    hotel
+                </span>
+                <?php echo sprintf("%d", $dorms); ?>
+             </li>
+             <?php endif; ?>
+             <?php
+                if(isset($prop_bathrooms)):
+                $baths = intval($prop_bathrooms);
+                ?>
+             <li class="list-inline-item">
+                <span class="material-icons icon-small" title="<?php echo sprintf(ngettext("%d Baño", "%d Baños", $baths), $baths);?>">
+                    bathtub
+                </span>
+                <?= sprintf("%d", $baths);?>
+             </li>
+             <?php endif; ?>
+        </ul>
+        </div>
+        <div class="flex-shrink-1">
+            <a class="btn btn-primary" href="<?php the_permalink() ?>">
+                <?php echo __('Ver Más') ?>
+            </a>
+        </div>
     </div>
 </div>
