@@ -1,4 +1,14 @@
 //main: theme.scss
+
+
+.admin-bar .fixed-top {
+  top:46px;
+  @media screen and (min-width:782px) {
+    top:32px;
+  }
+}
+
+
 html{font-size: 14px;}
 $h1-font-size: $font-size-base * 2 !default;
 $h2-font-size: $font-size-base * 1.8 !default;
@@ -109,4 +119,11 @@ a{
 }
 .panel-link{
     @extend .card-link;
+}
+
+
+.map-modal{
+    .modal-body{
+        margin: -$spacer;
+    }
 }

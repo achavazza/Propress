@@ -1,5 +1,5 @@
 $(function(){
-	alert('coso');
+	//alert('coso');
 	var $slider = $('#slider');
 	//var $slider = $('#slides');
 
@@ -20,7 +20,7 @@ $(function(){
 			$slider.css('height', emaxHeight).find('.pane').css('height', emaxHeight);
 		}
 	});
-	
+
 	$slider.on('mouseenter', function() {
 		//console.log('stop');
 		$slider.unslider('stop');

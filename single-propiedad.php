@@ -43,7 +43,7 @@ $operation         = get_the_terms($post, 'operacion')[0];
 
 
 ?>
-<div class="section section-primary">
+<div class="section section-primary bg-dark">
 	<div class="container">
 		<?php echo get_search_form(); ?>
 	</div>

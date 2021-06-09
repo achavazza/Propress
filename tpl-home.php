@@ -17,12 +17,12 @@ if($img){
 }*/
 ?>
 
+<?php include('inc/slider.php'); ?>
 <div class="section section-primary bg-dark">
 	<div class="container">
 		<?php echo get_search_form(); ?>
 	</div>
 </div>
-<?php include('inc/slider.php'); ?>
 
 <?php /*
 <div id="hero-featured">

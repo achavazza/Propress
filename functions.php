@@ -119,7 +119,7 @@ require_once 'inc/custom-functions.php';
            wp_deregister_script('jquery');
         }
         wp_register_script('jquery'       , get_template_directory_uri().'/js/jquery.slim.min.js', array(), '3.5.1', true);
-        wp_register_script('bootstrap'    , get_template_directory_uri().'/js/bootstrap.min.js', array('jquery'), '5.0.0-alpha1', true);
+        wp_register_script('bootstrap'    , get_template_directory_uri().'/js/bootstrap.bundle.min.js', array('jquery'), '5.0.0-alpha1', true);
 
         wp_register_script('photoswipe'   , get_template_directory_uri().'/js/plugins/photoswipe.min.js', array(), '4.1.3', true);
         wp_register_script('photoswipeUI' , get_template_directory_uri().'/js/plugins/photoswipe-ui-default.min.js', array('photoswipe'), '4.1.3', true);
