@@ -83,7 +83,8 @@ $operation         = get_the_terms($post, 'operacion')[0];
 									echo '&nbsp;';
 									echo '&nbsp;';
 									echo '<span class="base-font-size">';
-									echo '<a class="btn btn-primary" data-lity="" href="#contact_form" style="padding:7px">Informarme el precio</a>';
+									echo '<a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#contact_form" style="padding:7px">Informarme el precio</a>';
+									//echo '<a class="btn btn-primary" data-lity="" href="#contact_form" style="padding:7px">Informarme el precio</a>';
 									echo '</span>';
 								endif;
 							else:
@@ -107,7 +108,8 @@ $operation         = get_the_terms($post, 'operacion')[0];
 									echo '&nbsp;';
 									echo '&nbsp;';
 									echo '<span class="base-font-size">';
-									echo '<a class="btn btn-primary" data-lity="" href="#notificacion" style="padding:7px">Avisarme si baja el precio</a>';
+									echo '<a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#notificacion" style="padding:7px">Avisarme si baja el precio</a>';
+									//echo '<a class="btn btn-primary" data-lity="" href="#notificacion" style="padding:7px">Avisarme si baja el precio</a>';
 									echo '</span>';
 								endif;
 							endif;
@@ -396,21 +398,56 @@ $operation         = get_the_terms($post, 'operacion')[0];
 				</div>
 				<?php include (TEMPLATEPATH . '/inc/agents.php' ); ?>
 				<?php include (TEMPLATEPATH . '/inc/related.php' ); ?>
-
 			</div>
 			<?php if($notification_form): ?>
+				<div id="notificacion" class="modal email-form">
+					<div class="modal-dialog">
+				        <div class="modal-content">
+				            <div class="modal-header">
+				                <h5 class="modal-title" id="exampleModalLabel">
+									Consultar por:
+									<?php the_title(); ?>
+								</h5>
+				                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				            </div>
+				            <div class="modal-body">
+								<?php echo do_shortcode($notification_form, true); ?>
+				            </div>
+				        </div>
+				    </div>
+				</div>
+				<?php /*
 				<div id="notificacion" class="lity-hide email-form">
 					<h3 class="meta">Consultar por:</h4>
 					<h4 class="title-alt"><?php the_title(); ?></h4>
 						<?php echo do_shortcode($notification_form, true); ?>
 				</div>
+				*/ ?>
 			<?php endif; ?>
 			<?php if($contact_form): ?>
+				<div id="contact_form" class="modal email-form">
+					<div class="modal-dialog">
+				        <div class="modal-content">
+				            <div class="modal-header">
+				                <h5 class="modal-title" id="exampleModalLabel">
+									Consultar por:
+									<?php the_title(); ?>
+								</h5>
+				                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				            </div>
+				            <div class="modal-body">
+								<?php echo do_shortcode($contact_form, true); ?>
+				            </div>
+				        </div>
+				    </div>
+				</div>
+				<?php /*
 				<div id="contact_form" class="lity-hide email-form">
 					<h3 class="meta">Consultar por:</h4>
 					<h4 class="title-alt"><?php the_title(); ?></h4>
 						<?php echo do_shortcode($contact_form, true); ?>
 				</div>
+				*/ ?>
 			<?php endif; ?>
 		<?php endwhile;?>
 	<?php endif; ?>

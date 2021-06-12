@@ -1,1 +1,4 @@
 //main: theme.scss
+//@import "_plugins.scss";
+@import "./plugins/photoswipe/_photoswipe.scss";
+@import "plugins/photoswipe/_photoswipe-ui.scss";

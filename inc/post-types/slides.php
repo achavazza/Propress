@@ -35,7 +35,7 @@ function slide_init() {
         'menu_position'      => 3,
         'menu_icon'          => 'dashicons-images-alt2',
         'supports'           => array('title', 'editor', 'thumbnail'),
-        //'show_in_rest'       => true,
+        'show_in_rest'       => true,
         'taxonomies'         => array('slider'),
     );
     register_post_type('slide', $args);
@@ -262,7 +262,7 @@ function slider_taxonomy_metabox() {
     $cmb_term->add_field( array(
 		'name'    => __( 'Alto', 'tnb' ),
 		'desc'    => __( 'Alto  de la imagen de slider (en px)', 'tnb' ),
-		'default' => 675,
+		'default' => 400,
 		'id'      => $prefix . 'h',
 		'type'    => 'text',
     	'attributes' => array(
@@ -281,12 +281,14 @@ function slider_taxonomy_metabox() {
 		'desc'    => __( 'Controla si el slide se anima o no', 'tnb' ),
 		'id'      => $prefix . 'animated',
 		'type'    => 'checkbox',
+        'default' => true,
 	) );
     $cmb_term->add_field( array(
 		'name'    => __( 'Bucle', 'tnb' ),
 		'desc'    => __( 'Controla si el slide se anima indefinidamente en bucle', 'tnb' ),
 		'id'      => $prefix . 'loop',
 		'type'    => 'checkbox',
+        'default' => true,
 	) );
 
 

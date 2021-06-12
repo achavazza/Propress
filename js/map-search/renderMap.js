@@ -1,7 +1,7 @@
 function init_map(map_div){
     // Options
-    console.log(lat);
-    console.log(lon);
+    //console.log(lat);
+    //console.log(lon);
     var myOptions = {
         zoom:16,
         center:new google.maps.LatLng(lat,lon)

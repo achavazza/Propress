@@ -1,4 +1,4 @@
-<?php wp_enqueue_script('photo-init'); ?>
+<?php wp_enqueue_script('photoswipe-init'); ?>
 <!-- Root element of PhotoSwipe. Must have class pswp. -->
 <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
     <?php /*

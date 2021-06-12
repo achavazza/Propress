@@ -5,8 +5,8 @@ function renderMap($lat, $lon){
         <script type="text/javascript">
         const lat = <?php echo $lat; ?>;
         const lon = <?php echo $lon; ?>;
-        console.log(lat);
-        console.log(lon);
+        //console.log(lat);
+        //console.log(lon);
         </script>
         <?php /*
         <script type="text/javascript" src="<?php echo 'http://maps.google.com/maps/api/js?&key='.GMAPS_KEY ?>"></script>
@@ -81,7 +81,6 @@ init_map('gmap_canvas');
         </div>
     </div>
 </div>
-
 <?php /*
 migrando a bootstrap
 <div id="map_lightbox" class="lity-hide">

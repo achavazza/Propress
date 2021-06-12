@@ -50,18 +50,21 @@
     </figure>
 
     <?php
+
     $block = '';
     $gallery_images = get_post_meta( get_the_ID(), '_prop_images', 1);
     $thumb_limit = get_option('tnb_setup_options')['tnb_setup_options_gallery'];
     $limit = 5; //5+1
+
     if($thumb_limit){
         $limit = intval($thumb_limit);
     }
+    
     if ( ! empty( $gallery_images ) ) :
+
         $count = count($gallery_images);
-        ?>
-        <span class="img-list">
-            <?php
+
+        echo '<span class="img-list">';
             foreach ( $gallery_images as $gallery_image ) :
                 $image = wp_get_attachment_image_src( attachment_url_to_postid($gallery_image), 'large');
                 $thumb = wp_get_attachment_image(attachment_url_to_postid( $gallery_image), 'thumbnail' );
@@ -82,15 +85,20 @@
 
                     $style  = 'style="display:none"';
                 }
-                ?>
-                <figure <?php echo $style ?>>
-                    <a class="thumb" data-index="<?php echo $i ?>" href="<?php echo $image[0] ?>" itemprop="contentUrl" data-size="<?php echo $image[1].'x'.$image[2] ?>">
-                        <?php echo $thumb; ?>
-                    </a>
-                </figure>
-                <?php $i++; ?>
-            <?php endforeach; ?>
-            <?php echo $block; ?>
-        </span>
-    <?php endif; ?>
+
+                $figure = '<figure '.$style.' >';
+                    $figure .= '<a class="thumb" data-index="'. $i .'" href="'. $image[0] .'" itemprop="contentUrl" data-size="'. $image[1].'x'.$image[2] .'">';
+                        $figure .= $thumb;
+                    $figure .= '</a>';
+                $figure .= '</figure>';
+
+                echo $figure;
+
+                $i++;
+            endforeach;
+            echo $block;
+
+        echo '</span>';
+    endif;
+    ?>
 </div>

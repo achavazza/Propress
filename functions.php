@@ -122,12 +122,12 @@ require_once 'inc/custom-functions.php';
         wp_register_script('bootstrap'    , get_template_directory_uri().'/js/bootstrap.bundle.min.js', array('jquery'), '5.0.0-alpha1', true);
 
         wp_register_script('photoswipe'   , get_template_directory_uri().'/js/plugins/photoswipe.min.js', array(), '4.1.3', true);
-        wp_register_script('photoswipeUI' , get_template_directory_uri().'/js/plugins/photoswipe-ui-default.min.js', array('photoswipe'), '4.1.3', true);
-        wp_register_script('photo-init'   , get_template_directory_uri().'/js/photoswipe.init.js', array('photoswipe','photoswipeUI','jquery'), '1.0.0', true);
-        wp_register_script('lity'         , get_template_directory_uri().'/js/plugins/lity.js', array('jquery'), '2.4.1', true);
+        wp_register_script('photoswipe-ui' , get_template_directory_uri().'/js/plugins/photoswipe-ui-default.min.js', array('photoswipe'), '4.1.3', true);
+        wp_register_script('photoswipe-init'   , get_template_directory_uri().'/js/photoswipe.init.js', array('photoswipe','photoswipe-ui','jquery'), '1.0.0', true);
         wp_register_script('validate'     , get_template_directory_uri().'/js/jquery.validate.min.js', array('jquery'), '1.0.0', true);
         wp_register_script('form'         , get_template_directory_uri().'/js/form.js', array('jquery','validate'), '1.0.0', true);
         wp_register_script('siema'         , get_template_directory_uri().'/js/plugins/siema.min.js', array(), '1.5.1', true);
+        //wp_register_script('lity'         , get_template_directory_uri().'/js/plugins/lity.js', array('jquery'), '2.4.1', true);
 
         wp_register_script('infobubble'   , (get_template_directory_uri().'/js/plugins/infobubble.js'), array(), null, true);
         wp_register_script('initmaps'     , (get_template_directory_uri().'/js/map-search/initmaps.js'), array('infobubble'), '1.0.0', true);
@@ -136,7 +136,8 @@ require_once 'inc/custom-functions.php';
         wp_register_script('map'          , ('http://maps.google.com/maps/api/js?&key='.GMAPS_KEY), array(), null, true);
         wp_register_script('renderMap'     , (get_template_directory_uri().'/js/map-search/renderMap.js'), array('map', 'infobubble', 'jquery'), '1.0.0', true);
 
-        wp_register_script('scripts'      , get_template_directory_uri().'/js/scripts.js', array('jquery', 'lity', 'bootstrap'), null, true);
+        wp_register_script('scripts'      , get_template_directory_uri().'/js/scripts.js', array('bootstrap', 'jquery'), null, true);
+        //wp_register_script('scripts'      , get_template_directory_uri().'/js/scripts.js', array('jquery', 'bootstrap'), null, true);
 
         wp_enqueue_script('scripts');
     }

@@ -2,6 +2,7 @@ $(function(){
 
 	//your scripts
 	//alert('jquery');
+	/*
 	$('body').on('click','.menu-trigger', function(){
 		//	console.log($('#menu-header'));
 		$('#menu-principal').toggleClass('visible-md');
@@ -10,6 +11,7 @@ $(function(){
 		return false;
 	});
 
+	*/
 	/*
 
 	$('#street_lightbox_trigger').on('click', function(){
