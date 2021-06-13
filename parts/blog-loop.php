@@ -38,19 +38,21 @@ $statuses        = get_the_terms($post->ID, 'status')[0];
 var_dump($prop_sale);
 */
 ?>
-<div <?php post_class('card h-100') ?> id="post-<?php the_ID(); ?>">
-    <div class="card-img">
-        <div class="card-img-top thumb-head">
+<div <?php post_class('card') ?> id="post-<?php the_ID(); ?>">
+    <div class="card-image">
+        <figure class="image">
             <?php echo get_the_post_thumbnail($post->ID, 'medium'); ?>
-        </div>
+        </figure>
     </div>
-    <div class="card-body">
+    <div class="card-content">
         <a href="<?php the_permalink(); ?>">
-            <?php the_title(); ?>
+            <span class="title is-4">
+             <?php the_title(); ?>
+            </span>
         </a>
     </div>
-     <div class="card-footer d-flex flex-row justify-content-between align-items-right">
-        <a class="btn btn-primary" href="<?php the_permalink() ?>">
+     <div class="card-footer">
+        <a class="card-footer-item" href="<?php the_permalink() ?>">
             <?php echo __('Ver Más') ?>
         </a>
     </div>

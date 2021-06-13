@@ -1,71 +1,5 @@
 //main: theme.scss
 
-
-.admin-bar .fixed-top {
-  top:46px;
-  @media screen and (min-width:782px) {
-    top:32px;
-  }
-}
-
-
-html{font-size: 14px;}
-$h1-font-size: $font-size-base * 2 !default;
-$h2-font-size: $font-size-base * 1.8 !default;
-$h3-font-size: $font-size-base * 1.6 !default;
-$h4-font-size: $font-size-base * 1.4 !default;
-$h5-font-size: $font-size-base * 1.2 !default;
-$h6-font-size: $font-size-base !default;
-
-$btn-text-transform: uppercase;
-$btn-font-weight: bold;
-
-a{
-  text-decoration: none;
-}
-.no-color{
-  color: inherit
-}
-.title{
-  font-weight: bold;
-}
-.title,
-.sub-title{
-  display:block;
-}
-.material-icons{
-  vertical-align: middle !important;
-  opacity: .4;
-}
-.icon-small{
-  font-size: $font-size-base * 1.4 !important;
-}
-.icon-big{
-  font-size: $font-size-base * 3 !important;
-}
-.block{
-  display:block;
-}
-
-//custom
-.btn{
-  text-transform: $btn-text-transform;
-  font-weight: $btn-font-weight;
-}
-.card-header,.card-body,.card-footer{
-  border-color: transparent
-}
-.card-header,.card-body{
-  padding: $spacer/2 $spacer;
-}
-.card-footer{
-  padding: $spacer/2 $spacer $spacer;
-}
-.badge{
-  text-transform: $btn-text-transform;
-}
-
-
 #map-container{
   display:flex;
   > div{
@@ -73,100 +7,105 @@ a{
   }
 }
 
-.card{
-  box-shadow: 0 15px 40px rgba(0,0,0,.15);
-}
-.card-img,
-.card-img-top{
-  overflow: hidden;
 
-  img{
-    object-fit:cover;
-    width: 100%;
+.card-image-top{
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 100;
+    margin: .2em;
+
+
+}
+.list-inline{
+  display: inline-flex;
+  flex-wrap: wrap;
+  /*flex-direction: column;*/
+  > li {
+    margin: .2em;
+  }
+}
+.card .image img {
     height: 250px;
+    object-fit: cover;
+}
+
+
+.prop-icon-type{
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+
+.prop-info a{
+  /*display:block;*/
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+}
+.prop-info .title,
+.prop-info .subtitle,
+.prop-info .price-block{
+  /*display: block;*/
+  margin: 0 !important;
+  margin-bottom: .2em !important;
+}
+
+.is-ellipsis{
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.is-same-height{
+  .card {
+    height: 100%;
+    display:flex;
+    flex-direction: column;
+  }
+  .card-content{
+    height: 100%;
   }
 }
-.card-img-top{
-  position: relative;
-  .list-badges{
-    padding: $spacer/2;
-    position: absolute;
-    top: 0;
-    right: 0;
-    line-height:1;
+
+.has-background-dark .label{
+  color: $light;
+}
+
+.search-fields{
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  /*
+  .label{
+    display: none;
   }
-}
-.card-img,
-.card-img-bottom {
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-/*
-.panel{
-@extend .card;
-}
-.panel-body{
-@extend .card-body;
-}
-.panel-title{
-@extend .card-title;
-}
-.panel-subtitle{
-@extend .card-subtitle;
-}
-.panel-text{
-@extend .card-text;
-}
-.panel-link{
-@extend .card-link;
-}
-*/
-
-
-.map-modal{
-  .modal-body{
-    margin: -$spacer;
+  */
+  .field{
+    padding: 0 .75rem 0 0;
+    //width: 50%;
+    flex: 1;
+    margin-bottom: 0.75rem;
+    &.field-search{
+      flex-grow: 2;
+    }
   }
-}
-
-#slider{
-  position:relative;
-}
-.slide-item {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-
-.carousel-inner{
-
-  .carousel-item{
-    @include media-breakpoint-down(md) {padding-bottom: 75% !important;}
-    @include media-breakpoint-down(sm) {padding-bottom: 100% !important;}
-  }
-
-  .carousel-caption{
-
-    top: 0;
-    bottom: 0;
-    text-align: unset;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-  }
-  .carousel-bg{
-    background-size: cover !important;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+  .map-search &{
+    .label{
+      display: none;
+    }
+    .field{
+      width: 25%;
+      flex: none;
+      &.field-search,
+      &.field-button{
+        width:100%
+      }
+    }
   }
 }

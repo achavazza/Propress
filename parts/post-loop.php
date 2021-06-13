@@ -38,49 +38,42 @@ $statuses        = get_the_terms($post->ID, 'status')[0];
 //var_dump($prop_sale);
 
 ?>
-<div <?php post_class('card h-100') ?> id="post-<?php the_ID(); ?>">
-    <div class="card-img">
-        <div class="card-img-top thumb-head">
+<div <?php post_class('card') ?> id="post-<?php the_ID(); ?>">
+    <div class="card-image">
+        <div class="card-image-top">
             <?php
-            echo '<ul class="list-unstyled list-inline list-badges">';
+            echo '<ul class="list-inline">';
                 if($statuses):
-                    $out  = '';
-                    $out .= '<li class="list-inline-item">';
-                    $out .= sprintf('<a class="badge bg-info" href="%s">%s</a>', get_term_link($statuses), $statuses->name);
-                    $out .= '</li>';
-                    echo $out;
+                    echo sprintf('<li><a class="tag is-info" href="%s">%s</a></li>', get_term_link($statuses), $statuses->name);
                 endif;
                 if($ops):
                     foreach($ops as $op):
-                        $out = '';
-                        $out .= '<li class="list-inline-item">';
-                        $out .= sprintf('<a class="badge bg-primary" href="%s">%s</a>', get_term_link($op), $op->name);
-                        $out .= '</li>';
-                        echo $out;
+                        echo sprintf('<li><a class="tag is-primary" href="%s">%s</a></li>', get_term_link($op), $op->name);
                     endforeach;
                 endif;
                 if($prop_feat):
-                    $out = '';
-                    $out .= '<li class="list-inline-item">';
-                        $out .= sprintf('<span class="badge bg-warning">%s</span>', __('Destacado', 'propress'));
-                    $out .= '</li>';
-                    echo $out;
+                    echo sprintf('<li><span class="tag is-warning">%s</span></li>', __('Destacado', 'propress'));
                 endif;
             echo '</ul>';
+            ?>
+        </div>
+        <?php
+        echo '<figure class="image">';
             echo '<a href="'.get_the_permalink().'">';
                 echo $thumb ? $thumb : sprintf('<img src="%s" />', get_attachment_url_by_slug('default', 'medium'));
             echo '</a>';
-            ?>
-        </div>
+        echo '</figure>';
+        ?>
     </div>
-    <div class="card-body">
-        <div class="d-flex w-100">
-            <div class="flex-grow-1">
-                <a href="<?php the_permalink() ?>" class="no-color">
-                    <span class="h4 title">
+    <div class="card-content">
+        <div class="media">
+            <div class="media-content">
+            <div class="prop-info">
+                <a href="<?php the_permalink() ?>">
+                    <span class="title is-4">
                         <?php the_title(); ?>
                     </span>
-                    <span class="h6 sub-title">
+                    <span class="subtitle is-6">
                         <?php
                         if($prop_address):
                             echo $prop_address;
@@ -121,48 +114,49 @@ $statuses        = get_the_terms($post->ID, 'status')[0];
                     </span>
                 </a>
             </div>
-            <div class="text-center">
-                <?php if(isset($type)): ?>
-                <a class="d-block no-color" href="<?= isset($type) ? get_term_link($type) : get_bloginfo('home').'/?s='; ?>" title="<?php echo __('Tipo de propiedad') ?>">
-                    <span class="material-icons icon-big d-block" <?= isset($type) ? $type->name : __('Propiedad', 'tnb'); ?>>business</span>
-                    <span class="d-block">
-                        <?= $type->name  ?>
-                    </span>
-                </a>
-                <?php endif; ?>
-            </div>
         </div>
-    </div>
-     <div class="card-footer d-flex flex-row justify-content-between align-items-center">
-         <div class="flex-grow-2">
-         <ul class="list-inline prop-list mb-0">
-             <?php if(isset($prop_dormrooms)):
-                $dorms = intval($prop_dormrooms);
-                ?>
-             <li class="list-inline-item">
-                <span class="material-icons icon-small" title="<?php echo sprintf(ngettext("%d Dormitorio", "%d Dormitorios", $dorms), $dorms); ?>">
-                    hotel
+        <?php if(isset($type)): ?>
+        <div class="media-right">
+            <a class="prop-icon-type" href="<?= isset($type) ? get_term_link($type) : get_bloginfo('home').'/?s='; ?>" title="<?php echo __('Tipo de propiedad') ?>">
+                <span class="material-icons md-36" <?= isset($type) ? $type->name : __('Propiedad', 'tnb'); ?>>business</span>
+                <span>
+                    <?= $type->name  ?>
                 </span>
-                <?php echo sprintf("%d", $dorms); ?>
-             </li>
-             <?php endif; ?>
-             <?php
-                if(isset($prop_bathrooms)):
-                $baths = intval($prop_bathrooms);
-                ?>
-             <li class="list-inline-item">
-                <span class="material-icons icon-small" title="<?php echo sprintf(ngettext("%d Baño", "%d Baños", $baths), $baths);?>">
-                    bathtub
-                </span>
-                <?= sprintf("%d", $baths);?>
-             </li>
-             <?php endif; ?>
-        </ul>
-        </div>
-        <div class="flex-shrink-1">
-            <a class="btn btn-primary" href="<?php the_permalink() ?>">
-                <?php echo __('Ver Más') ?>
             </a>
         </div>
+        <?php endif; ?>
+    </div>
+
+
+    </div>
+     <div class="card-footer">
+         <div class="card-footer-item is-justify-content-flex-start is-flex-grow-2">
+             <ul class="list-inline">
+                 <?php if(isset($prop_dormrooms)):
+                    $dorms = intval($prop_dormrooms);
+                    ?>
+                 <li class="icon-text">
+                    <span class="icon material-icons icon-small" title="<?php echo sprintf(ngettext("%d Dormitorio", "%d Dormitorios", $dorms), $dorms); ?>">
+                        hotel
+                    </span>
+                    <?php echo sprintf("%d", $dorms); ?>
+                 </li>
+                 <?php endif; ?>
+                 <?php
+                    if(isset($prop_bathrooms)):
+                    $baths = intval($prop_bathrooms);
+                    ?>
+                 <li class="icon-text">
+                    <span class="icon material-icons icon-small" title="<?php echo sprintf(ngettext("%d Baño", "%d Baños", $baths), $baths);?>">
+                        bathtub
+                    </span>
+                    <?= sprintf("%d", $baths);?>
+                 </li>
+                 <?php endif; ?>
+            </ul>
+        </div>
+        <a class="card-footer-item" href="<?php the_permalink() ?>">
+            <?php echo __('Ver Más') ?>
+        </a>
     </div>
 </div>

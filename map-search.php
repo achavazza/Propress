@@ -13,9 +13,9 @@ get_header(); ?>
 */ ?>
 <div id="map-container">
 	<div class="map-layout" id="gmap_canvas"></div>
-	<div class="content">
-		<div class="section section-primary">
-			<?php echo get_search_form(); ?>
+	<div class="container">
+		<div class="section has-background-dark has-text-light map-search">
+				<?php echo get_search_form(); ?>
 		</div>
 
 		<script type="text/javascript">
@@ -33,16 +33,18 @@ get_header(); ?>
 		if(have_posts() ) :
 
 			$i = 0;
-			echo '<div class="col-12">';
-			echo '<div class="row">';
+			echo '<div class="column">';
+			echo '<div class="columns is-same-height">';
+			//echo '<div class="row">';
 			while (have_posts()) : the_post();
-				echo '<div class="col-6">';
-			        require('inc/map-search/map-post.php');
-					get_template_part('parts/post','loop');
+				echo '<div class="column is-half">';
+		        require('inc/map-search/map-post.php');
+						get_template_part('parts/post','loop');
 				echo '</div>';
 				$i++;
-				echo ($i % 2 == 0) ? '</div><div class="row">':'';
+				//echo ($i % 2 == 0) ? '</div><div class="row">':'';
 			endwhile;
+			//echo '</div>';
 			echo '</div>';
 			echo '</div>';
 

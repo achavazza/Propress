@@ -6,20 +6,21 @@
         </div>
         */ ?>
         <?php //endif; ?>
-        <div class="form search-form">
-            <ul class="list-unstyled search-fields-list row g-3 align-items-end">
+            <ul class="search-fields">
                 <?php
-                $inputContent  = '<label class="form-label" for="s">Buscar</label>';
-                $inputContent .= '<input class="form-control" type="text" id="s" name="s" value="'. get_search_query() .'" placeholder="Buscar"/>';
+                $inputContent  = '<label class="label" for="s">Buscar</label>';
+                $inputContent .= '<div class="control">';
+                $inputContent .= '<input class="input" type="text" id="s" name="s" value="'. get_search_query() .'" placeholder="Buscar"/>';
                 //$inputContent .= '<input type="hidden" name="post_type" value="propiedad" />';
                 $inputContent .= '<input type="hidden" name="search" value="advanced">';
+                $inputContent .= '</div>';
             /*
             if($_GET['search'] == 'advanced'){
                 echo '<input class="invisible" type="hidden" name="search" value="advanced">';
             }
             */
 
-            echo sprintf('<li class="col-auto flex-fill">%s</li>', $inputContent);
+            echo sprintf('<li class="field field-search">%s</li>', $inputContent);
 
             $taxonomies = array('tipo','operacion','location','features');
             $args = array('order'=>'DESC','hide_empty'=>true);
@@ -65,8 +66,10 @@
                         if ( !empty( $terms ) && !is_wp_error( $terms ) ){
                             //$inputLabel   = '<label for="'.$taxonomy.'">'.$label.'</label>';
                             $inputContent = '';
-                            $inputContent .= '<label for="'.$taxonomy.'" class="form-label">'.$label.'</label>';
-                            $inputContent .= '<select class="form-select" id="'.$taxonomy.'" name="'.$taxonomy.'">';
+                            $inputContent .= '<label for="'.$taxonomy.'" class="label">'.$label.'</label>';
+                            $inputContent .= '<div class="control">';
+                            $inputContent .= '<span class="select is-fullwidth">';
+                            $inputContent .= '<select id="'.$taxonomy.'" name="'.$taxonomy.'">';
                             $inputContent .= '<option value="" disabled selected>Localidad</option>';
                             $inputContent .= '<option value="">Todas las '.$plural.'</option>';
                             //foreach( get_terms( $taxonomy, array( 'hide_empty' => false) ) as $term ) {
@@ -94,16 +97,19 @@
                                 }
                                 $i++;
                             }
-                            $inputContent .= '</select>';
+                            $inputContent .= '</span>';
+                            $inputContent .= '</div>';
 
-                            echo sprintf('<li class="col-auto flex-fill">%s</li>', $inputLabel.$inputContent);
+                            echo sprintf('<li class="field">%s</li>', $inputLabel.$inputContent);
                         }
                     }else{
                         //$inputLabel = '<label for="'.$taxonomy.'">'.$label.'</label>';
 
                         $inputContent = '';
-                        $inputContent .= '<label for="'.$taxonomy.'" class="form-label">'.$label.'</label>';
-                        $inputContent .= '<select class="form-select" id="'.$taxonomy.'" name="'.$taxonomy.'">';
+                        $inputContent .= '<label for="'.$taxonomy.'" class="label">'.$label.'</label>';
+                        $inputContent .= '<div class="control">';
+                        $inputContent .= '<span class="select is-fullwidth">';
+                        $inputContent .= '<select id="'.$taxonomy.'" name="'.$taxonomy.'">';
                         $inputContent .= '<option value="" disabled selected>'.$label.'</option>';
                         $inputContent .= '<option value="">Todas las '.$plural.'</option>';
                         //<option value="">'.$empty.'</option>';
@@ -115,14 +121,16 @@
                             $inputContent .=  '<option name="'.$term->slug.'" value="'.$term->slug.'" '.$selected.'>'.$term->name.'</option>';
                         }
                         $inputContent .= '</select>';
-                        echo sprintf('<li class="col-auto flex-fill">%s</li>', $inputLabel.$inputContent);
+                        $inputContent .= '</span>';
+                        $inputContent .= '</div>';
+                        echo sprintf('<li class="field">%s</li>', $inputLabel.$inputContent);
 
                     }
                 }
             }
             ?>
-            <li class="col-auto flex-fill">
-                <label for="bedrooms" class="form-label">Dormitorios</label>
+            <li class="field">
+                <label for="bedrooms" class="label">Dormitorios</label>
                 <?php
                 function sel($v = null){
                     if(!empty($v)){
@@ -132,14 +140,18 @@
                     }
                 }
                 ?>
-                <select class="form-select" id="bedrooms" name="dormitorios" value="<?php echo $_GET['dormitorios'] ?>">
-                    <option <?php sel() ?> value="">Dormitorios</option>
-                    <option <?php sel(1) ?> value="1">Monoambiente</option>
-                    <option <?php sel(1) ?> value="1">1 Dormitorio</option>
-                    <option <?php sel(2) ?> value="2">2 Dormitorios</option>
-                    <option <?php sel(3) ?> value="3">3 Dormitorios</option>
-                    <option <?php sel(4) ?> value="4">4 Dormitorios</option>
-                </select>
+                <div class="control">
+                <span class="select is-fullwidth">
+                    <select id="bedrooms" name="dormitorios" value="<?php echo $_GET['dormitorios'] ?>">
+                        <option <?php sel() ?> value="">Dormitorios</option>
+                        <option <?php sel(1) ?> value="1">Monoambiente</option>
+                        <option <?php sel(1) ?> value="1">1 Dormitorio</option>
+                        <option <?php sel(2) ?> value="2">2 Dormitorios</option>
+                        <option <?php sel(3) ?> value="3">3 Dormitorios</option>
+                        <option <?php sel(4) ?> value="4">4 Dormitorios</option>
+                    </select>
+                </span>
+                </div>
             </li>
             <?php /*
             <li class="col-auto flex-fill">
@@ -153,15 +165,16 @@
             */ ?>
 
 
-            <li class="col-auto flex-fill">
-
-                <button type="submit" id="searchsubmit" class="btn btn-secondary btn-block">
+            <li class="field field-button">
+                <span class="control">
+                <button type="submit" id="searchsubmit" class="button is-primary is-fullwidth">
                     <i class="qs-icon icon-search"></i>
                     <?php echo __('Buscar') ?>
                 </button>
+                </span>
             </li>
         </ul>
-        <div class="row">
+        <div class="field-body is-align-items-flex-end">
             <?php
             /*wp_nav_menu( array(
             'theme_location'  => 'search-menu',
@@ -190,5 +203,4 @@
             <?php endif; ?>
         <?php endif; ?>
     </div>
-</div>
 </form>

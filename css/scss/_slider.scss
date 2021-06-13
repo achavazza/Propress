@@ -1,28 +1,16 @@
-// main: ../qs.less
-
-#slider{
-    background: @colorWhite;
+//main: theme.scss
+#main-slider{
+    background: white;
     margin-bottom: 1em;
 
-    /* absolute - relative fix */
     position: relative;
-    /*padding-bottom: 40%;
-    @media (min-width: @screenSmallDevice){
-        padding-bottom: 30%;
-    }
-    @media (min-width: @screenMediumDevice){
-        padding-bottom: 25%;
-    }
-    @media (min-width: @screenLargeDevice){
-        padding-bottom: 20%;
-    }*/
+
     > div{
         position: absolute;
     }
     div{
         height: 100% !important;
     }
-    /* absolute - relative fix */
 
     .slide-item{
         border-radius: 2px;
@@ -82,7 +70,7 @@
     }
 }
 
-#post-thumbnail{
+#main-thumbnail{
     text-align: center;
     img{
         border-radius: 2px;
