@@ -74,7 +74,7 @@ class CMB2 extends CMB2_Base {
 		 * Comments screen contexts include 'normal' and 'side'. Default is 'normal'.
 		 */
 		'context'                 => 'normal',
-		'priority'                => 'high',
+		'priority'                => 'high', // Or 10 for options pages.
 		'show_names'              => true, // Show field names on the left.
 		'show_on_cb'              => null, // Callback to determine if metabox should display.
 		'show_on'                 => array(), // Post IDs or page templates to display this metabox. overrides 'show_on_cb'.
@@ -208,6 +208,15 @@ class CMB2 extends CMB2_Base {
 		$this->object_id( $object_id );
 
 		if ( $this->is_options_page_mb() ) {
+
+			// Check initial priority.
+			if ( empty( $config['priority'] ) ) {
+
+				// If not explicitly defined, Reset the priority to 10
+				// Fixes https://github.com/CMB2/CMB2/issues/1410.
+				$this->meta_box['priority'] = 10;
+			}
+
 			$this->init_options_mb();
 		}
 
@@ -229,7 +238,7 @@ class CMB2 extends CMB2_Base {
 		do_action( "cmb2_init_{$this->cmb_id}", $this );
 
 		// Hook in the hookup... how meta.
-		add_action( "cmb2_init_hookup_{$this->cmb_id}", array( 'CMB2_hookup', 'maybe_init_and_hookup' ) );
+		add_action( "cmb2_init_hookup_{$this->cmb_id}", array( 'CMB2_Hookup', 'maybe_init_and_hookup' ) );
 
 		// Hook in the rest api functionality.
 		add_action( "cmb2_init_hookup_{$this->cmb_id}", array( 'CMB2_REST', 'maybe_init_and_hookup' ) );
@@ -1106,6 +1115,30 @@ class CMB2 extends CMB2_Base {
 	}
 
 	/**
+	 * Check if given object_type(s) matches any of the registered object types or
+	 * taxonomies for this box.
+	 *
+	 * @since  2.7.0
+	 * @param  string|array $object_types The object type(s) to check.
+	 * @param  array        $fallback     Fallback object_types value.
+	 *
+	 * @return bool Whether given object type(s) are registered to this box.
+	 */
+	public function is_box_type( $object_types = array(), $fallback = array() ) {
+		$object_types = (array) $object_types;
+		$box_types    = $this->box_types( $fallback );
+
+		if ( in_array( 'term', $box_types, true ) ) {
+			$taxonomies = CMB2_Utils::ensure_array( $this->prop( 'taxonomies' ) );
+			$box_types = array_merge( $box_types, $taxonomies );
+		}
+
+		$found = array_intersect( $object_types, $box_types );
+
+		return ! empty( $found );
+	}
+
+	/**
 	 * Initates the object types and option key for an options page metabox.
 	 *
 	 * @since  2.2.5
@@ -1359,7 +1392,7 @@ class CMB2 extends CMB2_Base {
 
 		list( $field_id, $sub_field_id ) = $ids;
 
-		$index = implode( '', $ids ) . ( $field_group ? $field_group->index : '' );
+		$index = $field_id . ( $sub_field_id ? '|' . $sub_field_id : '' ) . ( $field_group ? '|' . $field_group->index : '' );
 
 		if ( array_key_exists( $index, $this->fields ) && ! $reset_cached ) {
 			return $this->fields[ $index ];
@@ -1467,40 +1500,6 @@ class CMB2 extends CMB2_Base {
 			return false;
 		}
 
-		// Perform some field-type-specific initiation actions.
-		switch ( $field['type'] ) {
-			case 'file':
-			case 'file_list':
-				// Initiate attachment JS hooks.
-				add_filter( 'wp_prepare_attachment_for_js', array( 'CMB2_Type_File_Base', 'prepare_image_sizes_for_js' ), 10, 3 );
-				break;
-
-			case 'oembed':
-				// Initiate oembed Ajax hooks.
-				cmb2_ajax();
-				break;
-
-			case 'group':
-				if ( empty( $field['render_row_cb'] ) ) {
-					$field['render_row_cb'] = array( $this, 'render_group_callback' );
-				}
-				break;
-			case 'colorpicker':
-				// https://github.com/JayWood/CMB2_RGBa_Picker
-				// Dequeue the rgba_colorpicker custom field script if it is used,
-				// since we now enqueue our own more current version.
-				add_action( 'admin_enqueue_scripts', array( 'CMB2_Type_Colorpicker', 'dequeue_rgba_colorpicker_script' ), 99 );
-				break;
-		}
-
-		if ( isset( $field['column'] ) && false !== $field['column'] ) {
-			$field = $this->define_field_column( $field );
-		}
-
-		if ( isset( $field['taxonomy'] ) && ! empty( $field['remove_default'] ) ) {
-			$this->tax_metaboxes_to_remove[ $field['taxonomy'] ] = $field['taxonomy'];
-		}
-
 		$this->_add_field_to_array(
 			$field,
 			$this->meta_box['fields'],
@@ -1508,26 +1507,6 @@ class CMB2 extends CMB2_Base {
 		);
 
 		return $field['id'];
-	}
-
-	/**
-	 * Defines a field's column if requesting to be show in admin columns.
-	 *
-	 * @since  2.2.3
-	 * @param  array $field Metabox field config array.
-	 * @return array         Modified metabox field config array.
-	 */
-	protected function define_field_column( array $field ) {
-		$this->has_columns = true;
-
-		$column = is_array( $field['column'] ) ? $field['column'] : array();
-
-		$field['column'] = wp_parse_args( $column, array(
-			'name'     => isset( $field['name'] ) ? $field['name'] : '',
-			'position' => false,
-		) );
-
-		return $field;
 	}
 
 	/**
@@ -1564,6 +1543,72 @@ class CMB2 extends CMB2_Base {
 	}
 
 	/**
+	 * Perform some field-type-specific initiation actions.
+	 *
+	 * @since  2.7.0
+	 * @param  array $field Metabox field config array.
+	 * @return void
+	 */
+	protected function field_actions( $field ) {
+		switch ( $field['type'] ) {
+			case 'file':
+			case 'file_list':
+
+				// Initiate attachment JS hooks.
+				add_filter( 'wp_prepare_attachment_for_js', array( 'CMB2_Type_File_Base', 'prepare_image_sizes_for_js' ), 10, 3 );
+				break;
+
+			case 'oembed':
+				// Initiate oembed Ajax hooks.
+				cmb2_ajax();
+				break;
+
+			case 'group':
+				if ( empty( $field['render_row_cb'] ) ) {
+					$field['render_row_cb'] = array( $this, 'render_group_callback' );
+				}
+				break;
+			case 'colorpicker':
+
+				// https://github.com/JayWood/CMB2_RGBa_Picker
+				// Dequeue the rgba_colorpicker custom field script if it is used,
+				// since we now enqueue our own more current version.
+				add_action( 'admin_enqueue_scripts', array( 'CMB2_Type_Colorpicker', 'dequeue_rgba_colorpicker_script' ), 99 );
+				break;
+		}
+
+		if ( isset( $field['column'] ) && false !== $field['column'] ) {
+			$field = $this->define_field_column( $field );
+		}
+
+		if ( isset( $field['taxonomy'] ) && ! empty( $field['remove_default'] ) ) {
+			$this->tax_metaboxes_to_remove[ $field['taxonomy'] ] = $field['taxonomy'];
+		}
+
+		return $field;
+	}
+
+	/**
+	 * Defines a field's column if requesting to be show in admin columns.
+	 *
+	 * @since  2.2.3
+	 * @param  array $field Metabox field config array.
+	 * @return array         Modified metabox field config array.
+	 */
+	protected function define_field_column( array $field ) {
+		$this->has_columns = true;
+
+		$column = is_array( $field['column'] ) ? $field['column'] : array();
+
+		$field['column'] = wp_parse_args( $column, array(
+			'name'     => isset( $field['name'] ) ? $field['name'] : '',
+			'position' => false,
+		) );
+
+		return $field;
+	}
+
+	/**
 	 * Add a field array to a fields array in desired position
 	 *
 	 * @since 2.0.2
@@ -1572,6 +1617,8 @@ class CMB2 extends CMB2_Base {
 	 * @param integer $position Optionally specify a position in the array to be inserted.
 	 */
 	protected function _add_field_to_array( $field, &$fields, $position = 0 ) {
+		$field = $this->field_actions( $field );
+
 		if ( $position ) {
 			CMB2_Utils::array_insert( $fields, array( $field['id'] => $field ), $position );
 		} else {

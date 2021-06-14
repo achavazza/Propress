@@ -162,6 +162,12 @@ function cmb2_agents() {
         ),
     ) );
     $cmb->add_field( array(
+        'name'     => 'Form de contacto',
+        'desc'     => 'Formulario para contactarse con este asesor',
+        'id'       => $prefix .'contact',
+        'type'     => 'text',
+    ) );
+    $cmb->add_field( array(
         'name'     => 'Teléfono',
         //'desc'     => 'Teléfono del asesor',
         'id'       => $prefix .'phone',
@@ -179,5 +185,6 @@ function cmb2_agents() {
         'id'       => $prefix .'email',
         'type'     => 'text_email',
     ) );
+
 }
 ?>

@@ -18,61 +18,13 @@ if($img){
 ?>
 
 <?php include('inc/slider.php'); ?>
-<div class="section has-background-dark has-text-light">
+<div class="search-panel block">
 	<div class="container">
 		<?php echo get_search_form(); ?>
 	</div>
 </div>
 
-<?php /*
-<div id="hero-featured">
-	<div class="container">
-		<?php
-		$args = array(
-	    'post_type'      => 'propiedad',
-		'posts_per_page' => 3,
-	    'meta_query'  => array(
-	            array(
-	                'key'     => '_prop_featured',
-	                //'value'   => true,
-					'compare' => '=',
-	            )
-	        )
-		);
-		$loop = new WP_Query( $args );
-		$featPosts =  Array();
-		if ( $loop->have_posts() ) : ?>
-			<?php $i = 0 ?>
-
-			<h2 class="h1">Propiedades destacadas</h2>
-			<div class="columns">
-
-			<?php while ( $loop->have_posts() ) : $loop->the_post(); ?>
-				<?php
-					array_push($featPosts, get_the_ID());
-				?>
-				<div class="triad-1">
-					<?php get_template_part('parts/post','loop') ?>
-				</div>
-				<?php if(++$i % 3 === 0): ?>
-				</div><div class="columns">
-				<?php endif; ?>
-			<?php endwhile; ?>
-
-			</div>
-			<div class="columns">
-				<div class="triad-1 prefix-1 suffix-1">
-					<a href="<?php echo get_page_url('tpl-featured') ?>" class="button is-primary is-medium is-fullwidth">
-						<?php echo _e('Ver Propiedades Destacadas') ?>
-					</a>
-				</div>
-			</div>
-		<?php endif; ?>
-		<?php wp_reset_postdata(); ?>
-	</div>
-</div>
-*/  ?>
-
+<div class="section">
 <div class="container">
 	<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 		<div class="post" id="post-<?php the_ID(); ?>">
@@ -82,6 +34,7 @@ if($img){
 		</div>
 		<?php //comments_template(); ?>
 	<?php endwhile; endif; ?>
+
 	<?php
 	$args = array(
 		'post_type'      => 'post',
@@ -94,7 +47,9 @@ if($img){
 	$loop = new WP_Query( $args );
 	if ( $loop->have_posts() ) :
 		$i = 0 ?>
-		<h2 class="h1 title">Noticias</h2>
+
+        <h3 class="title is-3"><?php echo _e('Noticias','tnb') ?></h3>
+
 		<div class="columns is-same-height">
 		<?php while ( $loop->have_posts() ) : $loop->the_post(); ?>
 			<div class="column is-one-third">
@@ -108,7 +63,7 @@ if($img){
 	<?php wp_reset_postdata(); ?>
 	<?php if (get_option( 'page_for_posts' )): ?>
 	<div class="columns is-mobile is-centered">
-		<div class="column is-half">
+		<div class="column is-one-third">
 				<a href="<?php echo get_permalink( get_option( 'page_for_posts' ) )  ?>" class="button is-primary is-medium is-fullwidth">
 					<?php echo _e('Ver Todas las noticias') ?>
 				</a>
@@ -116,6 +71,54 @@ if($img){
 	</div>
 	<?php endif; ?>
 </div>
+</div>
+
+<div class="section">
+<div class="container">
+	<?php
+	$args = array(
+    'post_type'      => 'propiedad',
+	'posts_per_page' => 3,
+    'meta_query'  => array(
+            array(
+                'key'     => '_prop_featured',
+                //'value'   => true,
+				'compare' => '=',
+            )
+        )
+	);
+	$loop = new WP_Query( $args );
+	$featPosts =  Array();
+	if ( $loop->have_posts() ) : ?>
+		<?php $i = 0 ?>
+
+        <h3 class="title is-3"><?php echo _e('Propiedades destacadas','tnb') ?></h3>
+        <div class="columns is-same-height">
+		<?php while ( $loop->have_posts() ) : $loop->the_post(); ?>
+            <?php array_push($featPosts, get_the_ID()); ?>
+			<div class="column is-one-third">
+				<?php get_template_part('parts/post','loop') ?>
+			</div>
+
+			<?php
+			$i++;
+			echo ($i % 3 == 0) ? '</div><div class="columns">' : ''; ?>
+		<?php endwhile; ?>
+		</div>
+
+        <div class="columns is-mobile is-centered">
+    		<div class="column is-one-third">
+    				<a href="<?php echo get_bloginfo('tpl-featured').'/?s=' ?>" class="button is-primary is-medium is-fullwidth">
+    					<?php echo _e('Ver propiedades destacadas') ?>
+    				</a>
+    		</div>
+    	</div>
+	<?php endif; ?>
+	<?php wp_reset_postdata(); ?>
+</div>
+</div>
+
+<div class="section">
 <div class="container">
 	<?php
 	$args = array(
@@ -128,8 +131,7 @@ if($img){
 	$loop = new WP_Query( $args );
 	if ( $loop->have_posts() ) :
 		$i = 0 ?>
-
-		<?php echo sprintf('<h2 class="h1 title">%s</h2>', __('Últimas propiedades sumadas', 'tnb')); ?>
+        <h3 class="title is-3"><?php echo _e('Últimas propiedades','tnb') ?></h3>
 
 		<div class="columns is-same-height">
 		<?php while ( $loop->have_posts() ) : $loop->the_post(); ?>
@@ -145,7 +147,7 @@ if($img){
 
 	<?php endif; ?>
 	<div class="columns is-mobile is-centered">
-		<div class="column is-half">
+		<div class="column is-one-third">
 				<a href="<?php echo get_bloginfo('home').'/?s=' ?>" class="button is-primary is-medium is-fullwidth">
 					<?php echo _e('Ver Todas las propiedades') ?>
 				</a>
@@ -153,6 +155,7 @@ if($img){
 	</div>
 	<?php //include (TEMPLATEPATH . '/inc/nav.php' ); ?>
 	<?php wp_reset_postdata(); ?>
+</div>
 </div>
 
 <?php get_footer(); ?>

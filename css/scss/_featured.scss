@@ -1,0 +1,125 @@
+//main: theme.scss
+
+#gallery{
+    //padding: 2em 0;
+    figure{
+        margin: 0;
+        img{
+            border-radius: 0.25rem;
+            max-width: 100%;
+            height: auto;
+        }
+    }
+    .img-list{
+        display: flex;
+        flex-flow: row;
+        justify-content: flex-start;
+        /*
+        &-left{
+            justify-content: left;
+        }
+        */
+
+        figure{
+            display: flex;
+            margin: 1em 1em 0 0;
+            //margin: 5px 5px 0 0;
+            //border: 1px solid rgba(0,0,0,.05);
+
+            &:last-child{
+                margin-right: 0;
+            }
+        }
+        img {
+            border-radius: 0.25rem;
+            //width: 100px;
+            //width: 80px;
+            height: 100px;
+            object-fit: cover;
+        }
+        &-big{
+            img {
+                width: 150px;
+            }
+        }
+
+    }
+    .big-thumb{
+        width: 100%;
+        height: 480px;
+        @include until($tablet) {
+            height: 640px;
+        }
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        a{
+            display: block;
+            text-align: center;
+
+            height: 100%;
+            display: flex;
+            justify-content: center;
+        }
+        img{
+            flex: 0;
+            //object-fit: scale-down;
+            object-fit: cover;
+        }
+
+        position: relative;
+
+        .thumb-btns{
+            list-style: none;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: auto;
+
+
+            display: flex;
+            justify-content: start;
+            flex-flow: column;
+            li{
+                padding: 1em 1em 0;
+            }
+            /*
+            li{
+                padding: 1em;
+            }
+            */
+
+            .btn{
+                line-height:1 !important;
+                height: auto !important;
+            }
+        }
+    }
+    .img-limit{
+        a{
+            position: relative;
+            display:flex;
+            text-align: center;
+            font-weight: bold;
+            font-style: italic;
+
+            img{
+                opacity: .2;
+            }
+            span{
+                position: absolute;
+                width: auto;
+                max-width: 100%;
+                top: 50%;
+                left: 50%;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                transform: translate(-50%, -50%);
+
+            }
+        }
+    }
+}

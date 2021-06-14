@@ -14,8 +14,8 @@ get_header(); ?>
 <div id="map-container">
 	<div class="map-layout" id="gmap_canvas"></div>
 	<div class="container">
-		<div class="section has-background-dark has-text-light map-search">
-				<?php echo get_search_form(); ?>
+		<div class="search-panel map-search">
+			<?php echo get_search_form(); ?>
 		</div>
 
 		<script type="text/javascript">

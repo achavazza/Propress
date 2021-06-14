@@ -25,12 +25,6 @@ $prop_extra        = $data['_prop_extra'][0];
 
 $mapGPS            = get_post_meta($post->ID, '_prop_map', true);
 
-$prop_rooms        = $data['_prop_rooms'][0];
-$prop_sup          = $data['_prop_sup'][0];
-$prop_dormrooms    = $data['_prop_dormrooms'][0];
-$prop_bathrooms    = $data['_prop_bathrooms'][0];
-//$prop_garage     = $data['_prop_garage'][0];
-//$prop_time       = $data['_prop_time'][0];
 
 $prop_feat         = $data['_prop_featured'][0];
 $prop_phrase       = phrases()[$data['_prop_phrase'][0]];
@@ -43,27 +37,33 @@ $operation         = get_the_terms($post, 'operacion')[0];
 
 
 ?>
-<div class="section section-primary bg-dark">
+<div class="search-panel">
 	<div class="container">
 		<?php echo get_search_form(); ?>
 	</div>
 </div>
 
-<div class="section">
+<div class="block">
 	<div class="container">
-		<?php include('inc/featured-image.php'); ?>
 	</div>
 </div>
 <div class="container">
-	<div class="row">
-		<?php //the_breadcrumb(); ?>
-		<?php if (have_posts()) :?>
+    <?php the_breadcrumb(); ?>
+	<div class="columns">
+		<div class="column is-three-quarters">
+			<?php include('inc/featured-image.php'); ?>
 
-			<div class="col-md-8">
+			<?php if (have_posts()) :?>
+			<?php /*
+            <div class="column is-three-quarters">
+            */ ?>
 			<?php while (have_posts()) : the_post(); ?>
 				<div <?php post_class(); ?> id="post-<?php the_ID(); ?>">
-					<div class="clearfix mb-1">
-						<h2 class="h2 prop-title float-left">
+					<div class="card block">
+					<div class="card-content">
+					<div class="media">
+					<div class="media-content">
+						<h2 class="title is-3">
 							<?php if($prop_address): ?>
 								<?php echo $prop_address; ?>
 								<?php echo $prop_extra ? sprintf('<span class="em"> - %s</span>', $prop_extra) : ''; ?>
@@ -71,111 +71,62 @@ $operation         = get_the_terms($post, 'operacion')[0];
 								<?php echo get_the_title(); ?>
 							<?php endif; ?>
 						</h2>
-						<h3 class="h3 float-right">
+						<h3 class="subtitle is-4">
 							<?php //echo $prop_loc ? ' &mdash; '.$prop_loc : ''; ?>
 							<?php echo sprintf('<span class="sub-title">%s</span>', $prop_loc ? $prop_loc : '') ?>
 						</h3>
+                        <span class="price-block">
+                            <?php if(!$prop_sale && !$prop_rent):
+                                echo sprintf('<span>Precio: <strong>%s</strong></span>', __('Consultar'));
+                            else:
+                                if($prop_rent):
+                                    $val = $prop_currency.' '.$prop_rent;
+                                    echo sprintf('<span class="rent-price" title="Precio de alquiler">%s</span>', $val);
+                                    //<strong>Alquiler: </strong>
+                                    //<?php echo '$'.$prop_rent
+                                endif;
+                                if($prop_sale && $prop_rent):
+                                    echo ' | ';
+                                endif;
+                                if($prop_sale):
+                                    $val = $prop_currency.' '.$prop_sale;
+                                    echo sprintf('<span class="sale-price" title="Precio de venta">%s</span>', $val);
+                                    //<strong>Venta: </strong>
+                                    //<?php echo $cur_symbol.' '.$prop_sale
+                                endif;
+                            endif;
+                            ?>
+                        </span>
 					</div>
-					<span class="price">
-						<?php if(!$prop_sale && !$prop_rent):
-								echo sprintf('<strong>Precio: %s</strong>', __('Consultar'));
-								if($contact_form):
-									echo '&nbsp;';
-									echo '&nbsp;';
-									echo '<span class="base-font-size">';
-									echo '<a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#contact_form" style="padding:7px">Informarme el precio</a>';
-									//echo '<a class="btn btn-primary" data-lity="" href="#contact_form" style="padding:7px">Informarme el precio</a>';
-									echo '</span>';
-								endif;
-							else:
-								if($prop_rent):
-									$val = $prop_currency.' '.$prop_rent;
-									echo sprintf('<span class="price rent-price" title="Precio de alquiler">%s</span>', $val);
-									//<strong>Alquiler: </strong>
-									//<?php echo '$'.$prop_rent
-								endif;
-								if($prop_sale && $prop_rent):
-									echo ' | ';
-								endif;
-								if($prop_sale):
-									$val = $prop_currency.' '.$prop_sale;
-									echo sprintf('<span class="price sale-price" title="Precio de venta">%s</span>', $val);
-									//<strong>Venta: </strong>
-									//<?php echo $cur_symbol.' '.$prop_sale
-								endif;
+                    <div class="media-right">
+                        <a class="prop-icon-type" href="<?= isset($type) ? get_term_link($type) : get_bloginfo('home').'/?s='; ?>" title="<?php echo __('Tipo de propiedad') ?>">
+                            <span class="material-icons md-36" <?= isset($type) ? $type->name : __('Propiedad', 'tnb'); ?>>business</span>
+                            <span>
+                                <?= $type->name  ?>
+                            </span>
+                        </a>
+                    </div>
+					</div>
+                    <div>
+                        <?php if(!$prop_sale && !$prop_rent):
+                            if($contact_form):
+                                echo '&nbsp;';
+                                echo '<a class="button is-primary modal-button" data-target="#contact_form">Informarme el precio</a>';
+                                //echo '<a class="btn btn-primary" data-lity="" href="#contact_form" style="padding:7px">Informarme el precio</a>';
+                            endif;
+                        else:
+                            if($notification_form):
+                                echo '<a class="button is-primary modal-button" data-target="#notificacion">Avisarme si baja el precio</a>';
+                                //echo '<a class="btn btn-primary" data-lity="" href="#notificacion" style="padding:7px">Avisarme si baja el precio</a>';
+                            endif;
+                        endif;
+                        ?>
+                    </div>
+					</div>
+					</div>
 
-								if($notification_form):
-									echo '&nbsp;';
-									echo '&nbsp;';
-									echo '<span class="base-font-size">';
-									echo '<a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#notificacion" style="padding:7px">Avisarme si baja el precio</a>';
-									//echo '<a class="btn btn-primary" data-lity="" href="#notificacion" style="padding:7px">Avisarme si baja el precio</a>';
-									echo '</span>';
-								endif;
-							endif;
-							?>
+                    <?php get_template_part('parts/props/prop','features') ?>
 
-					</span>
-
-					<hr />
-					<ul class="prop-list prop-list-left">
-			            <li>
-			                <?php if(!$type):?>
-			                <a href="<?php echo get_bloginfo('home').'/?s=' ?>" title="<?php echo __('Tipo de propiedad') ?>">
-			                    <span class="block align-center">
-			                        <i class="icon cofasa-linear icon-l icon-property"></i>
-			                    </span>
-			                    &nbsp;
-			                    <?php echo 'Propiedad' ?>
-			                </a>
-			                <?php else: ?>
-			                <a href="<?php echo get_term_link($type); ?>" title="<?php echo __('Tipo de propiedad') ?>">
-			                    <span class="block align-center">
-									<i class="icon cofasa-img-icons icon-l icon-property"></i>
-			                    </span>
-			                    &nbsp;
-			                    <?php echo $type->name; ?>
-			                </a>
-			                <?php endif; ?>
-			            </li>
-						<?php if($prop_dormrooms): ?>
-			            <li>
-			                <span title="<?php echo __('Dormitorios') ?>">
-			                    <span class="block align-center">
-									<i class="icon cofasa-img-icons icon-l icon-bed"></i>
-			                    </span>
-			                    &nbsp;
-
-			                    <?php
-			                        if(!$prop_dormrooms):
-			                            $prop_dormrooms = 0;
-			                        endif;
-			                        $dorms = intval($prop_dormrooms);
-			                        echo sprintf(ngettext("%d Dormitorio", "%d Dormitorios", $dorms), $dorms);
-			                    ?>
-			                </span>
-			            </li>
-						<?php endif; ?>
-						<?php if($prop_bathrooms): ?>
-			            <li>
-			                <span title="<?php echo __('Baños') ?>">
-			                    <span class="block align-center">
-									<i class="icon cofasa-img-icons icon-l icon-bath"></i>
-			                        <!-- <i class="icon cofasa-linear icon-l icon-bath"></i> -->
-			                    </span>
-			                    &nbsp;
-			                    <?php
-			                        //if(!$prop_bathrooms):
-			                        //    $prop_bathrooms = 0;
-			                        //endif;
-			                        $baths = intval($prop_bathrooms);
-			                        echo sprintf(ngettext("%d Baño", "%d Baños", $baths), $baths);
-			                    ?>
-			                </span>
-			            </li>
-						<?php endif; ?>
-			        </ul>
-					<hr />
 
 
 					<?php
@@ -183,11 +134,11 @@ $operation         = get_the_terms($post, 'operacion')[0];
 					$content_desktop = apply_filters("the_content", $content);
 					?>
 					<?php if($content): ?>
-						<div class="card">
-							<div class="card-title">
-								<h3 class="h5 my-3"><?php echo __('Descripción de la propiedad') ?></h3>
+                        <div class="card block">
+    						<div class="card-header">
+								<h3 class="card-header-title"><?php echo __('Descripción de la propiedad') ?></h3>
 							</div>
-							<div class="card-body">
+							<div class="card-content">
 								<div class="entry">
 									<?php echo wpautop($content_desktop); ?>
 								</div>
@@ -201,7 +152,7 @@ $operation         = get_the_terms($post, 'operacion')[0];
 						$page_link = tnb_post_by_slug('requisitos');
 							if($page_link):
 							?>
-							<div class="panel panel-primary uppercase bold">
+							<div class="panel">
 								Consulte <a class="underline" href="<?php echo $page_link ?>" target="_blank">aquí</a> los requisitos para alquilar con <b>COFASA</b>
 							</div>
 							<?php
@@ -213,15 +164,16 @@ $operation         = get_the_terms($post, 'operacion')[0];
 					$tax_title       = get_post_meta($post->ID, '_prop_tax_title', true);
 					$tax_desc        = get_post_meta($post->ID, '_prop_tax_desc', true);
 					if($tax_desc): ?>
-					<div class="panel">
-						<div class="panel-head panel-primary">
+                    <div class="card block">
+						<div class="card-header">
+
 							<?php if($tax_title && $tax_title != '0,00'): ?>
-								<h3 class="h5 my-3"><?php echo sprintf(__('$ %s Gastos iniciales'), $tax_title); ?></h3>
+								<h3 class="card-header-title"><?php echo sprintf(__('$ %s Gastos iniciales'), $tax_title); ?></h3>
 							<?php else: ?>
-								<h3 class="h5 my-3"><?php echo __('Gastos iniciales') ?></h3>
+								<h3 class="card-header-title"><?php echo __('Gastos iniciales') ?></h3>
 							<?php endif; ?>
 						</div>
-						<div class="panel-content">
+						<div class="card-content">
 							<?php echo wpautop($tax_desc, true); ?>
 						</div>
 					</div>
@@ -231,15 +183,15 @@ $operation         = get_the_terms($post, 'operacion')[0];
 					$tax_month_title       = get_post_meta($post->ID, '_prop_tax_month_title', true);
 					$tax_month_desc        = get_post_meta($post->ID, '_prop_tax_month_desc', true);
 					if($tax_month_desc): ?>
-					<div class="panel">
-						<div class="panel-head panel-primary">
+                    <div class="card block">
+						<div class="card-header">
 							<?php if($tax_month_title && $tax_month_title != '0,00'): ?>
-								<h3 class="h5 my-3"><?php echo sprintf(__('$ %s Gastos mensuales'), $tax_month_title); ?></h3>
+								<h3 class="card-header-title"><?php echo sprintf(__('$ %s Gastos mensuales'), $tax_month_title); ?></h3>
 							<?php else: ?>
-								<h3 class="h5 my-3"><?php echo __('Gastos mensuales') ?></h3>
+								<h3 class="card-header-title"><?php echo __('Gastos mensuales') ?></h3>
 							<?php endif; ?>
 						</div>
-						<div class="panel-content">
+						<div class="card-content">
 							<?php echo wpautop($tax_month_desc, true); ?>
 						</div>
 					</div>
@@ -259,11 +211,11 @@ $operation         = get_the_terms($post, 'operacion')[0];
 					//pr($rent_values);
 					if($rent_values && array_key_exists('value', $rent_values[0])):
 					?>
-					<div class="panel">
-						<div class="panel-head">
-							<h3 class="h5 my-3"><?php echo __('Importe') ?></h3>
+                    <div class="card block">
+						<div class="card-header">
+							<h3 class="card-header-title"><?php echo __('Importe') ?></h3>
 						</div>
-						<div class="panel-content">
+						<div class="card-content">
 							<?php /*
 							<?php if($rent_values_desc): ?>
 								<?php echo wpautop($rent_values_desc) ?>
@@ -280,11 +232,11 @@ $operation         = get_the_terms($post, 'operacion')[0];
 					</div>
 					<?php endif; ?>
 
-					<div class="card mb-3">
+                    <div class="card block">
 						<div class="card-header">
-							<h3 class="h5 my-3"><?php echo __('Detalles', 'tnb'); ?></h3>
+							<h3 class="card-header-title"><?php echo __('Detalles', 'tnb'); ?></h3>
 						</div>
-						<div class="card-body">
+						<div class="card-content">
 							<?php
 								$stat             = status();
 								$prop_statuses    = get_post_meta($post->ID, '_prop_status', true);
@@ -386,35 +338,35 @@ $operation         = get_the_terms($post, 'operacion')[0];
 						</div>
 					</div>
 					<?php if(isset($mapGPS['latitude']) && isset($mapGPS['longitude']) && !empty($mapGPS['latitude']) && !empty($mapGPS['longitude'])): ?>
-					<div class="card mb-3">
+					<div class="card block">
 						<div class="card-header">
-							<h3 class="h5 my-3"><?php echo __('Ubicación', 'tnb'); ?></h3>
+							<h3 class="card-header-title"><?php echo __('Ubicación', 'tnb'); ?></h3>
 						</div>
-						<div class="card-body">
+						<div class="card-content">
 							<?php renderMap($mapGPS['latitude'],$mapGPS['longitude']); ?>
 						</div>
 					</div>
 					<?php endif; ?>
+
+                    <?php include (TEMPLATEPATH . '/inc/related.php' ); ?>
 				</div>
-				<?php include (TEMPLATEPATH . '/inc/agents.php' ); ?>
-				<?php include (TEMPLATEPATH . '/inc/related.php' ); ?>
+
 			</div>
 			<?php if($notification_form): ?>
-				<div id="notificacion" class="modal email-form">
-					<div class="modal-dialog">
-				        <div class="modal-content">
-				            <div class="modal-header">
-				                <h5 class="modal-title" id="exampleModalLabel">
-									Consultar por:
-									<?php the_title(); ?>
-								</h5>
-				                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				            </div>
-				            <div class="modal-body">
-								<?php echo do_shortcode($notification_form, true); ?>
-				            </div>
-				        </div>
-				    </div>
+				<div id="notificacion" class="modal">
+                    <div class="modal-background"></div>
+                    <div class="modal-card">
+                        <header class="modal-card-head">
+                            <p class="modal-card-title">
+                                Consultar por:
+                                <?php the_title(); ?>
+                            </p>
+                          <button class="delete" aria-label="close"></button>
+                      </header>
+                      <section class="modal-card-body">
+                          <?php echo do_shortcode($notification_form, true); ?>
+                      </section>
+                    </div>
 				</div>
 				<?php /*
 				<div id="notificacion" class="lity-hide email-form">
@@ -425,21 +377,20 @@ $operation         = get_the_terms($post, 'operacion')[0];
 				*/ ?>
 			<?php endif; ?>
 			<?php if($contact_form): ?>
-				<div id="contact_form" class="modal email-form">
-					<div class="modal-dialog">
-				        <div class="modal-content">
-				            <div class="modal-header">
-				                <h5 class="modal-title" id="exampleModalLabel">
-									Consultar por:
-									<?php the_title(); ?>
-								</h5>
-				                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				            </div>
-				            <div class="modal-body">
-								<?php echo do_shortcode($contact_form, true); ?>
-				            </div>
-				        </div>
-				    </div>
+				<div id="contact_form" class="modal">
+                    <div class="modal-background"></div>
+                    <div class="modal-card">
+                        <header class="modal-card-head">
+                            <p class="modal-card-title">
+                                Consultar por:
+                                <?php the_title(); ?>
+                            </p>
+                          <button class="delete" aria-label="close"></button>
+                      </header>
+                      <section class="modal-card-body">
+                          <?php echo do_shortcode($contact_form, true); ?>
+                      </section>
+                    </div>
 				</div>
 				<?php /*
 				<div id="contact_form" class="lity-hide email-form">
@@ -451,9 +402,10 @@ $operation         = get_the_terms($post, 'operacion')[0];
 			<?php endif; ?>
 		<?php endwhile;?>
 	<?php endif; ?>
-	<div class="col-md-4">
-		<?php get_sidebar('propiedad'); ?>
-	</div>
+		<div class="column is-one-quarter">
+            <?php include (TEMPLATEPATH . '/inc/agents.php' ); ?>
+			<?php get_sidebar('propiedad'); ?>
+		</div>
 	</div>
 </div>
 <?php

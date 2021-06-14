@@ -1,0 +1,30 @@
+//main: theme.scss
+
+.wpcf7-form{
+    label{
+        @extend .label;
+        margin-bottom: .75rem;
+    }
+}
+.wpcf7-form-control-wrap{
+    @extend .field;
+}
+input[type="text"].wpcf7-form-control,
+input[type="email"].wpcf7-form-control{
+    @extend .input;
+}
+select.wpcf7-form-control{
+    @extend .select;
+}
+.wpcf7-textarea{
+    @extend .textarea;
+}
+.wpcf7-submit{
+    @extend .button;
+    @extend .button.is-primary;
+    @extend .button.is-fullwidth;
+
+}
+.wpcf7 .ajax-loader:empty{
+    display: none;
+}

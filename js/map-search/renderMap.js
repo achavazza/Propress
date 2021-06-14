@@ -14,24 +14,28 @@ function init_map(map_div){
 // Initializes google map
 //google.maps.event.addDomListener(window, 'load', init_map);
 function init_street_view(map_div) {
-  var fenway = {lat: lat, lng: lon};
-  var map = new google.maps.Map(document.getElementById(map_div), {
-    center: fenway,
-    zoom: 16
-  });
-  var panorama = new google.maps.StreetViewPanorama(
-      document.getElementById(map_div), {
-        position: fenway,
-        pov: {
-          heading: 0,
-          pitch: 0
-        }
-      });
-  map.setStreetView(panorama);
-}
+    var fenway = {lat: lat, lng: lon};
+    var map = new google.maps.Map(document.getElementById(map_div), {
+        center: fenway,
+        zoom: 16
+    });
+    var panorama = new google.maps.StreetViewPanorama(
+        document.getElementById(map_div), {
+            position: fenway,
+            pov: {
+                heading: 0,
+                pitch: 0
+            }
+        });
+        map.setStreetView(panorama);
+    }
 
-$(function(){
-   $(window).on('load',function(){
+    $(function(){
+        //alert('lala');
         init_map('gmap_canvas');
-   })
+        /*
+        $(window).on('load',function(){
+        init_map('gmap_canvas');
+    })
+    */
 });

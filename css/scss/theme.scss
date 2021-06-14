@@ -3,5 +3,18 @@
 @charset "utf-8";
 @import "../../node_modules/bulma/bulma.sass";
 
+@import "./plugins/photoswipe/_photoswipe.scss";
+@import "./plugins/photoswipe/_photoswipe-ui.scss";
 @import "_slider";
+@import "_featured";
+@import "_form";
 @import "_style";
+
+/*
+    @include until($tablet) {
+        background-image: url('./assets/img/bg/mobile.jpg')
+    }
+    @include from($tablet) {
+        background-image: url('./assets/img/bg/desktop.jpg')
+    }
+*/

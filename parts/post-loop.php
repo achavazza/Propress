@@ -135,23 +135,23 @@ $statuses        = get_the_terms($post->ID, 'status')[0];
                  <?php if(isset($prop_dormrooms)):
                     $dorms = intval($prop_dormrooms);
                     ?>
-                 <li class="icon-text">
-                    <span class="icon material-icons icon-small" title="<?php echo sprintf(ngettext("%d Dormitorio", "%d Dormitorios", $dorms), $dorms); ?>">
-                        hotel
-                    </span>
-                    <?php echo sprintf("%d", $dorms); ?>
-                 </li>
+                     <li class="icon-text">
+                        <span class="icon material-icons icon-small" title="<?php echo sprintf(ngettext("%d Dormitorio", "%d Dormitorios", $dorms), $dorms); ?>">
+                            hotel
+                        </span>
+                        <span><?php echo sprintf("%d", $dorms); ?></span>
+                     </li>
                  <?php endif; ?>
                  <?php
                     if(isset($prop_bathrooms)):
                     $baths = intval($prop_bathrooms);
                     ?>
-                 <li class="icon-text">
-                    <span class="icon material-icons icon-small" title="<?php echo sprintf(ngettext("%d Baño", "%d Baños", $baths), $baths);?>">
-                        bathtub
-                    </span>
-                    <?= sprintf("%d", $baths);?>
-                 </li>
+                     <li class="icon-text">
+                        <span class="icon material-icons icon-small" title="<?php echo sprintf(ngettext("%d Baño", "%d Baños", $baths), $baths);?>">
+                            bathtub
+                        </span>
+                        <span><?= sprintf("%d", $baths);?></span>
+                     </li>
                  <?php endif; ?>
             </ul>
         </div>

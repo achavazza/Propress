@@ -50,7 +50,7 @@
 
 	</head>
 
-	<body <?php body_class(); ?>>
+	<body <?php body_class(''); ?>>
 
 		<div id="page-wrap">
 			<div id="header">
@@ -67,30 +67,31 @@
 						<span aria-hidden="true"></span>
 					</a>
 				</div>
-				<?php
-				wp_nav_menu([
-					'theme_location'    => 'header-menu',
-		            'depth'             => 0,
-		            'container'         => false,
-		            // 'items_wrap'     => 'div',
-		            'menu_class'        => 'navbar-menu',
-		            'menu_id'           => 'primary-menu',
-		            'after'             => "</div>",
-		            'walker'            => new Navwalker()
-					//'menu'            => 'top',
-					//'theme_location'  => 'header-menu',
-					//'container'       => 'div',
-					//'container_id'    => 'bs4navbar',
-					//'container_class' => 'collapse navbar-collapse ml-auto',
-					//'menu_id'         => false,
-					//'menu_class'      => 'navbar-nav ml-auto text-right',
-					//'depth'           => 2,
-					//'fallback_cb'     => 'bs4navwalker::fallback',
-					//'walker'          => new bs4navwalker()
-				]);
-				?>
-				<?php /*
+
 				<div class="navbar-end">
+                    <?php
+    				wp_nav_menu([
+    					'theme_location'    => 'header-menu',
+    		            'depth'             => 0,
+    		            'container'         => false,
+    		            // 'items_wrap'     => 'div',
+    		            'menu_class'        => 'navbar-menu',
+    		            'menu_id'           => 'primary-menu',
+    		            'after'             => "</div>",
+    		            'walker'            => new Navwalker()
+    					//'menu'            => 'top',
+    					//'theme_location'  => 'header-menu',
+    					//'container'       => 'div',
+    					//'container_id'    => 'bs4navbar',
+    					//'container_class' => 'collapse navbar-collapse ml-auto',
+    					//'menu_id'         => false,
+    					//'menu_class'      => 'navbar-nav ml-auto text-right',
+    					//'depth'           => 2,
+    					//'fallback_cb'     => 'bs4navwalker::fallback',
+    					//'walker'          => new bs4navwalker()
+    				]);
+    				?>
+                    <?php /*
 					<div class="navbar-item">
 						<div class="buttons">
 							<a class="button is-primary">
@@ -101,10 +102,11 @@
 							</a>
 						</div>
 					</div>
+                    */ ?>
 				</div>
-				*/ ?>
-			</div>
-		</nav>
+
+	        </nav>
+        </div>
 	<?php
 	/*
 	<div class="head">

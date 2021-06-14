@@ -464,7 +464,7 @@ function cmb2_prop_taxes(){
         'priority'      => 'low',
         'show_names'    => true, // Show field names on the left
         // 'cmb_styles' => false, // false to disable the CMB stylesheet
-        // 'closed'     => true, // Keep the metabox closed by default
+        //'closed'     => true, // Keep the metabox closed by default
     ) );
     $cmb6->add_field(array(
         'name' => 'Importe',
@@ -495,7 +495,7 @@ function cmb2_prop_taxes(){
         'priority'      => 'low',
         'show_names'    => true, // Show field names on the left
         // 'cmb_styles' => false, // false to disable the CMB stylesheet
-        // 'closed'     => true, // Keep the metabox closed by default
+        //'closed'     => true, // Keep the metabox closed by default
     ) );
     $cmb6->add_field(array(
         'name' => 'Importe',
@@ -546,7 +546,7 @@ function cmb2_prop_taxes(){
             'add_button'        => __( 'Agregar', 'cmb2' ),
             'remove_button'     => __( 'Eliminar', 'cmb2' ),
             'sortable'          => true,
-            // 'closed'         => true, // true to have the groups closed by default
+            'closed'         => true, // true to have the groups closed by default
             // 'remove_confirm' => esc_html__( 'Are you sure you want to remove?', 'cmb2' ), // Performs confirmation before removing group.
         ),
     ) );
@@ -692,7 +692,8 @@ function cmb2_prop_details() {
         'object_types'  => array( 'propiedad' ), // post type
         //'show_on'       => array( 'key' => 'page-template', 'value' => 'page-products.php' ),
         'context'       => 'normal',
-        'priority'      => 'high',
+        'priority'      => 'side',
+        //'priority'      => 'high',
         'show_names'    => true, // Show field names on the left
         // 'cmb_styles' => false, // false to disable the CMB stylesheet
         // 'closed'     => true, // Keep the metabox closed by default
@@ -927,6 +928,7 @@ function cmb2_attached_agents() {
 		'title'        => __( 'Asesores', 'tnb' ),
 		'object_types' => array( 'propiedad' ), // Post type
 		'context'      => 'normal',
+		//'context'      => 'normal',
 		'priority'     => 'low',
 		'show_names'   => false, // Show field names on the left
 	) );

@@ -458,11 +458,18 @@ class CMB2_Types {
 	 * Generate field id attribute
 	 *
 	 * @since  1.1.0
-	 * @param  string $suffix For multi-part fields
-	 * @return string          Id attribute
+	 * @param  string $suffix                     For multi-part fields
+	 * @param  bool   $append_repeatable_iterator Whether to append the iterator attribue if the field is repeatable.
+	 * @return string                             Id attribute
 	 */
-	public function _id( $suffix = '' ) {
-		return $this->field->id() . $suffix . ( $this->field->args( 'repeatable' ) ? '_' . $this->iterator . '" data-iterator="' . $this->iterator : '' );
+	public function _id( $suffix = '', $append_repeatable_iterator = true ) {
+		$id = $this->field->id() . $suffix . ( $this->field->args( 'repeatable' ) ? '_' . $this->iterator : '' );
+
+		if ( $append_repeatable_iterator && $this->field->args( 'repeatable' ) ) {
+			$id .= '" data-iterator="' . $this->iterator;
+		}
+
+		return $id;
 	}
 
 	/**
@@ -600,6 +607,10 @@ class CMB2_Types {
 
 	public function taxonomy_select( $args = array() ) {
 		return $this->get_new_render_type( __FUNCTION__, 'CMB2_Type_Taxonomy_Select', $args )->render();
+	}
+
+	public function taxonomy_select_hierarchical( $args = array() ) {
+		return $this->get_new_render_type( __FUNCTION__, 'CMB2_Type_Taxonomy_Select_Hierarchical', $args )->render();
 	}
 
 	public function radio( $args = array(), $type = __FUNCTION__ ) {

@@ -34,6 +34,7 @@ function propiedad_init() {
         'menu_position'      => 8,
         'menu_icon'          => 'dashicons-admin-multisite',
         'supports'           => array('title', 'editor', 'thumbnail'),
+        'show_in_rest'       => true,
         'taxonomies'         => array('tipo', 'operacion', 'location', 'status')
     );
     register_post_type('propiedad', $args);
@@ -964,10 +965,10 @@ function sanitize_int( $value, $field_args, $field ) {
 	return $sanitized_value;
 }
 function sanitize_money( $value, $field_args, $field ) {
-    
+
     //$sanitized_value = absint( $value );
     $sanitized_value = number_format( $value, 2, ',', '.');
-    
+
     return $sanitized_value;
 }
 /*function set_default_services($default) {

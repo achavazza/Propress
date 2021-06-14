@@ -29,7 +29,7 @@ if( $slider_query->have_posts() ):
     $calc    = round(((int)$slider_props['slider_term_h'][0] * 100) / (int)$slider_props['slider_term_w'][0], 2);
     $padding = 'style="padding-bottom:'.$calc.'%"';
 
-    echo '<div class="container">';
+    //echo '<div class="container">';
     echo sprintf('<div id="main-slider" %s>', $padding);
     while( $slider_query->have_posts() ) : $slider_query->the_post();
         $content_align = (get_post_meta($post->ID)['slide_prop_align']) ? get_post_meta($post->ID)['slide_prop_align'][0] : '';
@@ -40,7 +40,7 @@ if( $slider_query->have_posts() ):
 
         echo sprintf('<div class="slide-item" style="%s">%s</div>', $props, $content);
     endwhile;
-echo '</div>';
+    //echo '</div>';
 echo '</div>';
 else:
     echo '<div class="conatainer">';

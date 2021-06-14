@@ -1,4 +1,4 @@
-<div id="gallery">
+<div id="gallery" class="block">
     <figure class="big-thumb">
         <?php
         $i = 0;
@@ -18,7 +18,10 @@
             <ul class="thumb-btns">
                 <?php if(in_array('map', $btns)): ?>
                     <li>
+                        <?php /*
                         <a class="btn btn-lg btn-secondary" data-bs-toggle="modal" data-bs-target="#map_lightbox" href="#">
+                        */ ?>
+                        <a class="button is-primary is-large modal-button" data-target="#modal-lightbox">
                             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-geo-alt" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
                             </svg>
@@ -27,7 +30,10 @@
                 <?php endif; ?>
                 <?php if(in_array('street', $btns)): ?>
                     <li>
+                        <?php /*
                         <a class="btn btn-lg btn-secondary" data-bs-toggle="modal" data-bs-target="#street_lightbox" href="#">
+                        */ ?>
+                        <a class="button is-primary is-large modal-button" data-target="#modal-streetview">
                             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-map" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M15.817.613A.5.5 0 0 1 16 1v13a.5.5 0 0 1-.402.49l-5 1a.502.502 0 0 1-.196 0L5.5 14.51l-4.902.98A.5.5 0 0 1 0 15V2a.5.5 0 0 1 .402-.49l5-1a.5.5 0 0 1 .196 0l4.902.98 4.902-.98a.5.5 0 0 1 .415.103zM10 2.41l-4-.8v11.98l4 .8V2.41zm1 11.98l4-.8V1.61l-4 .8v11.98zm-6-.8V1.61l-4 .8v11.98l4-.8z"/>
                             </svg>
@@ -54,12 +60,13 @@
     $block = '';
     $gallery_images = get_post_meta( get_the_ID(), '_prop_images', 1);
     $thumb_limit = get_option('tnb_setup_options')['tnb_setup_options_gallery'];
-    $limit = 5; //5+1
+    $limit = $thumb_limit; //5+1
+    //$limit = 5; //5+1
 
     if($thumb_limit){
         $limit = intval($thumb_limit);
     }
-    
+
     if ( ! empty( $gallery_images ) ) :
 
         $count = count($gallery_images);
