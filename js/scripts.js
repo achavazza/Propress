@@ -46,10 +46,12 @@ $(function(){
         el = ($(this).attr('data-target'));
         $(el).addClass('is-active');
 
-        if(el == 'modal-lightbox'){
+        console.log(el);
+
+        if(el == '#modal-lightbox'){
             init_map('gmap_lightbox');
         }
-        if(el == 'modal-streetview'){
+        if(el == '#modal-streetview'){
             init_street_view('gstreet_lightbox');
         }
     });
