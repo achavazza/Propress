@@ -50,7 +50,7 @@ if($img){
 
         <h3 class="title is-3"><?php echo _e('Noticias','tnb') ?></h3>
 
-		<div class="columns is-same-height">
+		<div class="columns is-same-height is-multiline">
 		<?php while ( $loop->have_posts() ) : $loop->the_post(); ?>
 			<div class="column is-one-third">
 				<?php get_template_part('parts/blog','loop') ?>
@@ -93,7 +93,7 @@ if($img){
 		<?php $i = 0 ?>
 
         <h3 class="title is-3"><?php echo _e('Propiedades destacadas','tnb') ?></h3>
-        <div class="columns is-same-height">
+        <div class="columns is-same-height is-multiline">
 		<?php while ( $loop->have_posts() ) : $loop->the_post(); ?>
             <?php array_push($featPosts, get_the_ID()); ?>
 			<div class="column is-one-third">
@@ -133,7 +133,7 @@ if($img){
 		$i = 0 ?>
         <h3 class="title is-3"><?php echo _e('Últimas propiedades','tnb') ?></h3>
 
-		<div class="columns is-same-height">
+		<div class="columns is-same-height is-multiline">
 		<?php while ( $loop->have_posts() ) : $loop->the_post(); ?>
 			<div class="column is-one-third">
 				<?php get_template_part('parts/post','loop') ?>

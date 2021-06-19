@@ -204,33 +204,18 @@ require_once 'inc/custom-functions.php';
     require_once 'inc/breadcrumb.php';
 
     /*
-     * Custom meta boxes types
+     * Cunstom frontend functions
      * ========================================================================================================
      */
-
-     function phrases(){
-         /* pasar a taxes */
-         global $phrases;
-         $phrases = array(
-             1   => __('Apta para crédito', 'cmb' ),
-             2   => __('Destacados', 'cmb' ),
-             3   => __('Inversiones desde el pozo', 'cmb' ),
-             4   => __('Oportunidad', 'cmb' ),
+    function currency(){
+         global $currency;
+         $currency = array(
+             1 => __('$', 'cmb' ),
+             2 => __('U$S', 'cmb' ),
          );
-         return $phrases;
-    }
-    function services(){
-        /* no se por los iconos */
-        global $services;
-        $services = array(
-            1 => __('Agua Corriente', 'cmb' ),
-            2 => __('Gas Natural', 'cmb' ),
-            3 => __('Conexión Eléctrica', 'cmb' ),
-        );
-        return $services;
+         return $currency;
     }
     function orientation(){
-        /* no se por los iconos */
         global $orientation;
         $orientation = array(
             1 => 'Norte',
@@ -241,7 +226,6 @@ require_once 'inc/custom-functions.php';
         return $orientation;
     }
     function front(){
-        /* no se por los iconos */
         global $front;
         $front = array(
             1 => 'Frente',
@@ -250,17 +234,17 @@ require_once 'inc/custom-functions.php';
         );
         return $front;
     }
-    function currency(){
-        /* no se por los iconos */
-        global $currency;
-        $currency = array(
-            1 => __('$', 'cmb' ),
-            2 => __('U$S', 'cmb' ),
-        );
-        return $currency;
+    function phrases(){
+         global $phrases;
+         $phrases = array(
+             1   => __('Apta para crédito', 'cmb' ),
+             2   => __('Destacados', 'cmb' ),
+             3   => __('Inversiones desde el pozo', 'cmb' ),
+             4   => __('Oportunidad', 'cmb' ),
+         );
+         return $phrases;
     }
     function status(){
-        /* pasar a taxes */
         global $status;
         $status = array(
             1 => __('En construcción', 'cmb' ),
@@ -269,7 +253,16 @@ require_once 'inc/custom-functions.php';
         );
         return $status;
     }
-
+    function services(){
+        global $services;
+        $services = array(
+            1 => __('Agua Corriente', 'cmb' ),
+            2 => __('Gas Natural', 'cmb' ),
+            3 => __('Conexión Eléctrica', 'cmb' ),
+        );
+        return $services;
+    }
+    
 
 
 

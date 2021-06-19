@@ -5,8 +5,8 @@
 	</div>
 </div>
 <div class="container">
-	<div class="row">
-		<div class="col-md-8">
+	<div class="columns">
+		<div class="column">
 			<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
 				<?php get_template_part('parts/blog','list') ?>
@@ -15,10 +15,10 @@
 
 			<?php include (TEMPLATEPATH . '/inc/nav.php' ); ?>
 			<?php else : ?>
-				<h2>No encontramos ninguna Noticia :(</h2>
+				<h2><?php echo _e('No encontramos ninguna Noticia :(', 'tnb') ?></h2>
 			<?php endif; ?>
 		</div>
-		<div class="col-md-4">
+		<div class="column">
 			<?php get_sidebar(); ?>
 		</div>
 	</div>

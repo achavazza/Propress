@@ -1,20 +1,13 @@
 <?php
 get_header(); ?>
+<style>
+/* fix bulma minireset */
+html{overflow:hidden}</style>
 <?php wp_enqueue_script('gmaps'); ?>
-<?php /*
-<div class="grid">
-
-	<?php //get_template_part('parts/map', 'searchform'); ?>
-	<?php //get_template_part('parts/toggle', 'search'); ?>
-</div>
-<?php //the_breadcrumb(); ?>
-<?php global $query_string; ?>
-<h2 class="h2 title"><?php echo get_search_string($wp_query); ?></h2>
-*/ ?>
 <div id="map-container">
 	<div class="map-layout" id="gmap_canvas"></div>
-	<div class="container">
-		<div class="search-panel map-search">
+	<div class="container map-search">
+		<div class="search-panel">
 			<?php echo get_search_form(); ?>
 		</div>
 
@@ -29,22 +22,21 @@ get_header(); ?>
 		<?php
 		// Open this line to Debug what's query WP has just run
 		// Show the results
-		//query_posts( array( 'post_type' => 'propiedad'));
+		//pr(query_posts(array( 'post_type' => 'propiedad')));
 		if(have_posts() ) :
 
 			$i = 0;
 			echo '<div class="column">';
-			echo '<div class="columns is-same-height">';
+			echo '<div class="columns is-same-height is-multiline">';
 			//echo '<div class="row">';
 			while (have_posts()) : the_post();
 				echo '<div class="column is-half">';
 		        require('inc/map-search/map-post.php');
-						get_template_part('parts/post','loop');
+					get_template_part('parts/post','loop');
 				echo '</div>';
 				$i++;
 				//echo ($i % 2 == 0) ? '</div><div class="row">':'';
 			endwhile;
-			//echo '</div>';
 			echo '</div>';
 			echo '</div>';
 

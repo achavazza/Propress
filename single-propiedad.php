@@ -12,29 +12,29 @@ get_header();
 
 $data              = get_post_meta($post->ID);
 
-$notification_form = get_option('tnb_extra_options')['tnb_options_notification_form'];
-$contact_form      = get_option('tnb_extra_options')['tnb_options_contact_form'];
 
 $prop_title        = get_the_title();
 $prop_img          = get_the_post_thumbnail_url(null, 'thumbnail');
 $prop_address      = $data['_prop_address'][0];
-$prop_sale         = ($data['_prop_price_sale'][0]!= 0) ? number_format($data['_prop_price_sale'][0], 0, ',', '.') : '';
-$prop_rent         = ($data['_prop_price_rent'][0]!= 0) ? number_format($data['_prop_price_rent'][0], 0, ',', '.') : '';
-$prop_link         = get_the_permalink();
 $prop_extra        = $data['_prop_extra'][0];
+$prop_feat         = $data['_prop_featured'][0];
 
+$prop_link         = get_the_permalink();
 $mapGPS            = get_post_meta($post->ID, '_prop_map', true);
 
-
-$prop_feat         = $data['_prop_featured'][0];
-$prop_phrase       = phrases()[$data['_prop_phrase'][0]];
-$prop_currency     = currency()[$data['_prop_currency'][0]];
+//ahora estan parts/price-block.php
+//$prop_sale         = ($data['_prop_price_sale'][0]!= 0) ? number_format($data['_prop_price_sale'][0], 0, ',', '.') : '';
+//$prop_rent         = ($data['_prop_price_rent'][0]!= 0) ? number_format($data['_prop_price_rent'][0], 0, ',', '.') : '';
+//$prop_currency     = currency()[$data['_prop_currency'][0]];
 //$cur_symbol      = $prop_currency ? '$' : 'U$S';
 
-$prop_loc          = get_location($post);
 $type              = get_the_terms($post, 'tipo')[0];
-$operation         = get_the_terms($post, 'operacion')[0];
+$ops               = get_the_terms($post, 'operacion')[0];
+$prop_loc          = get_location($post);
+$prop_phrase       = phrases()[$data['_prop_phrase'][0]];
 
+$notification_form = get_option('tnb_extra_options')['tnb_options_notification_form'];
+$contact_form      = get_option('tnb_extra_options')['tnb_options_contact_form'];
 
 ?>
 <div class="search-panel">
@@ -75,28 +75,11 @@ $operation         = get_the_terms($post, 'operacion')[0];
 							<?php //echo $prop_loc ? ' &mdash; '.$prop_loc : ''; ?>
 							<?php echo sprintf('<span class="sub-title">%s</span>', $prop_loc ? $prop_loc : '') ?>
 						</h3>
-                        <span class="price-block">
-                            <?php if(!$prop_sale && !$prop_rent):
-                                echo sprintf('<span>Precio: <strong>%s</strong></span>', __('Consultar'));
-                            else:
-                                if($prop_rent):
-                                    $val = $prop_currency.' '.$prop_rent;
-                                    echo sprintf('<span class="rent-price" title="Precio de alquiler">%s</span>', $val);
-                                    //<strong>Alquiler: </strong>
-                                    //<?php echo '$'.$prop_rent
-                                endif;
-                                if($prop_sale && $prop_rent):
-                                    echo ' | ';
-                                endif;
-                                if($prop_sale):
-                                    $val = $prop_currency.' '.$prop_sale;
-                                    echo sprintf('<span class="sale-price" title="Precio de venta">%s</span>', $val);
-                                    //<strong>Venta: </strong>
-                                    //<?php echo $cur_symbol.' '.$prop_sale
-                                endif;
-                            endif;
-                            ?>
-                        </span>
+                        <?php
+                        //$args = $data;
+                        //pase todos los contenidos a un template
+                        get_template_part('parts/price','block', $data) ?>
+                    </span>
 					</div>
                     <div class="media-right">
                         <a class="prop-icon-type" href="<?= isset($type) ? get_term_link($type) : get_bloginfo('home').'/?s='; ?>" title="<?php echo __('Tipo de propiedad') ?>">
@@ -108,19 +91,26 @@ $operation         = get_the_terms($post, 'operacion')[0];
                     </div>
 					</div>
                     <div>
+                        <nav class="level">
+                        <div class="level-left">
                         <?php if(!$prop_sale && !$prop_rent):
                             if($contact_form):
-                                echo '&nbsp;';
+                                echo '<div class="level-item">';
                                 echo '<a class="button is-primary modal-button" data-target="#contact_form">Informarme el precio</a>';
+                                echo '</div>';
                                 //echo '<a class="btn btn-primary" data-lity="" href="#contact_form" style="padding:7px">Informarme el precio</a>';
                             endif;
                         else:
                             if($notification_form):
+                                echo '<div class="level-item">';
                                 echo '<a class="button is-primary modal-button" data-target="#notificacion">Avisarme si baja el precio</a>';
                                 //echo '<a class="btn btn-primary" data-lity="" href="#notificacion" style="padding:7px">Avisarme si baja el precio</a>';
+                                echo '</div>';
                             endif;
                         endif;
                         ?>
+                        </div>
+                        </nav>
                     </div>
 					</div>
 					</div>

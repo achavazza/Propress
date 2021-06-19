@@ -74,7 +74,7 @@ ul.is-unstyled {
 .material-icons.md-36 { font-size: 36px; }
 .material-icons.md-48 { font-size: 48px; }
 
-.prop-info a{
+.prop-info{
     /*display:block;*/
     display: flex;
     flex-flow: column;
@@ -113,6 +113,17 @@ ul.is-unstyled {
 .has-background-dark .label{
     color: $light;
 }
+.map-search{
+    overflow-y: auto;
+    max-height: 100%;
+    position: relative;
+
+    .search-panel{
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+}
 .search-panel{
     padding: .75rem;
     background: $dark;
@@ -122,7 +133,7 @@ ul.is-unstyled {
 }
 .search-fields{
     $field-distance: .75rem;
-    
+
     display: flex;
     align-items: flex-end;
     flex-wrap: wrap;
@@ -163,3 +174,8 @@ ul.is-unstyled {
         padding: 0
     }
 }
+/*
+#bodyContent .level{
+    margin-bottom: 1rem;
+}
+*/
