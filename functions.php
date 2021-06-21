@@ -48,6 +48,11 @@ if ( file_exists(CMB_PATH . '/init.php' ) ) {
     //include('inc/custom-metaboxes/contact.php');
     //include('inc/post-types/internal.php');
 }
+function cmb2_style_fixes() {
+    wp_register_style('cmb2_style_fixes', get_template_directory_uri(). '/inc/cmb2-plugins/cmb2_fixes.css', false, '1.0.0' );
+    wp_enqueue_style('cmb2_style_fixes');
+}
+add_action( 'admin_enqueue_scripts', 'cmb2_style_fixes');
 
 // post-types & metaboxes
 require_once ('inc/post-types/slides.php');
@@ -210,8 +215,8 @@ require_once 'inc/custom-functions.php';
     function currency(){
          global $currency;
          $currency = array(
-             1 => __('$', 'cmb' ),
-             2 => __('U$S', 'cmb' ),
+             1 => __('$', 'tnb' ),
+             2 => __('U$S', 'tnb' ),
          );
          return $currency;
     }
@@ -237,28 +242,28 @@ require_once 'inc/custom-functions.php';
     function phrases(){
          global $phrases;
          $phrases = array(
-             1   => __('Apta para crédito', 'cmb' ),
-             2   => __('Destacados', 'cmb' ),
-             3   => __('Inversiones desde el pozo', 'cmb' ),
-             4   => __('Oportunidad', 'cmb' ),
+             1   => __('Apta para crédito', 'tnb' ),
+             2   => __('Destacados', 'tnb' ),
+             3   => __('Inversiones desde el pozo', 'tnb' ),
+             4   => __('Oportunidad', 'tnb' ),
          );
          return $phrases;
     }
     function status(){
         global $status;
         $status = array(
-            1 => __('En construcción', 'cmb' ),
-            2 => __('Apta crédito', 'cmb' ),
-            3 => __('En sucesión', 'cmb' ),
+            1 => __('En construcción', 'tnb' ),
+            2 => __('Apta crédito', 'tnb' ),
+            3 => __('En sucesión', 'tnb' ),
         );
         return $status;
     }
     function services(){
         global $services;
         $services = array(
-            1 => __('Agua Corriente', 'cmb' ),
-            2 => __('Gas Natural', 'cmb' ),
-            3 => __('Conexión Eléctrica', 'cmb' ),
+            1 => __('Agua Corriente', 'tnb' ),
+            2 => __('Gas Natural', 'tnb' ),
+            3 => __('Conexión Eléctrica', 'tnb' ),
         );
         return $services;
     }

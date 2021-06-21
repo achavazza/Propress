@@ -3,7 +3,7 @@
 $data            = get_post_meta($post->ID);
 
 $prop_title      = get_the_title();
-$prop_img        = get_the_post_thumbnail_url(null, 'thumbnail');
+$prop_img        = get_the_post_thumbnail_url(null, 'large');
 $default         = get_the_post_thumbnail($post->ID, 'medium');
 $thumb           = empty($prop_img) ? $default : $prop_img;
 

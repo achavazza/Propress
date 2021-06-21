@@ -1,0 +1,15 @@
+.widget-content .cmb-th, .widget-content .cmb-td{
+    float: none;
+    padding: 0;
+    width: auto !important;
+}
+.widget-content label{
+    padding: 0;
+    font-weight: normal
+}
+.widget-content .cmb2-wrap .cmb-row{
+    margin: 1em 0;
+}
+.widget-content .cmb2-wrap .regular-text{
+    width: 400px;
+}
