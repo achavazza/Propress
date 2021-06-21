@@ -224,7 +224,7 @@ $contact_form      = get_option('tnb_extra_options')['tnb_options_contact_form']
 		<?php endwhile;?>
 	<?php endif; ?>
 		<div class="column is-one-quarter">
-            <?php include (TEMPLATEPATH . '/inc/agents.php' ); ?>
+            <?php //include (TEMPLATEPATH . '/inc/agents.php' ); ?>
 			<?php get_sidebar('propiedad'); ?>
 		</div>
 	</div>

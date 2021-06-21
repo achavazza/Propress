@@ -8,8 +8,8 @@ $email           = $data['_agent_email'][0];
 $type            = get_the_terms($post->ID, 'agent_type')[0];
 ?>
 <div <?php post_class('media') ?> id="post-<?php the_ID(); ?>">
-    <div class="img">
-        <a href="<?php the_permalink() ?>">
+    <div class="media-left">
+        <a class="image" href="<?php the_permalink() ?>">
             <?php if($thumb): ?>
                 <?php echo $thumb ?>
             <?php else: ?>
@@ -17,7 +17,7 @@ $type            = get_the_terms($post->ID, 'agent_type')[0];
             <?php endif; ?>
         </a>
     </div>
-    <div class="body">
+    <div class="media-content">
         <a href="<?php the_permalink() ?>">
             <span class="h3">
                 <?php the_title(); ?>

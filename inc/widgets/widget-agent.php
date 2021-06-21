@@ -13,83 +13,80 @@ if ( ! defined ( 'ABSPATH' ) ) {
  * @todo Properly hook in JS events, etc. Fields which require JS are not working.
  * @todo Fix css styling. Probably needs a sep. CSS file enqueued for widgets.
  */
-class CMB2_Widget_Viewed_Prop extends WP_Widget {
-
-	/**
-	 * Unique identifier for this widget.
-	 *
-	 * Will also serve as the widget class.
-	 *
-	 * @var string
-	 */
-	protected $widget_slug = 'viewed-properties';
-
-	/**
-	 * Shortcode name for this widget
-	 *
-	 * @var string
-	 */
-	protected static $shortcode = 'viewed-properties';
-
-	/**
-	 * This widget's CMB2 instance.
-	 *
-	 * @var CMB2
-	 */
+class CMB2_Widget_Agent extends WP_Widget {
+	protected $widget_slug = 'widget-agent';
+	protected static $shortcode = 'widget-agent';
 	protected $cmb2 = null;
-
-	/**
-	 * Array of default values for widget settings.
-	 *
-	 * @var array
-	 */
 	protected static $defaults = array();
-
-	/**
-	 * Store the instance properties as property
-	 *
-	 * @var array
-	 */
 	protected $_instance = array();
-
-	/**
-	 * Array of CMB2 fields args.
-	 *
-	 * @var array
-	 */
 	protected $cmb2_fields = array();
-
-	/**
-	 * Contruct widget.
-	 */
 	public function __construct() {
 
 		parent::__construct(
 			$this->widget_slug,
-			esc_html__( 'Propiedades vistas', 'tnb' ),
+			esc_html__( 'Agentes asociados', 'tnb' ),
 			array(
 				'classname' => $this->widget_slug,
-				'customize_selective_refresh' => true,
-				'description' => esc_html__( 'Lista las propiedades vistas', 'tnb' ),
+				//'customize_selective_refresh' => true,
+				'description' => esc_html__( 'Lista el agente asociado a la propiedad', 'tnb' ),
 			)
 		);
 
 		self::$defaults = array(
-			'title' => 'Propiedades vistas',
-			'desc'  => '',
-			'posts_num'  => 3,
-            //'image' => '',
+			'title'         => 'Agentes asociados',
+			'desc'          => '',
+            'contact_type'  => null,
+            'contact_check' => null,
+            'contact_phone' => null,
+            'contact_mail'  => null,
+            'contact_wa'    => null,
+            //'image'         => '',
+			//'posts_num'  => 3,
 			//'color' => '#bada55',
 		);
 
 		$this->cmb2_fields = array(
 			array(
-				'name'   => __( 'Título', 'tnb' ),
+                'name'   => __('Título', 'tnb'),
 				'id_key' => 'title',
-				//'id'     => 'title',
-                'id'     => 'widget-propview-title',
+				'id'     => 'widget-agent-title',
 				'type'   => 'text',
 			),
+            array(
+            	'name'   => '',
+            	'desc'   => __('Mostrar tipo de agente', 'tnb'),
+                'id_key' => 'contact_type',
+            	'id'     => 'contact_type',
+            	'type'   => 'checkbox',
+            ),
+            array(
+            	'name'   => '',
+            	'desc'   => __('Mostrar formulario de contacto', 'tnb'),
+                'id_key' => 'contact_check',
+            	'id'     => 'contact_check',
+            	'type'   => 'checkbox',
+            ),
+            array(
+            	'name'   => '',
+            	'desc'   => __('Mostrar teléfono', 'tnb'),
+                'id_key' => 'contact_phone',
+            	'id'     => 'contact_phone',
+            	'type'   => 'checkbox',
+            ),
+            array(
+            	'name'   => '',
+            	'desc'   => __('Mostrar e-mail', 'tnb'),
+                'id_key' => 'contact_mail',
+            	'id'     => 'contact_mail',
+            	'type'   => 'checkbox',
+            ),
+            array(
+            	'name'   => '',
+            	'desc'   => __('Mostrar WhatAapp', 'tnb'),
+                'id_key' => 'contact_wa',
+            	'id'     => 'contact_wa',
+            	'type'   => 'checkbox',
+            )
 			/*array(
 				'name'    => 'Image',
 				'desc'    => 'Upload an image or enter an URL.',
@@ -102,9 +99,9 @@ class CMB2_Widget_Viewed_Prop extends WP_Widget {
 				'text' => array(
 					'add_upload_file_text' => 'Upload An Image'
 				),
-			),*/
+			),
 			array(
-				'name'    => __('Numero de posts', 'tnb'),
+				'name'    => 'Numero de posts',
 				'id_key'  => 'posts_num',
 				'id'      => 'posts_num',
 				'type'     => 'text',
@@ -113,12 +110,13 @@ class CMB2_Widget_Viewed_Prop extends WP_Widget {
 		            'pattern' => '\d*',
 		        ),
 			),
-			//array(
-			//	'name'   => 'Color',
-			//	'id_key' => 'color',
-			//	'id'     => 'color',
-			//	'type'   => 'colorpicker',
-			//),
+			array(
+				'name'   => 'Color',
+				'id_key' => 'color',
+				'id'     => 'color',
+				'type'   => 'colorpicker',
+			),
+            */
 		);
 
 		add_action( 'save_post',    array( $this, 'flush_widget_cache' ) );
@@ -171,7 +169,6 @@ class CMB2_Widget_Viewed_Prop extends WP_Widget {
 				'flush_cache'   => isset( $_GET['delete-trans'] ), // Check for cache-buster
 			),
 			isset( $atts['args'] ) ? (array) $atts['args'] : (array) $attribs['args'],
-			//isset( $atts['args'] ) ? (array) $atts['args'] : array(),
 			self::$shortcode
 		);
 
@@ -179,7 +176,6 @@ class CMB2_Widget_Viewed_Prop extends WP_Widget {
 		$instance = shortcode_atts(
 			self::$defaults,
 			! empty( $atts['instance'] ) ? (array) $atts['instance'] : $attribs['args'],
-			//! empty( $atts['instance'] ) ? (array) $atts['instance'] : array(),
 			self::$shortcode
 		);
 
@@ -201,10 +197,12 @@ class CMB2_Widget_Viewed_Prop extends WP_Widget {
 
 		// If $widget is empty, rebuild our cache
 		if ( empty( $widget ) ) {
-            $values = explode(";", $_COOKIE['wpb_visited_props']);
+            //$values = explode(";", $_COOKIE['wpb_visited_props']);
             $widget = '';
-            $post_num = intval($instance['posts_num']);
-
+            $contact_check = $instance['contact_check'];
+            //$post_num = intval($instance['posts_num']);
+			//pr($instance);
+            /*
         	$widget_query = new WP_Query([
 				'post_type'           => 'propiedad',
         		'posts_per_page'      => $post_num,
@@ -213,7 +211,9 @@ class CMB2_Widget_Viewed_Prop extends WP_Widget {
         		'post__not_in'        => array(get_the_ID()),
         		//'post__not_in'        => $featPosts
 			]);
+            */
 			$widget_title = ( $instance['title'] ) ? $atts['before_title'] . esc_html( $instance['title'] ) . $atts['after_title'] : '';
+            //pr($widget_title);
 
 			$id      = $atts['args']['widget_id'];
 			$class   = 'widget card '. $atts['args']['id'];
@@ -223,77 +223,47 @@ class CMB2_Widget_Viewed_Prop extends WP_Widget {
 			$widget .= sprintf('<div class="card-header"><h2 class="card-header-title">%s</h2></div>', $widget_title);
 			$widget .= '<div class="card-content">';
 
-        	if ( $widget_query->have_posts() ) :
-                //$widget .= '<div style="background-color:'. esc_attr( $instance['color'] ) .'">';
-                //$widget .= wpautop( wp_kses_post( $instance['desc'] ) );
-                //$widget .= '</div>';
-                while ( $widget_query->have_posts() ) : $widget_query->the_post();
-                    $this_ID         = get_the_ID();
+                //$this_ID         = get_the_ID();
+                $attached_agents = get_post_meta( get_the_ID(), '_prop_attached_agents' );
+                //pr($attached_agents);
+                foreach ($attached_agents as $agent){
+                    $this_ID = $agent[0];
+                    $data            = get_post_meta($this_ID);
                     $thumb           = get_the_post_thumbnail($this_ID, 'thumbnail', 'class=image is-96x96');
-					$data            = get_post_meta($this_ID);
-					$prop_sale       = ($data['_prop_price_sale'][0]!= 0) ? number_format($data['_prop_price_sale'][0], 0, ',', '.') : '';
-					$prop_rent       = ($data['_prop_price_rent'][0]!= 0) ? number_format($data['_prop_price_rent'][0], 0, ',', '.') : '';
-					$prop_address    = $data['_prop_address'][0];
-					$prop_type       = get_the_terms($post, 'tipo')[0];
-					$prop_currency   = currency()[$data['_prop_currency'][0]];
+                    $title           = get_the_title($this_ID);
+                    $phone           = $data['_agent_phone'][0];
+                    $whats           = $data['_agent_whatsapp'][0];
+                    $email           = $data['_agent_email'][0];
+                    $contact         = $data['_agent_contact'][0];
+                    $type            = get_the_terms($this_ID, 'agent_type')[0];
+                    if($email){
+                        $email_link = sprintf('<a href="mailto:%s">%s</a>', $email, $email);
+                    }
 
-                    /*
-	                if(!$prop_sale && !$prop_rent):
-	                    $val =__('Consultar');
-	                else:
-	                    if($prop_rent):
-	                        $val = '';
-	                        if(isset($_GET['operacion']) && $_GET['operacion'] == 'alquiler'){
-	                            $val = '<strong class="highlight">'.'$'.$prop_rent.'</strong>';
-	                        }else{
-	                            $val = '$'.$prop_rent;
-	                        }
-	                        $val = sprintf('<span class="price rent-price" title="Precio de alquiler">%s</span>', $val);
-	                    endif;
-	                    if($prop_sale && $prop_rent):
-	                        // ' | ';
-	                    endif;
-	                    if($prop_sale):
-	                        $val = '';
-	                        if(isset($_GET['operacion']) && $_GET['operacion'] != 'alquiler'){
-	                            //echo '<strong class="highlight">'.'$'.$prop_sale.'</strong>';
-	                            $val = '<strong class="highlight">'.$prop_currency.' '.$prop_sale.'</strong>';
-	                        }else{
-	                            $val = $prop_currency.' '.$prop_sale;
-	                            //echo '$'.$prop_sale;
-	                        }
-	                        $val = sprintf('<span class="price sale-price" title="Precio de venta">%s</span>', $val);
-	                    endif;
-	                endif;
-                    */
-                    //get_template_part('parts/price','block', $data)
-                    $val     = load_template_part('parts/price','block', $data);
-					$title   = $prop_address ? $prop_address: get_the_title();
-
-                    $widget .= sprintf('<a class="widget-property media" href="%s">', get_the_permalink());
+                    $widget .= sprintf('<div class="widget-agent media" href="%s">', get_the_permalink());
                     $widget .= sprintf('<span class="media-left">%s</span>', $thumb);
                     $widget .= '<span class="media-content">';
-                    $widget .= sprintf('<span class="title is-5">%s</span>',$title);
-                    $widget .= sprintf('<span class="is-block">%s</span>', $val);
-                    $widget .= sprintf('<span class="is-block">%s</span>', $prop_type->name);
+                    $widget .= sprintf('<h5 class="title is-5">%s</h5>', $title);
+                    $widget .= $instance['contact_type'] ? sprintf('<span class="subtitle is-5">%s</span>', $type->name) : '';
+                    $widget .= '<ul class="list-vertical">';
+                    $widget .= $phone && $instance['contact_phone'] ? sprintf('<li class="icon-text"><i class="icon material-icons">phone</i><span>%s</span></li>', $phone) : '';
+                    $widget .= $whats && $instance['contact_wa'] ? sprintf('<li class="icon-text"><i class="icon material-icons">whatsapp</i><span>%s</span></li>', $whats) : '';
+                    $widget .= $email && $instance['contact_mail'] ? sprintf('<li class="icon-text"><i class="icon material-icons">email</i><span>%s</span></li>', $email_link) : '';
+                    $widget .= '</ul>';
                     $widget .= '</span>';
-                    $widget .= '</a>';
-					 wp_reset_query();
-        		endwhile;
-            endif;
-			//wp_reset_postdata();
-            $widget .= '</div>';
-            $widget .= $atts['after_widget'];
-            $widget .= '</div>';
+                    $widget .= '</div>';
+                    //pr($instance);
+                    if($instance['contact_check']){
+                        $widget .= '<hr />';
+                        $widget .= do_shortcode($contact);
+                    }
 
-
-			// Before widget hook
-
-
-			// After widget hook
+                }
+                $widget .= '</div>';
+                $widget .= $atts['after_widget'];
+                $widget .= '</div>';
 
 			wp_cache_set( $atts['cache_id'], $widget, 'widget', WEEK_IN_SECONDS );
-
 		}
 
 		return $widget;
@@ -378,8 +348,8 @@ class CMB2_Widget_Viewed_Prop extends WP_Widget {
 /**
  * Register this widget with WordPress.
  */
-function register_wds_widget_viewed_prop() {
-	register_widget( 'CMB2_Widget_Viewed_Prop' );
+function register_cmb2_widget_agent() {
+	register_widget( 'CMB2_Widget_Agent' );
 }
-add_action( 'widgets_init', 'register_wds_widget_viewed_prop' );
+add_action( 'widgets_init', 'register_cmb2_widget_agent' );
 ?>
