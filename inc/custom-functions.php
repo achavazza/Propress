@@ -323,4 +323,16 @@ function wrap_embed_with_div($html, $url, $attr) {
 }
 add_filter('embed_oembed_html', 'wrap_embed_with_div', 10, 3);
 
+
+/* levatantar template part pero no imprimirla
+====================================
+*/
+function load_template_part($template_name, $part_name=null, $args) {
+    ob_start();
+    get_template_part($template_name, $part_name, $args);
+    $var = ob_get_contents();
+    ob_end_clean();
+    return $var;
+}
+
 ?>

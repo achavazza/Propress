@@ -6,6 +6,6 @@
 </div>
 */ ?>
 
-<div class="navigation">
+<nav class="pagination" role="navigation" aria-label="pagination">
 <?php echo pagenavi(); ?>
-</div>
+</nav>

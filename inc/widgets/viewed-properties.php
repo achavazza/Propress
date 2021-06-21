@@ -215,11 +215,12 @@ class CMB2_Widget_Viewed_Prop extends WP_Widget {
 			$widget_title = ( $instance['title'] ) ? $atts['before_title'] . esc_html( $instance['title'] ) . $atts['after_title'] : '';
 
 			$id      = $atts['args']['widget_id'];
-			$class   = 'widget '. $atts['args']['id'];
+			$class   = 'widget card '. $atts['args']['id'];
 
             $widget .= sprintf('<div id="%s" class="%s">', $id, $class);
             $widget .= $atts['before_widget'];
-			$widget .= sprintf('<h2>%s</h2>', $widget_title);
+			$widget .= sprintf('<div class="card-header"><h2 class="card-header-title">%s</h2></div>', $widget_title);
+			$widget .= '<div class="card-content">';
 
         	if ( $widget_query->have_posts() ) :
                 //$widget .= '<div style="background-color:'. esc_attr( $instance['color'] ) .'">';
@@ -227,7 +228,7 @@ class CMB2_Widget_Viewed_Prop extends WP_Widget {
                 //$widget .= '</div>';
                 while ( $widget_query->have_posts() ) : $widget_query->the_post();
                     $this_ID         = get_the_ID();
-                    $thumb           = get_the_post_thumbnail($this_ID, 'thumbnail');
+                    $thumb           = get_the_post_thumbnail($this_ID, 'thumbnail', 'class=image is-96x96');
 					$data            = get_post_meta($this_ID);
 					$prop_sale       = ($data['_prop_price_sale'][0]!= 0) ? number_format($data['_prop_price_sale'][0], 0, ',', '.') : '';
 					$prop_rent       = ($data['_prop_price_rent'][0]!= 0) ? number_format($data['_prop_price_rent'][0], 0, ',', '.') : '';
@@ -235,7 +236,7 @@ class CMB2_Widget_Viewed_Prop extends WP_Widget {
 					$prop_type       = get_the_terms($post, 'tipo')[0];
 					$prop_currency   = currency()[$data['_prop_currency'][0]];
 
-
+                    /*
 	                if(!$prop_sale && !$prop_rent):
 	                    $val =__('Consultar');
 	                else:
@@ -249,7 +250,7 @@ class CMB2_Widget_Viewed_Prop extends WP_Widget {
 	                        $val = sprintf('<span class="price rent-price" title="Precio de alquiler">%s</span>', $val);
 	                    endif;
 	                    if($prop_sale && $prop_rent):
-	                        echo ' | ';
+	                        // ' | ';
 	                    endif;
 	                    if($prop_sale):
 	                        $val = '';
@@ -263,20 +264,24 @@ class CMB2_Widget_Viewed_Prop extends WP_Widget {
 	                        $val = sprintf('<span class="price sale-price" title="Precio de venta">%s</span>', $val);
 	                    endif;
 	                endif;
-					$title = $prop_address ? $prop_address: get_the_title();
+                    */
+                    //get_template_part('parts/price','block', $data)
+                    $val     = load_template_part('parts/price','block', $data);
+					$title   = $prop_address ? $prop_address: get_the_title();
 
                     $widget .= sprintf('<a class="widget-property media" href="%s">', get_the_permalink());
-                    $widget .= sprintf('<span class="img">%s</span>', $thumb);
-                    $widget .= '<span class="bd">';
-                    $widget .= sprintf('<span class="h5">%s</span>',$title);
-                    $widget .= sprintf('<span class="block">%s</span>', $val);
-                    $widget .= sprintf('<span class="block">%s</span>', $prop_type->name);
+                    $widget .= sprintf('<span class="media-left">%s</span>', $thumb);
+                    $widget .= '<span class="media-content">';
+                    $widget .= sprintf('<span class="title is-5">%s</span>',$title);
+                    $widget .= sprintf('<span class="is-block">%s</span>', $val);
+                    $widget .= sprintf('<span class="is-block">%s</span>', $prop_type->name);
                     $widget .= '</span>';
                     $widget .= '</a>';
 					 wp_reset_query();
         		endwhile;
             endif;
 			//wp_reset_postdata();
+            $widget .= '</div>';
             $widget .= $atts['after_widget'];
             $widget .= '</div>';
 

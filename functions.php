@@ -262,7 +262,7 @@ require_once 'inc/custom-functions.php';
         );
         return $services;
     }
-    
+
 
 
 
@@ -339,6 +339,7 @@ require_once 'inc/custom-functions.php';
      }
     add_action('widgets_init', 'unregister_default_wp_widgets', 1);
 
+    require_once ('inc/widgets/widget-example.php');
     require_once ('inc/widgets/viewed-properties.php');
     require_once 'inc/renderMap.php';
 
