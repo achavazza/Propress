@@ -22,13 +22,13 @@ function the_breadcrumb() {
             }
             echo '<li class="is-active">';
 			echo '<a href="#">';
-			the_title();
+			    the_title();
             echo '</a>';
 			echo '</li>';
 		} elseif (is_page()) {
 			echo '<li class="is-active">';
 			echo '<a href="#">';
-    			echo the_title();
+    			the_title();
 			echo '</a>';
 			echo '</li>';
 		}
@@ -54,12 +54,12 @@ function the_breadcrumb() {
     }
     */
 	if (is_search()) {
-        echo"<li>";
+        echo '<li class="is-active">';
         $search = get_search_query();
         if(isset($search) && !empty($search)){
-            echo "<span>Búsqueda de ". get_search_query().'</span>';
+            echo '<a href="#">Búsqueda de '. get_search_query().'</a>';
         }else{
-            echo "<span>Buscar</span>";
+            echo '<a href="#">Buscar</a>';
         }
         echo'</li>';
     }

@@ -1,8 +1,8 @@
 <?php get_header(); ?>
 <div class="container">
 	<?php the_breadcrumb(); ?>
-	<div class="row">
-		<div class="col-md-8">
+	<div class="columns">
+		<div class="column is-three-quarters">
 			<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 				<div class="post" id="post-<?php the_ID(); ?>">
 					<div class="mb-2">
@@ -18,7 +18,7 @@
 			<?php endwhile; endif; ?>
 			<?php include('inc/gallery.php'); ?>
 		</div>
-		<div class="col-md-4">
+		<div class="column is-one-quarter">
 			<?php get_sidebar(); ?>
 		</div>
 	</div>

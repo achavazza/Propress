@@ -6,7 +6,7 @@
 </div>
 <div class="container">
 	<div class="columns">
-		<div class="column is-two-thirds">
+		<div class="column is-three-quarters">
 			<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
 				<?php get_template_part('parts/blog','list') ?>
@@ -18,7 +18,7 @@
 				<h2><?php echo _e('No encontramos ninguna Noticia :(', 'tnb') ?></h2>
 			<?php endif; ?>
 		</div>
-		<div class="column is-one-third">
+		<div class="column is-one-quarter">
 			<?php get_sidebar(); ?>
 		</div>
 	</div>
