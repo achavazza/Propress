@@ -57,52 +57,53 @@
 
 			<nav class="navbar" role="navigation" aria-label="main navigation">
 				<div class="container">
-				<div class="navbar-brand">
-					<a class="navbar-item" id="logo" href="<?php echo get_option('home').'/'; ?>">
-						<img src="<?php echo get_template_directory_uri().'/img/logo.png' ?>" title="<?php bloginfo('name'); ?>" alt="<?php bloginfo('name'); ?>" />
-					</a>
-					<a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="primary-menu">
-						<span aria-hidden="true"></span>
-						<span aria-hidden="true"></span>
-						<span aria-hidden="true"></span>
-					</a>
-				</div>
+    				<div class="navbar-brand">
+    					<a class="navbar-item" id="logo" href="<?php echo get_option('home').'/'; ?>">
+    						<img src="<?php echo get_template_directory_uri().'/img/logo.png' ?>" title="<?php bloginfo('name'); ?>" alt="<?php bloginfo('name'); ?>" />
+    					</a>
+    					<a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="primary-menu">
+    						<span aria-hidden="true"></span>
+    						<span aria-hidden="true"></span>
+    						<span aria-hidden="true"></span>
+    					</a>
+    				</div>
 
-				<div class="navbar-end">
-                    <?php
-    				wp_nav_menu([
-    					'theme_location'    => 'header-menu',
-    		            'depth'             => 0,
-    		            'container'         => false,
-    		            // 'items_wrap'     => 'div',
-    		            'menu_class'        => 'navbar-menu',
-    		            'menu_id'           => 'primary-menu',
-    		            'after'             => "</div>",
-    		            'walker'            => new Navwalker()
-    					//'menu'            => 'top',
-    					//'theme_location'  => 'header-menu',
-    					//'container'       => 'div',
-    					//'container_id'    => 'bs4navbar',
-    					//'container_class' => 'collapse navbar-collapse ml-auto',
-    					//'menu_id'         => false,
-    					//'menu_class'      => 'navbar-nav ml-auto text-right',
-    					//'depth'           => 2,
-    					//'fallback_cb'     => 'bs4navwalker::fallback',
-    					//'walker'          => new bs4navwalker()
-    				]);
-    				?>
-                    <?php /*
-					<div class="navbar-item">
-						<div class="buttons">
-							<a class="button is-primary">
-								<strong>Sign up</strong>
-							</a>
-							<a class="button is-light">
-								Log in
-							</a>
-						</div>
-					</div>
-                    */ ?>
+    				<div class="navbar-end">
+                        <?php
+        				wp_nav_menu([
+        					'theme_location'    => 'header-menu',
+        		            'depth'             => 0,
+        		            'container'         => false,
+        		            // 'items_wrap'     => 'div',
+        		            'menu_class'        => 'navbar-menu',
+        		            'menu_id'           => 'primary-menu',
+        		            'after'             => "</div>",
+        		            'walker'            => new Navwalker()
+        					//'menu'            => 'top',
+        					//'theme_location'  => 'header-menu',
+        					//'container'       => 'div',
+        					//'container_id'    => 'bs4navbar',
+        					//'container_class' => 'collapse navbar-collapse ml-auto',
+        					//'menu_id'         => false,
+        					//'menu_class'      => 'navbar-nav ml-auto text-right',
+        					//'depth'           => 2,
+        					//'fallback_cb'     => 'bs4navwalker::fallback',
+        					//'walker'          => new bs4navwalker()
+        				]);
+        				?>
+                        <?php /*
+    					<div class="navbar-item">
+    						<div class="buttons">
+    							<a class="button is-primary">
+    								<strong>Sign up</strong>
+    							</a>
+    							<a class="button is-light">
+    								Log in
+    							</a>
+    						</div>
+    					</div>
+                        */ ?>
+	                </div>
 				</div>
 
 	        </nav>

@@ -1,9 +1,9 @@
 <?php
 /*
-Template Name: Home
+Template Name: Home - Solo propiedades
 */
 get_header();
-//get_template_part('parts/home','slider'); ?>
+?>
 <?php
 $home  = get_option('page_on_front');
 //$img   = get_the_post_thumbnail_url($home, 'slide');
@@ -23,7 +23,7 @@ if($img){
 		<?php echo get_search_form(); ?>
 	</div>
 </div>
-
+<?php /*
 <?php if (have_posts()) : ?>
 <div class="section">
     <div class="container">
@@ -36,7 +36,7 @@ if($img){
         <?php endwhile;?>
     </div>
 </div>
- <?php endif; ?>
+<?php endif; ?>
 
 <?php
 $args = array(
@@ -75,8 +75,9 @@ if ( $loop->have_posts() ) :
 </div>
 <?php endif; ?>
 <?php wp_reset_postdata(); ?>
-	<?php //if (get_option( 'page_for_posts' )): ?>
-	<?php //endif; ?>
+<?php //if (get_option( 'page_for_posts' )): ?>
+<?php //endif; ?>
+*/ ?>
 
 <?php
 $args = array(

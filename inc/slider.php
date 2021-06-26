@@ -42,13 +42,6 @@ if( $slider_query->have_posts() ):
     endwhile;
     //echo '</div>';
 echo '</div>';
-else:
-    echo '<div class="conatainer">';
-    echo sprintf('<div id="main-thumbnail">');
-    echo get_the_post_thumbnail(get_the_ID(),'large');
-    echo '</div>';
-    echo '</div>';
-endif;
 
 if($slider_props['slider_term_animated'][0]){
     echo '<script>var animated = true</script>';
@@ -62,6 +55,16 @@ if($slider_props['slider_term_time'][0]){
 };
 
 wp_enqueue_script('siema-init');
+
+
+else:
+    echo '<div class="container">';
+    echo sprintf('<div id="main-thumbnail">');
+    echo get_the_post_thumbnail(get_the_ID(),'large');
+    echo '</div>';
+    echo '</div>';
+endif;
+
 //wp_enqueue_script('slider');
 ?>
 <?php //pr(get_post_meta( get_the_ID(), 'extra_image_position', true )); ?>
