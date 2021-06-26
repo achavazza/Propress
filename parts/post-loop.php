@@ -98,8 +98,8 @@ $statuses        = get_the_terms($post->ID, 'status')[0];
             <?php endif; ?>
         </div>
     </div>
-    <div class="card-footer">
-        <div class="card-footer-item is-justify-content-flex-start is-flex-grow-2">
+    <div class="card-footer is-align-items-center card-footer-padding">
+        <div class="is-justify-content-flex-start is-flex-grow-2">
             <div class="level">
             <ul class="level-left">
                 <?php if(isset($prop_dormrooms)):
@@ -155,7 +155,7 @@ $statuses        = get_the_terms($post->ID, 'status')[0];
             </ul>
             */ ?>
         </div>
-        <a class="card-footer-item" href="<?php the_permalink() ?>">
+        <a class="button is-primary" href="<?php the_permalink() ?>">
             <?php echo __('Ver Más') ?>
         </a>
     </div>

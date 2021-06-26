@@ -51,8 +51,8 @@ var_dump($prop_sale);
             </span>
         </a>
     </div>
-     <div class="card-footer">
-        <a class="card-footer-item" href="<?php the_permalink() ?>">
+     <div class="card-footer card-footer-padding is-justify-content-end">
+        <a class="button is-primary" href="<?php the_permalink() ?>">
             <?php echo __('Ver Más') ?>
         </a>
     </div>

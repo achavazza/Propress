@@ -1,10 +1,10 @@
 <?php get_header(); ?>
-<div class="section section-primary">
-	<div class="grid">
+<div class="search-panel block">
+	<div class="container">
 		<?php echo get_search_form(); ?>
 	</div>
 </div>
-<div class="grid">
+<div class="container">
 	<?php if (have_posts()) : ?>
 		<?php
 		$post = $posts[0]; // Hack. Set $post so that the_date() works.
@@ -24,16 +24,11 @@
 			echo ('<h2>Blog</h2>');
 		} ?>
 
-		<div class="row">
-			<div class="quad-3">
-				<?php //include (TEMPLATEPATH . '/inc/nav.php' ); ?>
-
-				<div class="row">
+		<div class="columns">
+			<div class="column is-three-quarters">
 				<?php $i = 0; ?>
 				<?php while (have_posts()) : the_post(); ?>
-					<div class="quad-2">
-					<?php get_template_part('parts/post','loop') ?>
-					</div>
+					<?php get_template_part('parts/post','list') ?>
 					<?php /*
 					<div <?php post_class() ?>>
 
@@ -46,14 +41,12 @@
 					</div>
 					*/ ?>
 					<?php $i++; ?>
-					<?php echo ($i % 2 == 0) ? '</div><div class="row">':'' ?>
 				<?php endwhile; ?>
-				</div>
 				<?php include (TEMPLATEPATH . '/inc/nav.php' ); ?>
 
 			<?php else : ?>
 
-				<div class="panel">
+				<div class="card">
 					<h2 class="title">:( No encontramos propiedades</h2>
 					<p>
 						Por favor, vuelva al inicio
@@ -64,7 +57,7 @@
 
 			<?php endif; ?>
 		</div>
-		<div class="quad-1">
+		<div class="column is-one-quarter sticky-container">
 			<?php get_sidebar(); ?>
 		</div>
 	</div>

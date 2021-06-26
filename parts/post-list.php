@@ -97,68 +97,68 @@ $statuses        = get_the_terms($post->ID, 'status')[0];
                                 </div>
                             <?php endif; ?>
                         </div>
-
-                        <div class="card-footer">
-                            <div class="card-footer-item is-justify-content-flex-start is-flex-grow-2">
-                                <div class="level">
-                                    <ul class="level-left">
-                                        <?php if(isset($prop_dormrooms)):
-                                            $dorms = intval($prop_dormrooms);
-                                            ?>
-                                            <li class="level-item">
-                                                <span class="icon-text">
-                                                    <span class="icon material-icons icon-small" title="<?php echo sprintf(ngettext("%d Dormitorio", "%d Dormitorios", $dorms), $dorms); ?>">
-                                                        hotel
-                                                    </span>
-                                                    <span><?php echo sprintf("%d", $dorms); ?></span>
+                    </div>
+                    <div class="card-footer is-align-items-center card-footer-padding">
+                        <?php /* <div class="card-footer-item is-justify-content-flex-start is-flex-grow-2"> */  ?>
+                        <div class="is-justify-content-flex-start is-flex-grow-2">
+                            <div class="level">
+                                <ul class="level-left">
+                                    <?php if(isset($prop_dormrooms)):
+                                        $dorms = intval($prop_dormrooms);
+                                        ?>
+                                        <li class="level-item">
+                                            <span class="icon-text">
+                                                <span class="icon material-icons icon-small" title="<?php echo sprintf(ngettext("%d Dormitorio", "%d Dormitorios", $dorms), $dorms); ?>">
+                                                    hotel
                                                 </span>
-                                            </li>
-                                        <?php endif; ?>
-                                        <?php
-                                        if(isset($prop_bathrooms)):
-                                            $baths = intval($prop_bathrooms);
-                                            ?>
-                                            <li class="level-item">
-                                                <span class="icon-text">
-                                                    <span class="icon material-icons icon-small" title="<?php echo sprintf(ngettext("%d Baño", "%d Baños", $baths), $baths);?>">
-                                                        bathtub
-                                                    </span>
-                                                    <span><?= sprintf("%d", $baths);?></span>
+                                                <span><?php echo sprintf("%d", $dorms); ?></span>
+                                            </span>
+                                        </li>
+                                    <?php endif; ?>
+                                    <?php
+                                    if(isset($prop_bathrooms)):
+                                        $baths = intval($prop_bathrooms);
+                                        ?>
+                                        <li class="level-item">
+                                            <span class="icon-text">
+                                                <span class="icon material-icons icon-small" title="<?php echo sprintf(ngettext("%d Baño", "%d Baños", $baths), $baths);?>">
+                                                    bathtub
                                                 </span>
-                                            </li>
-                                        <?php endif; ?>
-                                    </ul>
-                                </div>
-                                <?php /*
-                                <ul class="list-inline">
-                                <?php if(isset($prop_dormrooms)):
-                                $dorms = intval($prop_dormrooms);
-                                ?>
-                                <li class="icon-text">
-                                <span class="icon material-icons icon-small" title="<?php echo sprintf(ngettext("%d Dormitorio", "%d Dormitorios", $dorms), $dorms); ?>">
-                                hotel
-                                </span>
-                                <span><?php echo sprintf("%d", $dorms); ?></span>
-                                </li>
-                                <?php endif; ?>
-                                <?php
-                                if(isset($prop_bathrooms)):
-                                $baths = intval($prop_bathrooms);
-                                ?>
-                                <li class="icon-text">
-                                <span class="icon material-icons icon-small" title="<?php echo sprintf(ngettext("%d Baño", "%d Baños", $baths), $baths);?>">
-                                bathtub
-                                </span>
-                                <span><?= sprintf("%d", $baths);?></span>
-                                </li>
-                                <?php endif; ?>
+                                                <span><?= sprintf("%d", $baths);?></span>
+                                            </span>
+                                        </li>
+                                    <?php endif; ?>
                                 </ul>
-                                */ ?>
                             </div>
-                            <a class="card-footer-item" href="<?php the_permalink() ?>">
-                                <?php echo __('Ver Más') ?>
-                            </a>
+                            <?php /*
+                            <ul class="list-inline">
+                            <?php if(isset($prop_dormrooms)):
+                            $dorms = intval($prop_dormrooms);
+                            ?>
+                            <li class="icon-text">
+                            <span class="icon material-icons icon-small" title="<?php echo sprintf(ngettext("%d Dormitorio", "%d Dormitorios", $dorms), $dorms); ?>">
+                            hotel
+                            </span>
+                            <span><?php echo sprintf("%d", $dorms); ?></span>
+                            </li>
+                            <?php endif; ?>
+                            <?php
+                            if(isset($prop_bathrooms)):
+                            $baths = intval($prop_bathrooms);
+                            ?>
+                            <li class="icon-text">
+                            <span class="icon material-icons icon-small" title="<?php echo sprintf(ngettext("%d Baño", "%d Baños", $baths), $baths);?>">
+                            bathtub
+                            </span>
+                            <span><?= sprintf("%d", $baths);?></span>
+                            </li>
+                            <?php endif; ?>
+                            </ul>
+                            */ ?>
                         </div>
+                        <a class="button is-primary" href="<?php the_permalink() ?>">
+                            <?php echo __('Ver Más') ?>
+                        </a>
                     </div>
                 </div>
             </div>
