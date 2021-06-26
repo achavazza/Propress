@@ -1,4 +1,4 @@
-<div id="sidebar">
+<div id="sidebar" class="is-sticky">
     <?php if (function_exists('dynamic_sidebar') && dynamic_sidebar('Sidebar Propiedad Widgets')) : else : ?>
 
         <!-- All this stuff in here only shows up if you DON'T have any widgets active in this zone -->

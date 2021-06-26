@@ -1,13 +1,18 @@
 // compileCompressed: ../style.min.css
+$blue:         hsl(217, 71%,  53%);
+$primary: $blue;
 
 @charset "utf-8";
 @import "../../node_modules/bulma/bulma.sass";
 
 @import "./plugins/photoswipe/_photoswipe.scss";
 @import "./plugins/photoswipe/_photoswipe-ui.scss";
+//@import "_initial-variables";
+//@import "_derived-variables";
 @import "_slider";
 @import "_featured";
 @import "_form";
+@import "_fixing";
 @import "_style";
 
 /*
