@@ -33,7 +33,7 @@ class CMB2_Widget_Agent extends WP_Widget {
 		);
 
 		self::$defaults = array(
-			'title'         => 'Agentes asociados',
+			'title'         => '',
 			'desc'          => '',
             'contact_type'  => null,
             'contact_check' => null,
@@ -220,7 +220,9 @@ class CMB2_Widget_Agent extends WP_Widget {
 
             $widget .= sprintf('<div id="%s" class="%s">', $id, $class);
             $widget .= $atts['before_widget'];
-			$widget .= sprintf('<div class="card-header"><h2 class="card-header-title">%s</h2></div>', $widget_title);
+            if($widget_title){
+	            $widget .= sprintf('<div class="card-header"><h2 class="card-header-title">%s</h2></div>', $widget_title);
+            }
 			$widget .= '<div class="card-content">';
 
                 //$this_ID         = get_the_ID();
@@ -229,7 +231,7 @@ class CMB2_Widget_Agent extends WP_Widget {
                 foreach ($attached_agents as $agent){
                     $this_ID = $agent[0];
                     $data            = get_post_meta($this_ID);
-                    $thumb           = get_the_post_thumbnail($this_ID, 'thumbnail', 'class=image is-96x96');
+                    $thumb           = get_the_post_thumbnail($this_ID, 'thumbnail', 'class=image is-64x64');
                     $title           = get_the_title($this_ID);
                     $phone           = $data['_agent_phone'][0];
                     $whats           = $data['_agent_whatsapp'][0];
@@ -243,16 +245,17 @@ class CMB2_Widget_Agent extends WP_Widget {
                     $widget .= sprintf('<div class="widget-agent media" href="%s">', get_the_permalink());
                     $widget .= sprintf('<span class="media-left">%s</span>', $thumb);
                     $widget .= '<span class="media-content">';
-                    $widget .= sprintf('<h5 class="title is-5">%s</h5>', $title);
-                    $widget .= $instance['contact_type'] ? sprintf('<span class="subtitle is-5">%s</span>', $type->name) : '';
+                    $widget .= sprintf('<h5 class="title is-6 mb-1">%s</h5>', $title);
+                    $widget .= $instance['contact_type'] ? sprintf('<span class="">%s</span>', $type->name) : '';
+                    $widget .= '</span>';
+                    $widget .= '</div>';
                     $widget .= '<ul class="list-vertical">';
                     $widget .= $phone && $instance['contact_phone'] ? sprintf('<li class="icon-text"><i class="icon material-icons">phone</i><span>%s</span></li>', $phone) : '';
                     $widget .= $whats && $instance['contact_wa'] ? sprintf('<li class="icon-text"><i class="icon material-icons">whatsapp</i><span>%s</span></li>', $whats) : '';
                     $widget .= $email && $instance['contact_mail'] ? sprintf('<li class="icon-text"><i class="icon material-icons">email</i><span>%s</span></li>', $email_link) : '';
                     $widget .= '</ul>';
-                    $widget .= '</span>';
-                    $widget .= '</div>';
                     //pr($instance);
+
                     if($instance['contact_check']){
                         $widget .= '<hr />';
                         $widget .= do_shortcode($contact);

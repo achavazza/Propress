@@ -36,7 +36,7 @@ if( $slider_query->have_posts() ):
 
         $bg      = get_the_post_thumbnail_url(get_the_ID(),'full');
         $props   = 'background-image:url('.$bg.');';
-        $content = sprintf('<div class="content %s">%s</div>', $content_align, get_the_content(get_the_ID()));
+        $content = sprintf('<div class="container"><div class="content %s">%s</div></div>', $content_align, get_the_content(get_the_ID()));
 
         echo sprintf('<div class="slide-item" style="%s">%s</div>', $props, $content);
     endwhile;
@@ -48,13 +48,12 @@ if($slider_props['slider_term_animated'][0]){
 };
 echo '<script>var loop;</script>';
 if($slider_props['slider_term_loop'][0]){
-    echo '<script>loop = true</script>';
+    echo '<script>var loop = true</script>';
 };
 if($slider_props['slider_term_time'][0]){
     echo '<script>var time = '.intval($slider_props['slider_term_time'][0]).'</script>';
 };
 
-wp_enqueue_script('siema-init');
 
 
 else:
@@ -64,6 +63,7 @@ else:
     echo '</div>';
     echo '</div>';
 endif;
+wp_enqueue_script('siema-init');
 
 //wp_enqueue_script('slider');
 ?>

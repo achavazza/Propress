@@ -8,9 +8,13 @@
     > div{
         position: absolute;
     }
-    div{
+    > div,
+    > div > div,
+    .slide-item{
         height: 100% !important;
     }
+
+
 
     .slide-item{
         border-radius: 2px;
@@ -24,7 +28,7 @@
         .content{
             display: flex;
             box-sizing: border-box;
-            padding: 5%;
+            //padding: 5%;
             align-items: center;
             justify-content: center;
             height: 100%;
