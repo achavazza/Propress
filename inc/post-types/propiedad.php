@@ -396,6 +396,7 @@ function cmb2_prop_base() {
             'no_terms_text' => __('Lo sentimos, no encontramos un tipo de operación, agregue una') // Change default text. Default: "No terms"
         ),
     ) );
+    /*
     $cmb->add_field( array(
         'name'     => 'Valor Alquiler',
         'desc'     => '(Solo se muestra en caso de que la operación sea alquiler)',
@@ -415,7 +416,7 @@ function cmb2_prop_base() {
         'id'       => $prefix .'price_sale',
         'type' => 'text',
         'attributes' => array(
-            'type' => 'number',
+            'type'    => 'number',
             'pattern' => '\d*',
         ),
         'sanitization_cb' => 'absint',
@@ -423,11 +424,42 @@ function cmb2_prop_base() {
         //'escape_cb'       => 'intval',
         //'type'     => 'text_money',
     ) );
+    */
+    /*
     $cmb->add_field( array(
         'name'     => 'Moneda',
         'id'       => $prefix .'currency',
         'type'     => 'select',
         'options'  => currency(),
+    ) );
+    */
+    $cmb->add_field( array(
+        'name' => 'Valor Alquiler',
+		'desc'     => '(Solo se muestra en caso de que la operación sea alquiler)',
+		'id'       => $prefix .'price_rent',
+		'type' => 'currency_price',
+        /*
+        'attributes' => array(
+            'type'    => 'number',
+            'pattern' => '\d*',
+        ),
+        'sanitization_cb' => 'absint',
+        'escape_cb'       => 'absint',
+        */
+    ) );
+    $cmb->add_field( array(
+        'name' => 'Valor Venta',
+		'desc'     => '(Solo se muestra en caso de que la operación sea venta)',
+		'id'       => $prefix .'price_sale',
+		'type' => 'currency_price',
+        /*
+        'attributes' => array(
+            'type'    => 'number',
+            'pattern' => '\d*',
+        ),
+        'sanitization_cb' => 'absint',
+        'escape_cb'       => 'absint',
+        */
     ) );
 
     /*

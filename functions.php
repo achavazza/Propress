@@ -44,6 +44,9 @@ if ( file_exists(CMB_PATH . '/init.php' ) ) {
     //Attached agents
     require_once (CMB_PLUGINS . '/CMB2-attached-posts/cmb2-attached-posts-field.php');
 
+
+    require_once (CMB_PLUGINS . '/CMB2-currency-price-field/CMB2-currency-price-field.php');
+
     //metaboxes list
     //include('inc/custom-metaboxes/contact.php');
     //include('inc/post-types/internal.php');

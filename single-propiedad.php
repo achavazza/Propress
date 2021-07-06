@@ -12,7 +12,6 @@ get_header();
 
 $data              = get_post_meta($post->ID);
 
-
 $prop_title        = get_the_title();
 $prop_img          = get_the_post_thumbnail_url(null, 'thumbnail');
 $prop_address      = $data['_prop_address'][0];
@@ -79,7 +78,8 @@ $contact_form      = get_option('tnb_extra_options')['tnb_options_contact_form']
                         //$args = $data;
                         //pase todos los contenidos a un template
                         //get_template_part('parts/price','block', $data)
-                        echo price_block($data);
+                        //echo price_block($data, $post->ID);
+                        echo price_block($post->ID);
                         ?>
                     </span>
 					</div>

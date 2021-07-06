@@ -268,7 +268,8 @@ class CMB2_Widget_Viewed_Prop extends WP_Widget {
                     */
                     //get_template_part('parts/price','block', $data)
                     //echo price_block($data);
-                    $val     = price_block($data);
+                    //$val     = price_block($data);
+                    $val     = price_block($this_ID);
 					$title   = $prop_address ? $prop_address: get_the_title();
 
                     $widget .= sprintf('<a class="widget-property media" href="%s">', get_the_permalink());

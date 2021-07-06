@@ -50,7 +50,8 @@ $prop_loc        = get_location($post);
                 //$args = $args;
                 //pase todos los contenidos a un template
                 //get_template_part('parts/price','block', $data)
-                echo price_block($data);
+                //echo price_block($data);
+                echo price_block($post->ID);
                 ?>
             </span>
             <div class="level mb-3">
