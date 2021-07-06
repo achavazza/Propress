@@ -49,7 +49,9 @@ $prop_loc        = get_location($post);
                 <?php
                 //$args = $args;
                 //pase todos los contenidos a un template
-                get_template_part('parts/price','block', $args) ?>
+                //get_template_part('parts/price','block', $data)
+                echo price_block($data);
+                ?>
             </span>
             <div class="level mb-3">
                 <ul class="level-left">

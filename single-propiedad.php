@@ -78,7 +78,9 @@ $contact_form      = get_option('tnb_extra_options')['tnb_options_contact_form']
                         <?php
                         //$args = $data;
                         //pase todos los contenidos a un template
-                        get_template_part('parts/price','block', $data) ?>
+                        //get_template_part('parts/price','block', $data)
+                        echo price_block($data);
+                        ?>
                     </span>
 					</div>
                     <div class="media-right">

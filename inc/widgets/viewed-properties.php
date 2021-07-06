@@ -231,11 +231,11 @@ class CMB2_Widget_Viewed_Prop extends WP_Widget {
                     $this_ID         = get_the_ID();
                     $thumb           = get_the_post_thumbnail($this_ID, 'thumbnail', 'class=image is-96x96');
 					$data            = get_post_meta($this_ID);
-					$prop_sale       = ($data['_prop_price_sale'][0]!= 0) ? number_format($data['_prop_price_sale'][0], 0, ',', '.') : '';
-					$prop_rent       = ($data['_prop_price_rent'][0]!= 0) ? number_format($data['_prop_price_rent'][0], 0, ',', '.') : '';
+					//$prop_sale       = ($data['_prop_price_sale'][0]!= 0) ? number_format($data['_prop_price_sale'][0], 0, ',', '.') : '';
+					//$prop_rent       = ($data['_prop_price_rent'][0]!= 0) ? number_format($data['_prop_price_rent'][0], 0, ',', '.') : '';
 					$prop_address    = $data['_prop_address'][0];
 					$prop_type       = get_the_terms($post, 'tipo')[0];
-					$prop_currency   = currency()[$data['_prop_currency'][0]];
+					//$prop_currency   = currency()[$data['_prop_currency'][0]];
 
                     /*
 	                if(!$prop_sale && !$prop_rent):
@@ -267,7 +267,8 @@ class CMB2_Widget_Viewed_Prop extends WP_Widget {
 	                endif;
                     */
                     //get_template_part('parts/price','block', $data)
-                    $val     = load_template_part('parts/price','block', $data);
+                    //echo price_block($data);
+                    $val     = price_block($data);
 					$title   = $prop_address ? $prop_address: get_the_title();
 
                     $widget .= sprintf('<a class="widget-property media" href="%s">', get_the_permalink());

@@ -75,6 +75,10 @@ require_once 'inc/admin/theme-options-sub.php';
 require_once 'inc/custom-functions.php';
 
 
+require_once 'inc/WDS-Simple-Page-Builder/wds-simple-page-builder.php';
+
+
+
 
     /*
      * INIT
@@ -206,6 +210,10 @@ require_once 'inc/custom-functions.php';
     require_once 'inc/the_search_string.php';
     require_once 'inc/pagenavi.php';
     require_once 'inc/breadcrumb.php';
+
+
+    //require_once(get_template_directory().'/inc/price-block.php');
+    require_once 'inc/price-block.php';
 
     /*
      * Cunstom frontend functions

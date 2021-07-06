@@ -82,7 +82,10 @@ $statuses        = get_the_terms($post->ID, 'status')[0];
                         <?php
                         //$args = $data;
                         //pase todos los contenidos a un template
-                        get_template_part('parts/price','block', $data) ?>
+                        //get_template_part('parts/price','block', $data)
+                        echo price_block($data);
+                        ?>
+
                     </a>
                 </div>
             </div>
