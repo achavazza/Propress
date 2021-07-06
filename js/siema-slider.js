@@ -1,11 +1,10 @@
-
 ($(function(){
 
     if (loop === null){
         loop = false
     }
     var mySiema = new Siema({
-        selector: '#slider',
+        selector: '#main-slider',
         duration: 500,
         easing: 'ease-out',
         perPage: 1,

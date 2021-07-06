@@ -128,14 +128,14 @@ require_once 'inc/custom-functions.php';
         wp_register_script('jquery'       , get_template_directory_uri().'/js/jquery.slim.min.js', array(), '3.5.1', true);
         //wp_register_script('bootstrap'    , get_template_directory_uri().'/js/bootstrap.bundle.min.js', array('jquery'), '5.0.0-alpha1', true);
 
-        wp_register_script('photoswipe'   , get_template_directory_uri().'/js/plugins/photoswipe.min.js', array(), '4.1.3', true);
-        wp_register_script('photoswipe-ui' , get_template_directory_uri().'/js/plugins/photoswipe-ui-default.min.js', array('photoswipe'), '4.1.3', true);
+        wp_register_script('photoswipe'        , get_template_directory_uri().'/js/plugins/photoswipe.min.js', array(), '4.1.3', true);
+        wp_register_script('photoswipe-ui'     , get_template_directory_uri().'/js/plugins/photoswipe-ui-default.min.js', array('photoswipe'), '4.1.3', true);
         wp_register_script('photoswipe-init'   , get_template_directory_uri().'/js/photoswipe.init.js', array('photoswipe','photoswipe-ui','jquery'), '1.0.0', true);
-        wp_register_script('validate'     , get_template_directory_uri().'/js/jquery.validate.min.js', array('jquery'), '1.0.0', true);
-        wp_register_script('form'         , get_template_directory_uri().'/js/form.js', array('jquery','validate'), '1.0.0', true);
-        wp_register_script('siema'         , get_template_directory_uri().'/js/plugins/siema.min.js', array(), '1.5.1', true);
-        wp_register_script('siema-init'    , get_template_directory_uri().'/js/plugins/siema-init.js', array('siema'), '1', true);
-        wp_register_script('lity'         , get_template_directory_uri().'/js/plugins/lity.js', array('jquery'), '2.4.1', true);
+        wp_register_script('validate'          , get_template_directory_uri().'/js/jquery.validate.min.js', array('jquery'), '1.0.0', true);
+        wp_register_script('form'              , get_template_directory_uri().'/js/form.js', array('jquery','validate'), '1.0.0', true);
+        wp_register_script('siema'             , get_template_directory_uri().'/js/plugins/siema.min.js', array(), '1.5.1', true);
+        wp_register_script('siema-init'        , get_template_directory_uri().'/js/plugins/siema-init.js', array('siema'), '1', true);
+        wp_register_script('lity'              , get_template_directory_uri().'/js/plugins/lity.js', array('jquery'), '2.4.1', true);
 
         wp_register_script('infobubble'   , (get_template_directory_uri().'/js/plugins/infobubble.js'), array(), null, true);
         wp_register_script('initmaps'     , (get_template_directory_uri().'/js/map-search/initmaps.js'), array('infobubble'), '1.0.0', true);

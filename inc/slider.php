@@ -63,8 +63,7 @@ else:
     echo '</div>';
     echo '</div>';
 endif;
-wp_enqueue_script('siema-init');
-
+wp_enqueue_script('siema-init', true);
 //wp_enqueue_script('slider');
 ?>
 <?php //pr(get_post_meta( get_the_ID(), 'extra_image_position', true )); ?>
